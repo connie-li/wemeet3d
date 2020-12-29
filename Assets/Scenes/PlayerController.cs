@@ -6,6 +6,10 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 5;
     Rigidbody rb;
+    public float distance = 5;
+    //public GameObject Camera;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +20,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //transform.position = transform.position + Camera.main.transform.forward * distance * Time.deltaTime;
+
     }
 
     void FixedUpdate()
@@ -33,6 +38,7 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = Vector3.zero;
              }*/
             rb.velocity = new Vector3(moveHorizontal*speed, 0.0f, moveVertical*speed);
+            //Debug.Log("Text: " + transform.forward);
 
      }
 
