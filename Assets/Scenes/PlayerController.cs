@@ -7,7 +7,9 @@ public class PlayerController : MonoBehaviour
     public float speed = 5;
     Rigidbody rb;
     public float distance = 5;
+
     //public GameObject Camera;
+    
 
 
     // Start is called before the first frame update
@@ -15,13 +17,13 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
+
     }
 
     // Update is called once per frame
     void Update()
     {
         //transform.position = transform.position + Camera.main.transform.forward * distance * Time.deltaTime;
-
     }
 
     void FixedUpdate()

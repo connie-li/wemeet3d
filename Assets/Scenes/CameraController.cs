@@ -59,12 +59,12 @@ public class CameraController : MonoBehaviour
 
         // Rotate around our y-axis
         //transform.Rotate(0, rotation, 0);
-        transform.LookAt(player.transform.position + offset);
-     /*
+       // transform.LookAt(player.transform.position + offset);
+     
      yaw += speedH * Input.GetAxis("Mouse X");
      pitch -= speedV * Input.GetAxis("Mouse Y");
      transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
-    */
+    
    
 
     }
