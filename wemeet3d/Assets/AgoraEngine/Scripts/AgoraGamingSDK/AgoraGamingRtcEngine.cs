@@ -9,7 +9,7 @@ using AOT;
 /* class IRtcEngine provides c# API for Unity 3D
 * app. Use IRtcEngine to access underlying Agora
 * sdk.
-* 
+*
 * Agora sdk only supports single instance by now. So here
 * provides GetEngine() and Destroy() to create/delete the
 * only instance.
@@ -258,17 +258,17 @@ namespace agora_gaming_rtc
         }
 
         /** Sets the role of the user, such as a host or an audience (default), before joining a channel in a live broadcast.
-         * 
+         *
          * This method can be used to switch the user role in a live broadcast after the user joins a channel.
-         * 
+         *
          * In the Live Broadcast profile, when a user switches user roles after joining a channel, a successful `SetClientRole` method call triggers the following callbacks:
          * - The local client: {@link agora_gaming_rtc.OnClientRoleChangedHandler OnClientRoleChangedHandler}
          * - The remote client: {@link agora_gaming_rtc.OnUserJoinedHandler OnUserJoinedHandler} or {@link agora_gaming_rtc.OnUserOfflineHandler OnUserOfflineHandler} (BECOME_AUDIENCE)
-         * 
+         *
          * @note This method applies only to the Live-broadcast profile.
-         * 
+         *
          * @param role Sets the role of the user. See {@link agora_gaming_rtc.CLIENT_ROLE_TYPE CLIENT_ROLE_TYPE}.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -279,13 +279,13 @@ namespace agora_gaming_rtc
         }
 
         /** Sets the output log level of the SDK.
-         * 
+         *
          * You can use one or a combination of the log filter levels. The log level follows the sequence of OFF, CRITICAL, ERROR, WARNING, INFO, and DEBUG. Choose a level to see the logs preceding that level.
-         * 
+         *
          * For example, when you set the log level to WARNING, you can see the logs within levels CRITICAL, ERROR, and WARNING.
          *
          * @param filter Sets the log filter level. See {@link agora_gaming_rtc.LOG_FILTER LOG_FILTER}.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -297,15 +297,15 @@ namespace agora_gaming_rtc
 
         // about audio effects: use c interface instead of interface IAudioEffectManager
         /** Specifies an SDK output log file.
-         * 
+         *
          * The log file records all SDK operations during runtime. If it does not exist, the SDK creates one.
-         * 
+         *
          * @note
          * - The default log file is located at: C:\Users<user_name>\AppData\Local\Agora<process_name>.
          * - Ensure that you call this method immediately after calling the {@link agora_gaming_rtc.IRtcEngine.GetEngine GetEngine} method, otherwise the output log may not be complete.
          *
          * @param filePath File path of the log file. The string of the log file is in UTF-8.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -321,18 +321,18 @@ namespace agora_gaming_rtc
         }
 
         /** Allows a user to join a channel.
-         * 
+         *
          * Users in the same channel can talk to each other, and multiple users in the same channel can start a group chat. Users with different App IDs cannot call each other.
-         * 
+         *
          * You must call the {@link agora_gaming_rtc.IRtcEngine.LeaveChannel LeaveChannel} method to exit the current call before entering another channel.
-         * 
+         *
          * A successful `JoinChannel` method call triggers the following callbacks:
          * - The local client: {@link agora_gaming_rtc.OnJoinChannelSuccessHandler OnJoinChannelSuccessHandler}
          * - The remote client: {@link agora_gaming_rtc.OnUserJoinedHandler OnUserJoinedHandler}, if the user joining the channel is in the Communication profile, or is a BROADCASTER in the Live Broadcast profile.
          * When the connection between the client and Agora's server is interrupted due to poor network conditions, the SDK tries reconnecting to the server. When the local client successfully rejoins the channel, the SDK triggers the {@link agora_gaming_rtc.OnReJoinChannelSuccessHandler OnReJoinChannelSuccessHandler} callback on the local client.
-         * 
+         *
          * @note A channel does not accept duplicate uids, such as two users with the same uid. If you set `uid` as 0, the system automatically assigns a uid. If you want to join a channel from different devices, ensure that each device has a different uid.
-         * 
+         *
          * @param channelName The unique channel name for the Agora RTC session in the string format smaller than 64 bytes. Supported characters:
          * - The 26 lowercase English letters: a to z
          * - The 26 uppercase English letters: A to Z
@@ -341,7 +341,7 @@ namespace agora_gaming_rtc
          * - "!", "#", "$", "%", "&", "(", ")", "+", "-", ":", ";", "<", "=", ".", ">", "?", "@", "[", "]", "^", "_", " {", "}", "|", "~", ","
          * @param info (Optional) Additional information about the channel. This parameter can be set to `NULL` or contain channel related information. Other users in the channel will not receive this message.
          * @param uid (Optional) User ID. A 32-bit unsigned integer with a value ranging from 1 to 2<sup>32</sup>-1. The uid must be unique. If a uid is not assigned (or set to 0), the SDK assigns and returns a uid in the {@link agora_gaming_rtc.OnJoinChannelSuccessHandler OnJoinChannelSuccessHandler} callback. Your application must record and maintain the returned uid since the SDK does not do so.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -355,20 +355,20 @@ namespace agora_gaming_rtc
         }
 
         /** Allows a user to join a channel with token.
-         * 
+         *
          * Users in the same channel can talk to each other, and multiple users in the same channel can start a group chat. Users with different App IDs cannot call each other.
-         * 
+         *
          * You must call the {@link agora_gaming_rtc.IRtcEngine.LeaveChannel LeaveChannel} method to exit the current call before entering another channel.
-         * 
+         *
          * A successful `JoinChannelByKey` method call triggers the following callbacks:
          * - The local client: {@link agora_gaming_rtc.OnJoinChannelSuccessHandler OnJoinChannelSuccessHandler}
          * - The remote client: {@link agora_gaming_rtc.OnUserJoinedHandler OnUserJoinedHandler}, if the user joining the channel is in the Communication profile, or is a BROADCASTER in the Live Broadcast profile.
          * When the connection between the client and Agora's server is interrupted due to poor network conditions, the SDK tries reconnecting to the server. When the local client successfully rejoins the channel, the SDK triggers the {@link agora_gaming_rtc.OnReJoinChannelSuccessHandler OnReJoinChannelSuccessHandler} callback on the local client.
-         * 
+         *
          * @note A channel does not accept duplicate uids, such as two users with the same uid. If you set `uid` as 0, the system automatically assigns a uid. If you want to join a channel from different devices, ensure that each device has a different uid.
-         * 
+         *
          * @warning Ensure that the App ID used for creating the token is the same App ID used by the {@link agora_gaming_rtc.IRtcEngine.GetEngine GetEngine} method for initializing the IRtcEngine. Otherwise, the CDN live streaming may fail.
-         * 
+         *
          * @param channelKey The token generated by the application server. In most circumstances, a static App ID suffices. For added security, use a Channel Key.
          * - If the user uses a static App ID, token is optional and can be set as NULL.
          * - If the user uses a Channel Key, Agora issues an additional App Certificate for you to generate a user key based on the algorithm and App Certificate for user authentication on the server.
@@ -380,7 +380,7 @@ namespace agora_gaming_rtc
          * - "!", "#", "$", "%", "&", "(", ")", "+", "-", ":", ";", "<", "=", ".", ">", "?", "@", "[", "]", "^", "_", " {", "}", "|", "~", ","
          * @param info (Optional) Additional information about the channel. This parameter can be set to `NULL` or contain channel related information. Other users in the channel will not receive this message.
          * @param uid (Optional) User ID. A 32-bit unsigned integer with a value ranging from 1 to 2<sup>32</sup>-1. The uid must be unique. If a uid is not assigned (or set to 0), the SDK assigns and returns a uid in the {@link agora_gaming_rtc.OnJoinChannelSuccessHandler OnJoinChannelSuccessHandler} callback. Your application must record and maintain the returned uid since the SDK does not do so.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -394,15 +394,15 @@ namespace agora_gaming_rtc
         }
 
         /** Gets a new token when the current token expires after a period of time.
-         * 
+         *
          * The `token` expires after a period of time once the token schema is enabled when:
          * - The SDK triggers the {@link agora_gaming_rtc.OnTokenPrivilegeWillExpireHandler OnTokenPrivilegeWillExpireHandler} callback, or
          * - The {@link agora_gaming_rtc.OnConnectionStateChangedHandler OnConnectionStateChangedHandler} reports {@link agora_gaming_rtc.CONNECTION_CHANGED_REASON_TYPE#CONNECTION_CHANGED_TOKEN_EXPIRED CONNECTION_CHANGED_TOKEN_EXPIRED(9)}.
-         * 
+         *
          * The application should call this method to get the new `token`. Failure to do so will result in the SDK disconnecting from the server.
-         * 
+         *
          * @param token The new token.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -415,22 +415,22 @@ namespace agora_gaming_rtc
         }
 
         /** Allows a user to leave a channel, such as hanging up or exiting a call.
-        * 
+        *
         * After joining a channel, the user must call the `LeaveChannel` method to end the call before joining another channel.
-        * 
+        *
         * This method returns 0 if the user leaves the channel and destroys all resources related to the call.
-        * 
+        *
         * This method call is asynchronous, and the user has not left the channel when the method call returns. Once the user leaves the channel, the SDK triggers the {@link agora_gaming_rtc.OnLeaveChannelHandler OnLeaveChannelHandler} callback.
-        * 
+        *
         * A successful `LeaveChannel` method call triggers the following callbacks:
         * - The local client: `OnLeaveChannelHandler`
         * - The remote client: {@link agora_gaming_rtc.OnUserOfflineHandler OnUserOfflineHandler}, if the user leaving the channel is in the Communication channel, or is a BROADCASTER in the Live Broadcast profile.
-        * 
+        *
         * @note
         * - If you call the {@link agora_gaming_rtc.IRtcEngine.Destroy Destroy} method immediately after the `LeaveChannel` method, the `LeaveChannel` process interrupts, and the `OnLeaveChannelHandler` callback is not triggered.
         * - If you call the `LeaveChannel` method during a CDN live streaming, the SDK triggers the {@link agora_gaming_rtc.IRtcEngine.RemovePublishStreamUrl RemovePublishStreamUrl} method.
-        * 
-        * 
+        *
+        *
         * @return
         * - 0: Success.
         * - < 0: Failure.
@@ -457,7 +457,7 @@ namespace agora_gaming_rtc
         /** Provides the technical preview functionalities or special customizations by configuring the SDK with JSON options.
          *
          * @param parameters The set parameters in a JSON string.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -487,12 +487,12 @@ namespace agora_gaming_rtc
         }
 
         /** Retrieves the current call ID.
-         * 
+         *
          * When a user joins a channel on a client, a `callId` is generated to identify the call from the client. Feedback methods, such as {@link agora_gaming_rtc.IRtcEngine.Rate Rate} and {@link agora_gaming_rtc.IRtcEngine.Complain Complain}, must be called after the call ends to submit feedback to the SDK.
-         * 
+         *
          * The `Rate` and `Complain` methods require the `callId` parameter retrieved from the `GetCallId` method during a call. `callId` is passed as an argument into the `Rate` and `Complain` methods after the call ends.
-         * 
-         * 
+         *
+         *
          * @return
          * - &ge; 0: The current call ID, if this method call succeeds.
          * - < 0: Failure.
@@ -525,13 +525,13 @@ namespace agora_gaming_rtc
         }
 
         /** Allows a user to complain about the call quality after a call ends.
-         *         
+         *
          * @param callId The ID of the call, retrieved from the {@link agora_gaming_rtc.IRtcEngine.GetCallId GetCallId} method.
          * @param desc (Optional) The description of the rating, with a string length of less than 800 bytes.
-         *         
+         *
          * @return
          * - 0: Success.
-         * - < 0: Failure.        
+         * - < 0: Failure.
          */
         public int Complain(string callId, string desc = "")
         {
@@ -539,9 +539,9 @@ namespace agora_gaming_rtc
         }
 
         /** Enables the audio module.
-         * 
+         *
          * The audio mode is enabled by default.
-         * 
+         *
          * @note
          * - This method affects the internal engine and can be called after the {@link agora_gaming_rtc.IRtcEngine.LeaveChannel LeaveChannel} method. You can call this method either before or after joining a channel.
          * - This method resets the internal engine and takes some time to take effect. We recommend using the following API methods to control the audio engine modules separately:
@@ -560,7 +560,7 @@ namespace agora_gaming_rtc
         }
 
         /** Disables the audio module.
-         * 
+         *
          * @note
          * - This method affects the internal engine and can be called after the {@link agora_gaming_rtc.IRtcEngine.LeaveChannel LeaveChannel} method. You can call this method either before or after joining a channel.
          * - This method resets the internal engine and takes some time to take effect. We recommend using the following API methods to control the audio engine modules separately:
@@ -579,7 +579,7 @@ namespace agora_gaming_rtc
         }
 
         /** Stops/Resumes sending the local audio stream.
-         * 
+         *
          * @note
          * - When `mute` is set as true, this method does not disable the microphone, which does not affect any ongoing recording.
          * - If you call {@link agora_gaming_rtc.IRtcEngine.SetChannelProfile SetChannelProfile} after this method, the SDK resets whether or not to mute the local audio according to the channel profile and user role. Therefore, we recommend calling this method after the `SetChannelProfile` method.
@@ -587,7 +587,7 @@ namespace agora_gaming_rtc
          * @param mute Sets whether to send/stop sending the local audio stream:
          * - true: Stops sending the local audio stream.
          * - false: (Default) Sends the local audio stream.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -602,7 +602,7 @@ namespace agora_gaming_rtc
          * @param mute Sets whether to receive or stop receiving all remote users' audio streams.
          * - true: Stops receiving all remote users' audio streams.
          * - false: (Default) Receives all remote users' audio streams.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -615,14 +615,14 @@ namespace agora_gaming_rtc
         /** Stops/Resumes receiving a specified remote user's audio stream.
          *
          * @note
-         * - If you called the {@link agora_gaming_rtc.IRtcEngine.MuteAllRemoteAudioStreams MuteAllRemoteAudioStreams} method and set `mute` as `true` to stop receiving all remote users' audio streams, call the `MuteAllRemoteAudioStreams` method and set `mute` as `false` before calling this method. 
+         * - If you called the {@link agora_gaming_rtc.IRtcEngine.MuteAllRemoteAudioStreams MuteAllRemoteAudioStreams} method and set `mute` as `true` to stop receiving all remote users' audio streams, call the `MuteAllRemoteAudioStreams` method and set `mute` as `false` before calling this method.
          * - The `MuteAllRemoteAudioStreams` method sets all remote audio streams, while the `MuteRemoteAudioStream` method sets a specified remote audio stream.
          *
          * @param uid User ID of the specified remote user sending the audio.
          * @param mute Sets whether to receive/stop receiving a specified remote user's audio stream:
          * - true: Stops receiving the specified remote user's audio stream.
          * - false: (Default) Receives the specified remote user's audio stream.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -633,21 +633,21 @@ namespace agora_gaming_rtc
         }
 
         /** Enables/Disables the audio playback route to the speakerphone.
-         * 
+         *
          * This method sets whether the audio is routed to the speakerphone or earpiece.
-         * 
+         *
          * See the default audio route explanation in the {@link agora_gaming_rtc.IRtcEngine.SetDefaultAudioRouteToSpeakerphone SetDefaultAudioRouteToSpeakerphone} method and check whether it is necessary to call this method.
-         * 
-         * @note 
+         *
+         * @note
          * - This method is for Android and iOS only.
          * - Ensure that you have successfully called the {@link agora_gaming_rtc.IRtcEngine.JoinChannelByKey JoinChannelByKey} method before calling this method.
          * - After calling this method, the SDK returns the {@link agora_gaming_rtc.OnAudioRouteChangedHandler OnAudioRouteChangedHandler} callback to indicate the changes.
          * - This method does not take effect if a headset is used.
-         * 
+         *
          * @param speakerphone Sets whether to route the audio to the speakerphone or earpiece:
          * - true: Route the audio to the speakerphone.
          * - false: Route the audio to the earpiece.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -660,23 +660,23 @@ namespace agora_gaming_rtc
         /** Sets the default audio playback route.
         *
         * This method sets whether the received audio is routed to the earpiece or speakerphone by default before joining a channel. If a user does not call this method, the audio is routed to the earpiece by default. If you need to change the default audio route after joining a channel, call the {@link agora_gaming_rtc.IRtcEngine.SetEnableSpeakerphone SetEnableSpeakerphone} method.
-        * 
+        *
         * The default setting for each profile:
-        * - Communication: 
-        *   - In a voice call, the default audio route is the earpiece. 
+        * - Communication:
+        *   - In a voice call, the default audio route is the earpiece.
         *   - In a video call, the default audio route is the speakerphone. If a user who is in the Communication profile calls the {@link agora_gaming_rtc.IRtcEngine.DisableVideo DisableVideo} method or if the user calls the {@link agora_gaming_rtc.IRtcEngine.MuteLocalVideoStream MuteLocalVideoStream} and {@link agora_gaming_rtc.IRtcEngine.MuteAllRemoteVideoStreams MuteAllRemoteVideoStreams} methods, the default audio route switches back to the earpiece automatically.
         * - Live Broadcast: Speakerphone.
-        * 
-        * @note 
+        *
+        * @note
         * - This method is for Android and iOS only.
         * - This method is applicable only to the Communication profile.
         * - For iOS, this method only works in a voice call.
         * - Call this method before calling the {@link agora_gaming_rtc.IRtcEngine.JoinChannelByKey JoinChannelByKey} method.
-        * 
+        *
         * @param speakerphone Sets the default audio route:
         * - true: Route the audio to the speakerphone. If the playback device connects to the earpiece or Bluetooth, the audio cannot be routed to the speakerphone.
         * - false: (Default) Route the audio to the earpiece. If a headset is plugged in, the audio is routed to the headset.
-        * 
+        *
         * @return
         * - 0: Success.
         * - < 0: Failure.
@@ -700,9 +700,9 @@ namespace agora_gaming_rtc
         }
 
         /** Switches between front and rear cameras.
-        * 
+        *
         * @note This method is for Android and iOS only.
-        * 
+        *
         * @return
         * - 0: Success.
         * - < 0: Failure.
@@ -713,21 +713,21 @@ namespace agora_gaming_rtc
         }
 
         /** Sets the video profile.
-        * 
+        *
         * @deprecated This method is deprecated as of v2.3. Use the {@link agora_gaming_rtc.IRtcEngine.SetVideoEncoderConfiguration SetVideoEncoderConfiguration} method instead.
-        * 
+        *
         * Each video profile includes a set of parameters, such as the resolution, frame rate, and bitrate. If the camera device does not support the specified resolution, the SDK automatically chooses a suitable camera resolution, keeping the encoder resolution specified by the `setVideoProfile` method.
-        * 
+        *
         * @note
         * - If you do not need to set the video profile after joining the channel, call this method before the {@link agora_gaming_rtc.IRtcEngine.EnableVideo EnableVideo} method to reduce the render time of the first video frame.
         * - Always set the video profile before calling the {@link agora_gaming_rtc.IRtcEngine.JoinChannelByKey JoinChannelByKey} or {@link agora_gaming_rtc.IRtcEngine.StartPreview StartPreview} method.
         * - Since the landscape or portrait mode of the output video can be decided directly by the video profile, We recommend setting *swapWidthAndHeight* to *false* (default).
-        * 
+        *
         * @param profile Sets the video profile. See #VIDEO_PROFILE_TYPE.
         * @param swapWidthAndHeight Sets whether to swap the width and height of the video stream:
         * - true: Swap the width and height.
         * - false: (Default) Do not swap the width and height. The width and height of the output video are consistent with the set video profile.
-        * 
+        *
         * @return
         * - 0: Success.
         * - < 0: Failure.
@@ -738,17 +738,17 @@ namespace agora_gaming_rtc
         }
 
         /** Stops/Resumes sending the local video stream.
-        * 
+        *
         * A successful `MuteLocalVideoStream` method call triggers the {@link agora_gaming_rtc.OnUserMuteVideoHandler OnUserMuteVideoHandler} callback on the remote client.
-        * 
-        * @note 
+        *
+        * @note
         * - When set to `true`, this method does not disable the camera which does not affect the retrieval of the local video streams. This method executes faster than the {@link agora_gaming_rtc.IRtcEngine.EnableLocalVideo EnableLocalVideo} method which controls the sending of the local video stream.
         * - If you call {@link agora_gaming_rtc.IRtcEngine.SetChannelProfile SetChannelProfile} after this method, the SDK resets whether or not to mute the local video according to the channel profile and user role. Therefore, we recommend calling this method after the `SetChannelProfile` method.
-        * 
+        *
         * @param mute Sets whether to send or stop sending the local video stream:
         * - true: Stop sending the local video stream.
         * - false: (Default) Send the local video stream.
-        * 
+        *
         * @return
         * - 0: Success.
         * - < 0: Failure.
@@ -759,11 +759,11 @@ namespace agora_gaming_rtc
         }
 
         /** Stops/Resumes receiving all remote video streams.
-        * 
+        *
         * @param mute Sets whether to receive or stop receiving all remote users' video streams:
         * - true: Stop receiving all remote users' video streams.
         * - false: (Default) Receive all remote users' video streams.
-        * 
+        *
         * @return
         * - 0: Success.
         * - < 0: Failure.
@@ -774,14 +774,14 @@ namespace agora_gaming_rtc
         }
 
         /** Stops/Resumes receiving the video stream from a specified remote user.
-        * 
+        *
         * @note If you called the {@link agora_gaming_rtc.IRtcEngine.MuteAllRemoteVideoStreams MuteAllRemoteVideoStreams} method and set `mute` as `true` to stop receiving all remote video streams, call the `MuteAllRemoteVideoStreams` method and set `mute` as `false` before calling this method.
-        * 
+        *
         * @param uid User ID of the specified remote user.
         * @param mute Sets whether to stop or resume receiving the video stream from a specified remote user:
         * - true: Stop receiving the specified remote user's video stream.
         * - false: (Default) Receive the specified remote user's video stream.
-        * 
+        *
         * @return
         * - 0: Success.
         * - < 0: Failure.
@@ -794,14 +794,14 @@ namespace agora_gaming_rtc
         /** Sets the stream mode to the single-stream (default) or dual-stream mode. (Live broadcast only.)
          *
          * If the dual-stream mode is enabled, the receiver can choose to receive the high stream (high-resolution and high-bitrate video stream), or the low stream (low-resolution and low-bitrate video stream).
-         * 
+         *
          * @param enabled Sets the stream mode:
          * - true: Dual-stream mode.
          * - false: (Default) Single-stream mode.
-         * 
+         *
          * @return
          * - 0: Success.
-         * - < 0: Failure.        
+         * - < 0: Failure.
          */
         public int EnableDualStreamMode(bool enabled)
         {
@@ -809,21 +809,21 @@ namespace agora_gaming_rtc
         }
 
         /** Sets the built-in encryption mode.
-         * 
+         *
          * The Agora RTC SDK supports built-in encryption, which is set to the `aes-128-xts` mode by default. Call this method to use other encryption modes.
-         * 
+         *
          * All users in the same channel must use the same encryption mode and password.
-         * 
+         *
          * Refer to the information related to the AES encryption algorithm on the differences between the encryption modes.
-         * 
+         *
          * @note Call the {@link agora_gaming_rtc.IRtcEngine.SetEncryptionSecret SetEncryptionSecret} method to enable the built-in encryption function before calling this method.
-         * 
+         *
          * @param encryptionMode The set encryption mode:
          * - "aes-128-xts": (Default) 128-bit AES encryption, XTS mode.
          * - "aes-128-ecb": 128-bit AES encryption, ECB mode.
          * - "aes-256-xts": 256-bit AES encryption, XTS mode.
          * - "": When encryptionMode is set as NULL, the encryption mode is set as "aes-128-xts" by default.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -834,17 +834,17 @@ namespace agora_gaming_rtc
         }
 
         /** Enables built-in encryption with an encryption password before users join a channel.
-         * 
+         *
          * All users in a channel must use the same encryption password. The encryption password is automatically cleared once a user leaves the channel.
-         * 
+         *
          * If an encryption password is not specified, the encryption functionality will be disabled.
-         * 
-         * @note 
+         *
+         * @note
          * - Do not use this method for CDN live streaming.
          * - For optimal transmission, ensure that the encrypted data size does not exceed the original data size + 16 bytes. 16 bytes is the maximum padding size for AES encryption.
-         * 
+         *
          * @param secret The encryption password.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -855,18 +855,18 @@ namespace agora_gaming_rtc
         }
 
         /** Creates a data stream.
-         * 
+         *
          * Each user can create up to five data streams during the lifecycle of the IRtcEngine.
-         * 
+         *
          * @note Set both the `reliable` and `ordered` parameters to `true` or `false`. Do not set one as `true` and the other as `false`.
-         * 
+         *
          * @param reliable Sets whether or not the recipients are guaranteed to receive the data stream from the sender within five seconds:
          * - true: The recipients receive the data stream from the sender within five seconds. If the recipient does not receive the data stream within five seconds, an error is reported to the application.
          * - false: There is no guarantee that the recipients receive the data stream within five seconds and no error message is reported for any delay or missing data stream.
          * @param ordered Sets whether or not the recipients receive the data stream in the sent order:
          * - true: The recipients receive the data stream in the sent order.
          * - false: The recipients do not receive the data stream in the sent order.
-         * 
+         *
          * @return
          * - &ge; 0: The ID of the data stream, if this method call succeeds.
          * - < 0: Failure.
@@ -877,23 +877,23 @@ namespace agora_gaming_rtc
         }
 
         /** Sends data stream messages to all users in a channel.
-         * 
+         *
          * The SDK has the following restrictions on this method:
          * - Up to 30 packets can be sent per second in a channel with each packet having a maximum size of 1 kB.
          * - Each client can send up to 6 kB of data per second.
          * - Each user can have up to five data streams simultaneously.
-         * 
+         *
          * A successful {@link agora_gaming_rtc.IRtcEngine.SendStreamMessage SendStreamMessage} method call triggers the {@link agora_gaming_rtc.OnStreamMessageHandler OnStreamMessageHandler} callback on the remote client, from which the remote user gets the stream message.
-         * 
+         *
          * A failed `SendStreamMessage` method call triggers the `OnStreamMessageHandler` callback on the remote client.
-         * 
-         * @note 
+         *
+         * @note
          * - This method applies only to the Communication profile or to the hosts in the Live-broadcast profile. If an audience in the Live-broadcast profile calls this method, the audience may be switched to a host.
          * - Ensure that you have created the data stream using {@link agora_gaming_rtc.IRtcEngine.CreateDataStream CreateDataStream} before calling this method.
          *
          * @param streamId ID of the sent data stream, returned in the `CreateDataStream` method.
          * @param data The sent data.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -904,9 +904,9 @@ namespace agora_gaming_rtc
         }
 
         /** Set the volume of the speaker. (macOS only.)
-         * 
+         *
          * @deprecated This method is deprecated as of v2.3.0. Use {@link agora_gaming_rtc.IRtcEngine.AdjustRecordingSignalVolume AdjustRecordingSignalVolume} and {@link agora_gaming_rtc.IRtcEngine.AdjustPlaybackSignalVolume AdjustPlaybackSignalVolume} instead.
-         * 
+         *
          * @param volume Sets the speakerphone volume. The value ranges between 0 (lowest volume) and 255 (highest volume).
          *
          * @return
@@ -920,13 +920,13 @@ namespace agora_gaming_rtc
 
         //only for live broadcast
         /** Sets the preferences for the high-quality video. (Live broadcast only).
-         * 
+         *
          * @deprecated This method is deprecated as of v2.4.0.
-         * 
+         *
          * @param preferFrameRateOverImageQuality Sets the video quality preference:
          * - true: Frame rate over image quality.
          * - false: (Default) Image quality over frame rate.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -937,19 +937,19 @@ namespace agora_gaming_rtc
         }
 
         /** Starts an audio call test.
-         * 
+         *
          * @deprecated This method is deprecated as of v2.4.0.
-         * 
+         *
          * This method starts an audio call test to check whether the audio devices (for example, headset and speaker) and the network connection are working properly.
-         * 
+         *
          * To conduct the test:
          * - The user speaks and the recording is played back within 10 seconds.
          * - If the user can hear the recording within 10 seconds, the audio devices and network connection are working properly.
-         * 
+         *
          * @note
          * - After calling this method, always call the {@link agora_gaming_rtc.IRtcEngine.StopEchoTest StopEchoTest} method to end the test. Otherwise, the application cannot run the next echo test.
          * - In the Live-broadcast profile, only the hosts can call this method. If the user switches from the Communication to Live-broadcast profile, the user must call the {@link agora_gaming_rtc.IRtcEngine.SetClientRole SetClientRole} method to change the user role from the audience (default) to the host before calling this method.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -960,18 +960,18 @@ namespace agora_gaming_rtc
         }
 
         /** Starts an audio call test.
-         * 
+         *
          * This method starts an audio call test to determine whether the audio devices (for example, headset and speaker) and the network connection are working properly.
-         * 
+         *
          * In the audio call test, you record your voice. If the recording plays back within the set time interval, the audio devices and the network connection are working properly.
-         * 
-         * @note 
+         *
+         * @note
          * - Call this method before joining a channel.
          * - After calling this method, call the {@link agora_gaming_rtc.IRtcEngine.StopEchoTest StopEchoTest} method to end the test. Otherwise, the app cannot run the next echo test, or call the {@link agora_gaming_rtc.IRtcEngine.JoinChannelByKey JoinChannelByKey} method.
          * - In the Live-broadcast profile, only a host can call this method.
-         * 
+         *
          * @param intervalInSeconds The time interval (sec) between when you speak and when the recording plays back.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -982,7 +982,7 @@ namespace agora_gaming_rtc
         }
 
         /** Stops the audio call test.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -993,21 +993,21 @@ namespace agora_gaming_rtc
         }
 
         /** Starts the last-mile network probe test.
-         * 
+         *
          * This method starts the last-mile network probe test before joining a channel to get the uplink and downlink last-mile network statistics, including the bandwidth, packet loss, jitter, and round-trip time (RTT).
-         * 
+         *
          * Call this method to check the uplink network quality before users join a channel or before an audience switches to a host.
          * Once this method is enabled, the SDK returns the following callbacks:
          * - {@link agora_gaming_rtc.OnLastmileQualityHandler OnLastmileQualityHandler}: the SDK triggers this callback within two seconds depending on the network conditions. This callback rates the network conditions and is more closely linked to the user experience.
          * - {@link agora_gaming_rtc.OnLastmileProbeResultHandler OnLastmileProbeResultHandler}: the SDK triggers this callback within 30 seconds depending on the network conditions. This callback returns the real-time statistics of the network conditions and is more objective.
-         * 
-         * @note 
-         * - This method consumes extra network traffic and may affect communication quality. We do not recommend calling this method together with {@link agora_gaming_rtc.IRtcEngine.EnableLastmileTest EnableLastmileTest}. 
+         *
+         * @note
+         * - This method consumes extra network traffic and may affect communication quality. We do not recommend calling this method together with {@link agora_gaming_rtc.IRtcEngine.EnableLastmileTest EnableLastmileTest}.
          * - Do not call other methods before receiving the `OnLastmileQualityHandler` and `OnLastmileProbeResultHandler` callbacks. Otherwise, the callbacks may be interrupted.
          * - In the Live-broadcast profile, a host should not call this method after joining a channel.
-         * 
+         *
          * @param lastmileProbeConfig Sets the configurations of the last-mile network probe test. See LastmileProbeConfig.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -1018,7 +1018,7 @@ namespace agora_gaming_rtc
         }
 
         /** Stops the last-mile network probe test.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -1029,22 +1029,22 @@ namespace agora_gaming_rtc
         }
 
         /** Adds a watermark image to the local video or CDN live stream.
-         * 
+         *
          * @deprecated This method is deprecated from v2.9.1. Use {@link agora_gaming_rtc.IRtcEngine.AddVideoWatermark(string watermarkUrl, WatermarkOptions watermarkOptions) AddVideoWatermark} instead.
-         * 
+         *
          * This method adds a PNG watermark image to the local video stream for the recording device, channel audience, and CDN live audience to view and capture.
-         * 
+         *
          * To add the PNG file to the CDN live publishing stream, see the {@link agora_gaming_rtc.IRtcEngine.SetLiveTranscoding SetLiveTranscoding} method.
-         * 
+         *
          * @note
          * - The URL descriptions are different for the local video and CDN live streams:
          *     - In a local video stream, `url` in RtcImage refers to the absolute path of the added watermark image file in the local video stream.
          *     - In a CDN live stream, `url` in RtcImage refers to the URL address of the added watermark image in the CDN live broadcast.
          * - The source file of the watermark image must be in the PNG file format. If the width and height of the PNG file differ from your settings in this method, the PNG file will be cropped to conform to your settings.
          * - The Agora RTC SDK supports adding only one watermark image onto a local video or CDN live stream. The newly added watermark image replaces the previous one.
-         * 
+         *
          * @param rtcImage The watermark image to be added to the local video stream. See RtcImage.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -1055,15 +1055,15 @@ namespace agora_gaming_rtc
         }
 
         /** Adds a watermark image to the local video.
-         * 
-         * This method adds a PNG watermark image to the local video in a live broadcast. Once the watermark image is added, all the audience in the channel (CDN audience included), 
+         *
+         * This method adds a PNG watermark image to the local video in a live broadcast. Once the watermark image is added, all the audience in the channel (CDN audience included),
          * and the recording device can see and capture it. Agora supports adding only one watermark image onto the local video, and the newly watermark image replaces the previous one.
-         * 
+         *
          * The watermark position depends on the settings in the {@link agora_gaming_rtc.IRtcEngine.SetVideoEncoderConfiguration SetVideoEncoderConfiguration} method:
          * - If the orientation mode of the encoding video is {@link agora_gaming_rtc.ORIENTATION_MODE#ORIENTATION_MODE_FIXED_LANDSCAPE ORIENTATION_MODE_FIXED_LANDSCAPE(1)}, or the landscape mode in {@link agora_gaming_rtc.ORIENTATION_MODE#ORIENTATION_MODE_ADAPTIVE ORIENTATION_MODE_ADAPTIVE(0)}, the watermark uses the landscape orientation.
          * - If the orientation mode of the encoding video is {@link agora_gaming_rtc.ORIENTATION_MODE#ORIENTATION_MODE_FIXED_PORTRAIT ORIENTATION_MODE_FIXED_PORTRAIT(2)}, or the portrait mode in {@link agora_gaming_rtc.ORIENTATION_MODE#ORIENTATION_MODE_ADAPTIVE ORIENTATION_MODE_ADAPTIVE(0)}, the watermark uses the portrait orientation.
          * - When setting the watermark position, the region must be less than the dimensions set in the `setVideoEncoderConfiguration` method. Otherwise, the watermark image will be cropped.
-         * 
+         *
          * @note
          * - Ensure that you have called the {@link agora_gaming_rtc.IRtcEngine.EnableVideo EnableVideo} method to enable the video module before calling this method.
          * - If you only want to add a watermark image to the local video for the audience in the CDN live broadcast channel to see and capture, you can call this method or the {@link agora_gaming_rtc.IRtcEngine.SetLiveTranscoding SetLiveTranscoding} method.
@@ -1074,7 +1074,7 @@ namespace agora_gaming_rtc
          *
          * @param watermarkUrl The local file path of the watermark image to be added. This method supports adding a watermark image from the local absolute or relative file path.
          * @param watermarkOptions The watermark's options to be added. See WatermarkOptions for more infomation.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -1085,7 +1085,7 @@ namespace agora_gaming_rtc
         }
 
         /** Removes the watermark image from the video stream added by the {@link agora_gaming_rtc.IRtcEngine.AddVideoWatermark(string watermarkUrl, WatermarkOptions watermarkOptions) AddVideoWatermark} method.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -1096,15 +1096,15 @@ namespace agora_gaming_rtc
         }
 
         /** Sets the stream type of the remote video.
-         * 
+         *
          * Under limited network conditions, if the publisher has not disabled the dual-stream mode using {@link agora_gaming_rtc.IRtcEngine.EnableDualStreamMode EnableDualStreamMode(false)}, the receiver can choose to receive either the high-quality video stream (the high resolution, and high bitrate video stream) or the low-video stream (the low resolution, and low bitrate video stream).
-         * 
+         *
          * By default, users receive the high-quality video stream. Call this method if you want to switch to the low-video stream. This method allows the app to adjust the corresponding video stream type based on the size of the video window to reduce the bandwidth and resources.
-         * 
+         *
          * The aspect ratio of the low-video stream is the same as the high-quality video stream. Once the resolution of the high-quality video stream is set, the system automatically sets the resolution, frame rate, and bitrate of the low-video stream.
-         * 
+         *
          * The method result returns in the {@link agora_gaming_rtc.OnApiExecutedHandler OnApiExecutedHandler} callback.
-         * 
+         *
          * @param uid ID of the remote user sending the video stream.
          * @param streamType  Sets the video-stream type. See #REMOTE_VIDEO_STREAM_TYPE.
          *
@@ -1118,12 +1118,12 @@ namespace agora_gaming_rtc
         }
 
         /** Sets the mixed audio format for the {@link agora_gaming_rtc.AudioRawDataManager.OnMixedAudioFrameHandler OnMixedAudioFrameHandler} callback.
-         * 
+         *
          * @note The SDK calculates the sample interval according to the value of the `channels` of `AudioFrame`, `sampleRate`, and `samplesPerCall` parameters you set in this method. Sample interval (sec) = `samplePerCall`/(`sampleRate` &times; `channels`). Ensure that the value of sample interval is no less than 0.01. The SDK triggers the `OnMixedAudioFrameHandler` callback according to the sample interval.
-         * 
+         *
          * @param sampleRate Sets the sample rate (`samplesPerSec`) returned in the `OnMixedAudioFrameHandler` callback, which can be set as 8000, 16000, 32000, 44100, or 48000 Hz.
-         * @param samplesPerCall Sets the number of samples the `OnMixedAudioFrameHandler` callback returns. Set it as 1024 for RTMP streaming.        
-         * 
+         * @param samplesPerCall Sets the number of samples the `OnMixedAudioFrameHandler` callback returns. Set it as 1024 for RTMP streaming.
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -1134,9 +1134,9 @@ namespace agora_gaming_rtc
         }
 
         /** Sets the playback position of the music file to a different starting position (the default plays from the beginning).
-         * 
+         *
          * @param pos The playback starting position (ms) of the music file.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -1147,17 +1147,17 @@ namespace agora_gaming_rtc
         }
 
         /** Enables the {@link agora_gaming_rtc.OnVolumeIndicationHandler OnVolumeIndicationHandler} callback at a set time interval to report on which users are speaking and the speakers' volume.
-         * 
+         *
          * Once this method is enabled, the SDK returns the volume indication in the `OnVolumeIndicationHandler` callback at the set time interval, whether or not any user is speaking in the channel.
          *
          * @param interval Sets the time interval between two consecutive volume indications:
          * - &le; 0: Disables the volume indication.
          * - > 0: Time interval (ms) between two consecutive volume indications. We recommend setting `interval` > 200 ms. Do not set `interval` < 10 ms, or the `OnVolumeIndicationHandler` callback will not be triggered.
          * @param smooth Smoothing factor sets the sensitivity of the audio volume indicator. The value ranges between 0 and 10. The greater the value, the more sensitive the indicator. The recommended value is 3.
-         * @param report_vad 
+         * @param report_vad
          * - true: Enable the voice activity detection of the local user. Once it is enabled, the `vad` parameter of the `OnVolumeIndicationHandler` callback reports the voice activity status of the local user.
          * - false: (Default) Disable the voice activity detection of the local user. Once it is disabled, the `vad` parameter of the `OnVolumeIndicationHandler` callback does not report the voice activity status of the local user, except for the scenario where the engine automatically detects the voice activity of the local user.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -1172,7 +1172,7 @@ namespace agora_gaming_rtc
          * @param volume Recording volume. To avoid echoes and improve call quality, Agora recommends setting the value of volume between 0 and 100. If you need to set the value higher than 100, contact support@agora.io first.
          * - 0: Mute.
          * - 100: Original volume.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -1183,7 +1183,7 @@ namespace agora_gaming_rtc
         }
 
         /** Adjusts the playback volume of all remote users.
-         * 
+         *
          * @note
          * - This method adjusts the playback volume which is mixed volume of all remote users.
          * - Since v2.3.2, to mute the local audio playback, call both `AdjustPlaybackSignalVolume` and {@link agora_gaming_rtc.IRtcEngine.AdjustAudioMixingVolume AdjustAudioMixingVolume}, and set `volume` as 0.
@@ -1191,7 +1191,7 @@ namespace agora_gaming_rtc
          * @param volume The playback volume of all remote users. To avoid echoes and improve call quality, Agora recommends setting the value of volume between 0 and 100. If you need to set the value higher than 100, contact support@agora.io first.
          * - 0: Mute.
          * - 100: Original volume.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -1202,19 +1202,19 @@ namespace agora_gaming_rtc
         }
 
         /** Starts playing and mixing the music file.
-         * 
+         *
          * This method mixes the specified local audio file with the audio stream from the microphone, or replaces the microphone's audio stream with the specified local audio file. You can choose whether the other user can hear the local audio playback and specify the number of playback loops. This method also supports online music playback.
-         * 
+         *
          * When the audio mixing file playback finishes after calling this method, the SDK triggers the {@link agora_gaming_rtc.OnAudioMixingFinishedHandler OnAudioMixingFinishedHandler} callback.
-         * 
+         *
          * A successful `StartAudioMixing` method call triggers the {@link agora_gaming_rtc.OnAudioMixingStateChangedHandler OnAudioMixingStateChangedHandler(PLAYING)} callback on the local client.
-         * 
+         *
          * When the audio mixing file playback finishes, the SDK triggers the `OnAudioMixingStateChangedHandler(STOPPED)` callback on the local client.
-         * 
+         *
          * @note
          * - Call this method when you are in a channel.
          * - If the local audio mixing file does not exist, or if the SDK does not support the file format or cannot access the music file URL, the SDK returns `WARN_AUDIO_MIXING_OPEN_ERROR(701)`.
-         * 
+         *
          * @param filePath The absolute path (including the suffixes of the filename) of the local or online audio file to mix. Supported audio formats: mp3, mp4, m4a, aac, 3gp, mkv and wav. For more information, see [Supported Media Formats in Media Foundation](https://docs.microsoft.com/en-us/windows/win32/medfound/supported-media-formats-in-media-foundation).
          * @param loopback Sets which user can hear the audio mixing:
          * - true: Only the local user can hear the audio mixing.
@@ -1225,7 +1225,7 @@ namespace agora_gaming_rtc
          * @param cycle Sets the number of playback loops:
          * - Positive integer: Number of playback loops.
          * - -1: Infinite playback loops.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -1252,7 +1252,7 @@ namespace agora_gaming_rtc
          *
          * Call this method when you are in a channel.
          *
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -1263,9 +1263,9 @@ namespace agora_gaming_rtc
         }
 
         /** Resumes playing and mixing the music file.
-         * 
+         *
          * Call this method when you are in a channel.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -1276,15 +1276,15 @@ namespace agora_gaming_rtc
         }
 
         /** Adjusts the volume during audio mixing.
-         * 
+         *
          * Call this method when you are in a channel.
-         * 
+         *
          * @note Calling this method does not affect the volume of audio effect file playback invoked by the {@link agora_gaming_rtc.AudioEffectManagerImpl.PlayEffect PlayEffect} method.
-         * 
+         *
          * @param volume Audio mixing volume. The value ranges between 0 and 100.
          * - 0: Mute.
          * - 100: Original volume.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -1295,10 +1295,10 @@ namespace agora_gaming_rtc
         }
 
         /** Retrieves the duration (ms) of the music file.
-         * 
+         *
          * Call this method when you are in a channel.
-         * 
-         * @return 
+         *
+         * @return
          * - &ge; 0: The audio mixing duration, if this method call succeeds.
          * - < 0: Failure.
          */
@@ -1308,10 +1308,10 @@ namespace agora_gaming_rtc
         }
 
         /** Retrieves the playback position (ms) of the music file.
-         * 
+         *
          * Call this method when you are in a channel.
          *
-         * @return 
+         * @return
          * - &ge; 0: The current playback position of the audio mixing, if this method call succeeds.
          * - < 0: Failure.
          */
@@ -1323,21 +1323,21 @@ namespace agora_gaming_rtc
         /** Starts an audio recording.
          *
          * @deprecated Use {@link agora_gaming_rtc.IRtcEngine.StartAudioRecording(string filePath, int sampleRate, AUDIO_RECORDING_QUALITY_TYPE quality) StartAudioRecording2} instead.
-         * 
+         *
          * The SDK allows recording during a call. Supported formats:
-         * 
+         *
          * - .wav: Large file size with high fidelity.
          * - .aac: Small file size with low fidelity.
-         * 
+         *
          * This method has a fixed sample rate of 32 kHz.
-         * 
+         *
          * - Ensure that the directory to save the recording file exists and is writable.
          * - This method is usually called after the {@link agora_gaming_rtc.IRtcEngine.JoinChannelByKey JoinChannelByKey} method.
          * - The recording automatically stops when the {@link agora_gaming_rtc.IRtcEngine.LeaveChannel LeaveChannel} method is called.
-         * 
+         *
          * @param filePath Pointer to the absolute file path of the recording file. The string of the file name is in UTF-8.
          * @param quality Sets the audio recording quality. See #AUDIO_RECORDING_QUALITY_TYPE.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -1348,17 +1348,17 @@ namespace agora_gaming_rtc
         }
 
         /** Starts an audio recording on the client.
-         * 
-         * The SDK allows recording during a call. After successfully calling this method, you can record the audio of all the users in the channel and get an audio recording file. 
+         *
+         * The SDK allows recording during a call. After successfully calling this method, you can record the audio of all the users in the channel and get an audio recording file.
          * Supported formats of the recording file are as follows:
          * - .wav: Large file size with high fidelity.
          * - .aac: Small file size with low fidelity.
-         * 
+         *
          * @note
          * - Ensure that the directory you use to save the recording file exists and is writable.
          * - This method is usually called after the {@link agora_gaming_rtc.IRtcEngine.JoinChannelByKey JoinChannelByKey} method. The recording automatically stops when you call the {@link agora_gaming_rtc.IRtcEngine.LeaveChannel LeaveChannel} method.
          * - For better recording effects, set quality as {@link agora_gaming_rtc.AUDIO_RECORDING_QUALITY_TYPE#AUDIO_RECORDING_QUALITY_MEDIUM AUDIO_RECORDING_QUALITY_MEDIUM(1)} or {@link agora_gaming_rtc.AUDIO_RECORDING_QUALITY_TYPE#AUDIO_RECORDING_QUALITY_HIGH AUDIO_RECORDING_QUALITY_HIGH(2)} when `sampleRate` is 44100 Hz or 48000 Hz.
-         * 
+         *
          * @param filePath Pointer to the absolute file path of the recording file. The string of the file name is in UTF-8.
          * @param sampleRate Sample rate (Hz) of the recording file. Supported values are as follows:
          * - 16000
@@ -1366,7 +1366,7 @@ namespace agora_gaming_rtc
          * - 44100
          * - 48000
          * @param quality Sets the audio recording quality. See #AUDIO_RECORDING_QUALITY_TYPE.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -1377,10 +1377,10 @@ namespace agora_gaming_rtc
         }
 
         /** Stops an audio recording on the client.
-         * 
+         *
          * You can call this method before calling the {@link agora_gaming_rtc.IRtcEngine.LeaveChannel LeaveChannel} method else, the recording automatically stops when the `LeaveChannel` method is called.
          *
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -1391,7 +1391,7 @@ namespace agora_gaming_rtc
         }
 
         /** Retrieves the AudioEffectManagerImpl object.
-         * 
+         *
          * @return The AudioEffectManagerImpl object.
          */
         public IAudioEffectManager GetAudioEffectManager()
@@ -1400,7 +1400,7 @@ namespace agora_gaming_rtc
         }
 
         /** Retrieves the AudioRecordingDeviceManager object.
-         * 
+         *
          * @return The AudioRecordingDeviceManager object.
          */
         public IAudioRecordingDeviceManager GetAudioRecordingDeviceManager()
@@ -1409,7 +1409,7 @@ namespace agora_gaming_rtc
         }
 
         /** Retrieves the AudioPlaybackDeviceManager object.
-         * 
+         *
          * @return The AudioPlaybackDeviceManager object.
          */
         public IAudioPlaybackDeviceManager GetAudioPlaybackDeviceManager()
@@ -1418,7 +1418,7 @@ namespace agora_gaming_rtc
         }
 
         /** Retrieves the VideoDeviceManager object.
-         * 
+         *
          * @return The VideoDeviceManager object.
          */
         public IVideoDeviceManager GetVideoDeviceManager()
@@ -1427,7 +1427,7 @@ namespace agora_gaming_rtc
         }
 
         /** Retrieves the AudioRawDataManager object.
-         * 
+         *
          * @return The AudioRawDataManager object.
          */
         public IAudioRawDataManager GetAudioRawDataManager()
@@ -1436,7 +1436,7 @@ namespace agora_gaming_rtc
         }
 
         /** Retrieves the VideoRawDataManager object.
-         * 
+         *
          * @return The VideoRawDataManager object.
          */
         public IVideoRawDataManager GetVideoRawDataManager()
@@ -1445,7 +1445,7 @@ namespace agora_gaming_rtc
         }
 
         /** Retrieves the VideoRender object.
-         * 
+         *
          * @return The VideoRender object.
          */
         public IVideoRender GetVideoRender()
@@ -1454,12 +1454,12 @@ namespace agora_gaming_rtc
         }
 
         /** Enables the video module.
-         * 
+         *
          * Call this method either before joining a channel or during a call. If this method is called before joining a channel, the call starts in the video mode. If this method is called during an audio call, the audio mode switches to the video mode. To disable the video module, call the {@link agora_gaming_rtc.IRtcEngine.DisableVideo DisableVideo} method.
-         * 
+         *
          * A successful `EnableVideo` method call triggers the {@link agora_gaming_rtc.OnUserEnableVideoHandler OnUserEnableVideoHandler(true)} callback on the remote client.
-         * 
-         * @note 
+         *
+         * @note
          * - To get video raw data, call both `EnableVideo` and {@link agora_gaming_rtc.IRtcEngine.EnableVideoObserver EnableVideoObserver} methods.
          * - This method affects the internal engine and can be called after the {@link agora_gaming_rtc.IRtcEngine.LeaveChannel LeaveChannel} method.
          * - This method resets the internal engine and takes some time to take effect. We recommend using the following API methods to control the video engine modules separately:
@@ -1467,7 +1467,7 @@ namespace agora_gaming_rtc
          *  - {@link agora_gaming_rtc.IRtcEngine.MuteLocalVideoStream MuteLocalVideoStream}: Whether to publish the local video stream.
          *  - {@link agora_gaming_rtc.IRtcEngine.MuteRemoteVideoStream MuteRemoteVideoStream}: Whether to subscribe to and play the remote video stream.
          *  - {@link agora_gaming_rtc.IRtcEngine.MuteAllRemoteVideoStreams MuteAllRemoteVideoStreams}: Whether to subscribe to and play all remote video streams.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -1478,11 +1478,11 @@ namespace agora_gaming_rtc
         }
 
         /** Disables the video module.
-         * 
+         *
          * This method can be called before joining a channel or during a call. If this method is called before joining a channel, the call starts in audio mode. If this method is called during a video call, the video mode switches to the audio mode. To enable the video module, call the {@link agora_gaming_rtc.IRtcEngine.EnableVideo EnableVideo} method.
-         * 
+         *
          * A successful `DisableVideo` method call triggers the {@link agora_gaming_rtc.OnUserEnableVideoHandler OnUserEnableVideoHandler(false)} callback on the remote client.
-         * 
+         *
          * @note
          * - To stop getting video raw data, call both `DisableVideo` and {@link agora_gaming_rtc.IRtcEngine.DisableVideoObserver DisableVideoObserver} methods.
          * - This method affects the internal engine and can be called after the {@link agora_gaming_rtc.IRtcEngine.LeaveChannel LeaveChannel} method.
@@ -1491,7 +1491,7 @@ namespace agora_gaming_rtc
          *  - {@link agora_gaming_rtc.IRtcEngine.MuteLocalVideoStream MuteLocalVideoStream}: Whether to publish the local video stream.
          *  - {@link agora_gaming_rtc.IRtcEngine.MuteRemoteVideoStream MuteRemoteVideoStream}: Whether to subscribe to and play the remote video stream.
          *  - {@link agora_gaming_rtc.IRtcEngine.MuteAllRemoteVideoStreams MuteAllRemoteVideoStreams}: Whether to subscribe to and play all remote video streams.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -1502,19 +1502,19 @@ namespace agora_gaming_rtc
         }
 
         /** Enables/Disables the local video capture.
-         * 
+         *
          * This method disables or re-enables the local video capturer, and does not affect receiving the remote video stream.
-         * 
+         *
          * After you call the {@link agora_gaming_rtc.IRtcEngine.EnableVideo EnableVideo} method, the local video capturer is enabled by default. You can call `EnableLocalVideo(false)` to disable the local video capturer. If you want to re-enable it, call `EnableLocalVideo(true)`.
-         * 
+         *
          * After the local video capturer is successfully disabled or re-enabled, the SDK triggers the {@link agora_gaming_rtc.OnUserEnableLocalVideoHandler OnUserEnableLocalVideoHandler} callback on the remote client.
-         * 
+         *
          * @note This method affects the internal engine and can be called after the {@link agora_gaming_rtc.IRtcEngine.LeaveChannel LeaveChannel} method.
-         * 
+         *
          * @param enabled Sets whether to disable/re-enable the local video, including the capturer, renderer, and sender:
          * - true: (Default) Re-enable the local video.
          * - false: Disable the local video. Once the local video is disabled, the remote users can no longer receive the video stream of this user, while this user can still receive the video streams of the other remote users.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -1525,22 +1525,22 @@ namespace agora_gaming_rtc
         }
 
         /** Disables/Re-enables the local audio function.
-         * 
+         *
          * The audio function is enabled by default. This method disables or re-enables the local audio function, that is, to stop or restart local audio capturing.
-         * 
+         *
          * This method does not affect receiving or playing the remote audio streams, and `EnableLocalAudio(false)` is applicable to scenarios where the user wants to receive remote audio streams without sending any audio stream to other users in the channel.
-         * 
+         *
          * The SDK triggers the {@link agora_gaming_rtc.OnMicrophoneEnabledHandler OnMicrophoneEnabledHandler} callback once the local audio function is disabled or enabled.
-         * 
+         *
          * @note
          * This method is different from the {@link agora_gaming_rtc.IRtcEngine.MuteLocalAudioStream MuteLocalAudioStream} method:
          *  - `EnableLocalAudio`: Disables/Re-enables the local audio capturing and processing. If you disable or re-enable local audio recording using the `EnableLocalAudio` method, the local user may hear a pause in the remote audio playback.
          *  - `MuteLocalAudioStream`: Sends/Stops sending the local audio streams.
-         * 
+         *
          * @param enabled Sets whether to disable/re-enable the local audio function:
          * - true: (Default) Re-enable the local audio function, that is, to start the local audio capturing device (for example, the microphone).
          * - false: Disable the local audio function, that is, to stop local audio capturing.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -1565,13 +1565,13 @@ namespace agora_gaming_rtc
         {
             return IRtcEngineNative.setLocalRenderMode((int)renderMode);
         }
-       
-       
+
+
         public int SetRemoteRenderMode(uint userId, RENDER_MODE_TYPE renderMode)
         {
             return IRtcEngineNative.setRemoteRenderMode(userId, (int)renderMode);
         }
-       
+
         public int setLocalVideoMirrorMode(VIDEO_MIRROR_MODE_TYPE mirrorMode)
         {
             return IRtcEngineNative.setLocalVideoMirrorMode((int)VIDEO_MIRROR_MODE_TYPE);
@@ -1579,11 +1579,11 @@ namespace agora_gaming_rtc
          */
 
         /** Starts the local video preview before joining the channel.
-         * 
+         *
          * Before calling this method, you must call the {@link agora_gaming_rtc.IRtcEngine.EnableVideo EnableVideo} method to enable video.
-         * 
+         *
          * @note Once the `StartPreview` method is called to start the local video preview, if you leave the channel by calling the {@link agora_gaming_rtc.IRtcEngine.LeaveChannel LeaveChannel} method, the local video preview remains until you call the {@link agora_gaming_rtc.IRtcEngine.StopPreview StopPreview} method to disable it.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -1594,7 +1594,7 @@ namespace agora_gaming_rtc
         }
 
         /** Stops the local video preview and disables video.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -1605,10 +1605,10 @@ namespace agora_gaming_rtc
         }
 
         /** Enables the video observer.
-         * 
+         *
          * This method sends the video pictures directly to the app instead of to the traditional view renderer.
-         * 
-         * @note 
+         *
+         * @note
          * - To get video raw data, call both {@link agora_gaming_rtc.IRtcEngine.EnableVideo EnableVideo} and `EnableVideoObserver` methods.
          * - Call this method before joining a channel.
          *
@@ -1622,10 +1622,10 @@ namespace agora_gaming_rtc
         }
 
         /** Disables the video observer.
-         * 
+         *
          * This method disables sending video directly to the app.
-         * 
-         * @note 
+         *
+         * @note
          * - To stop getting video raw data, call both {@link agora_gaming_rtc.IRtcEngine.DisableVideo DisableVideo} and `DisableVideoObserver` methods.
          * - Call this method after leaving the channel.
          *
@@ -1639,7 +1639,7 @@ namespace agora_gaming_rtc
         }
 
         /** Sets whether to receive all remote audio streams by default. You can call this method either before or after joining a channel. If you call `SetDefaultMuteAllRemoteAudioStreams (true)` after joining a channel, the remote audio streams of all subsequent users are not received.
-         * 
+         *
          * @note If you want to resume receiving the audio stream, call {@link agora_gaming_rtc.IRtcEngine.MuteRemoteAudioStream MuteRemoteAudioStream (false)}, and specify the ID of the remote user whose audio stream you want to receive. To receive the audio streams of multiple remote users, call `MuteRemoteAudioStream (false)` as many times. Calling `SetDefaultMuteAllRemoteAudioStreams (false)` resumes receiving the audio streams of subsequent users only.
          *
          * @param mute Sets whether to receive/stop receiving all remote users' audio streams by default:
@@ -1658,13 +1658,13 @@ namespace agora_gaming_rtc
         /** Stops/Resumes receiving all remote users' video streams by default.
          *
          * You can call this method either before or after joining a channel. If you call `SetDefaultMuteAllRemoteVideoStreams (true)` after joining a channel, the remote video streams of all subsequent users are not received.
-         * 
+         *
          * @note If you want to resume receiving the video stream, call {@link agora_gaming_rtc.IRtcEngine.MuteRemoteVideoStream MuteRemoteVideoStream (false)}, and specify the ID of the remote user whose video stream you want to receive. To receive the video streams of multiple remote users, call `MuteRemoteVideoStream (false)` as many times. Calling `SetDefaultMuteAllRemoteVideoStreams (false)` resumes receiving the video streams of subsequent users only.
          *
          * @param mute Sets whether to receive/stop receiving all remote users' video streams by default:
          * - true: Stop receiving all remote users' video streams by default.
          * - false: (Default) Receive all remote users' video streams by default.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -1675,20 +1675,20 @@ namespace agora_gaming_rtc
         }
 
         /**  Enables the network connection quality test.
-         * 
+         *
          * This method tests the quality of the users' network connections and is disabled by default.
-         * 
+         *
          * Before a user joins a channel or before an audience switches to a host, call this method to check the uplink network quality.
-         * 
+         *
          * This method consumes additional network traffic, and hence may affect communication quality.
-         * 
+         *
          * Call the {@link agora_gaming_rtc.IRtcEngine.DisableLastmileTest DisableLastmileTest} method to disable this test after receiving the {@link agora_gaming_rtc.OnLastmileQualityHandler OnLastmileQualityHandler} callback, and before joining a channel.
-         * 
+         *
          * @note
          * - Do not call any other methods before receiving the `OnLastmileQualityHandler` callback. Otherwise, the callback may be interrupted by other methods, and hence may not be triggered.
          * - A host should not call this method after joining a channel (when in a call).
          * - If you call this method to test the last-mile quality, the SDK consumes the bandwidth of a video stream, whose bitrate corresponds to the bitrate you set in the {@link agora_gaming_rtc.IRtcEngine.SetVideoEncoderConfiguration SetVideoEncoderConfiguration} method. After you join the channel, whether you have called the {@link agora_gaming_rtc.IRtcEngine.DisableLastmileTest DisableLastmileTest} method or not, the SDK automatically stops consuming the bandwidth.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -1699,7 +1699,7 @@ namespace agora_gaming_rtc
         }
 
         /** Disables the network connection quality test.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -1710,7 +1710,7 @@ namespace agora_gaming_rtc
         }
 
         /** Retrieves the connection state of the SDK.
-         * 
+         *
          * @return #CONNECTION_STATE_TYPE
          */
         public CONNECTION_STATE_TYPE GetConnectionState()
@@ -1719,15 +1719,15 @@ namespace agora_gaming_rtc
         }
 
         /** Sets the audio parameters and application scenarios.
-        * 
+        *
         * @note
         * - The `SetAudioProfile` method must be called before the {@link agora_gaming_rtc.IRtcEngine.JoinChannelByKey JoinChannelByKey} method.
         * - In the Communication and Live-broadcast profiles, the bitrate may be different from your settings due to network self-adaptation.
         * - In scenarios requiring high-quality audio, we recommend setting profile as {@link agora_gaming_rtc.AUDIO_PROFILE_TYPE#AUDIO_PROFILE_MUSIC_HIGH_QUALITY AUDIO_PROFILE_MUSIC_HIGH_QUALITY(4)} and scenario as {@link agora_gaming_rtc.AUDIO_SCENARIO_TYPE#AUDIO_SCENARIO_GAME_STREAMING AUDIO_SCENARIO_GAME_STREAMING(3)}. For example, for music education scenarios.
-        * 
+        *
         * @param audioProfile Sets the sample rate, bitrate, encoding mode, and the number of channels. See #AUDIO_PROFILE_TYPE.
         * @param scenario Sets the audio application scenario. See #AUDIO_SCENARIO_TYPE. Under different audio scenarios, the device uses different volume tracks, i.e. either the in-call volume or the media volume. For details, see [What is the difference between the in-call volume and the media volume?](https://docs.agora.io/en/faq/system_volume).
-        * 
+        *
         * @return
         * - 0: Success.
         * - < 0: Failure.
@@ -1742,11 +1742,11 @@ namespace agora_gaming_rtc
          * Each video encoder configuration corresponds to a set of video parameters, including the resolution, frame rate, bitrate, and video orientation.
          *
          * The parameters specified in this method are the maximum values under ideal network conditions. If the video engine cannot render the video using the specified parameters due to poor network conditions, the parameters further down the list are considered until a successful configuration is found.
-         * 
+         *
          * @note If you do not need to set the video encoder configuration after joining the channel, you can call this method before the {@link agora_gaming_rtc.IRtcEngine.EnableVideo EnableVideo} method to reduce the render time of the first video frame.
          *
          * @param configuration Sets the local video encoder configuration. See VideoEncoderConfiguration.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -1757,11 +1757,11 @@ namespace agora_gaming_rtc
         }
 
         /** Adjusts the audio mixing volume for local playback.
-         * 
+         *
          * @note Call this method when you are in a channel.
-         * 
+         *
          * @param volume Audio mixing volume for local playback. The value ranges between 0 and 100 (default).
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -1772,11 +1772,11 @@ namespace agora_gaming_rtc
         }
 
         /** Adjusts the audio mixing volume for publishing (for remote users).
-         * 
+         *
          * @note Call this method when you are in a channel.
-         * 
+         *
          * @param volume Audio mixing volume for publishing. The value ranges between 0 and 100 (default).
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -1787,10 +1787,10 @@ namespace agora_gaming_rtc
         }
 
         /** Sets the volume of a specified audio effect.
-         * 
+         *
          * @param soundId ID of the audio effect. Each audio effect has a unique ID.
          * @param volume Sets the volume of the specified audio effect. The value ranges between 0 and 100 (default).
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -1801,16 +1801,16 @@ namespace agora_gaming_rtc
         }
 
         /** Sets the audio recording format for the {@link agora_gaming_rtc.AudioRawDataManager.OnRecordAudioFrameHandler OnRecordAudioFrameHandler} callback.
-         * 
+         *
          * @note The SDK calculates the sample interval according to the value of the `sampleRate`, `channel`, and `samplesPerCall` parameters you set in this method. Sample interval (sec) = `samplePerCall`/(`sampleRate` &times; `channel`). Ensure that the value of sample interval is no less than 0.01. The SDK triggers the `OnRecordAudioFrameHandler` callback according to the sample interval.
-         * 
+         *
          * @param sampleRate Sets the sample rate returned in the `OnRecordAudioFrameHandler` callback, which can be set as 8000, 16000, 32000, 44100, or 48000 Hz.
          * @param channel Sets the number of audio channels returned in the `OnRecordAudioFrameHandler` callback:
          * - 1: Mono
          * - 2: Stereo
          * @param mode Sets the use mode (see #RAW_AUDIO_FRAME_OP_MODE_TYPE) of the `OnRecordAudioFrameHandler` callback.
          * @param samplesPerCall Sets the number of samples the `OnRecordAudioFrameHandler` callback returns. Set it as 1024 for RTMP streaming.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -1821,16 +1821,16 @@ namespace agora_gaming_rtc
         }
 
         /** Sets the audio playback format for the {@link agora_gaming_rtc.AudioRawDataManager.OnPlaybackAudioFrameHandler OnPlaybackAudioFrameHandler} callback.
-        * 
+        *
         * @note The SDK calculates the sample interval according to the value of the `sampleRate`, `channel`, and `samplesPerCall` parameters you set in this method. Sample interval (sec) = `samplePerCall`/(`sampleRate` &times; `channel`). Ensure that the value of sample interval is no less than 0.01. The SDK triggers the `OnPlaybackAudioFrameHandler` callback according to the sample interval.
-        * 
+        *
         * @param sampleRate Sets the sample rate returned in the `OnPlaybackAudioFrameHandler` callback, which can be set as 8000, 16000, 32000, 44100, or 48000 Hz.
         * @param channel Sets the number of channels returned in the `OnPlaybackAudioFrameHandler` callback:
         * - 1: Mono
         * - 2: Stereo
         * @param mode Sets the use mode (see #RAW_AUDIO_FRAME_OP_MODE_TYPE) of the `OnPlaybackAudioFrameHandler` callback.
         * @param samplesPerCall Sets the number of samples the `OnPlaybackAudioFrameHandler` callback returns. Set it as 1024 for RTMP streaming.
-        * 
+        *
         * @return
         * - 0: Success.
         * - < 0: Failure.
@@ -1841,18 +1841,18 @@ namespace agora_gaming_rtc
         }
 
         /** Sets the fallback option for the locally published video stream based on the network conditions.
-        * 
+        *
         * If `option` is set as {@link agora_gaming_rtc.STREAM_FALLBACK_OPTIONS#STREAM_FALLBACK_OPTION_AUDIO_ONLY STREAM_FALLBACK_OPTION_AUDIO_ONLY(2)}, the SDK will:
-        * 
+        *
         * - Disable the upstream video but enable audio only when the network conditions deteriorate and cannot support both video and audio.
         * - Re-enable the video when the network conditions improve.
-        * 
+        *
         * When the locally published video stream falls back to audio only or when the audio-only stream switches back to the video, the SDK triggers the {@link agora_gaming_rtc.OnLocalPublishFallbackToAudioOnlyHandler OnLocalPublishFallbackToAudioOnlyHandler} callback.
-        * 
+        *
         * @note Agora does not recommend using this method for CDN live streaming, because the remote CDN live user will have a noticeable lag when the locally published video stream falls back to audio only.
-        * 
+        *
         * @param option Sets the fallback option for the locally published video stream. See #STREAM_FALLBACK_OPTIONS.
-        * 
+        *
         * @return
         * - 0: Success.
         * - < 0: Failure.
@@ -1863,15 +1863,15 @@ namespace agora_gaming_rtc
         }
 
         /** Sets the fallback option for the remotely subscribed video stream based on the network conditions.
-         * 
+         *
          * The default setting for `option` is {@link agora_gaming_rtc.STREAM_FALLBACK_OPTIONS#STREAM_FALLBACK_OPTION_VIDEO_STREAM_LOW STREAM_FALLBACK_OPTION_VIDEO_STREAM_LOW(1)}, where the remotely subscribed video stream falls back to the low-stream video (low resolution and low bitrate) under poor downlink network conditions.
-         * 
+         *
          * If `option` is set as {@link agora_gaming_rtc.STREAM_FALLBACK_OPTIONS#STREAM_FALLBACK_OPTION_AUDIO_ONLY STREAM_FALLBACK_OPTION_AUDIO_ONLY(2)}, the SDK automatically switches the video from a high-stream to a low-stream, or disables the video when the downlink network conditions cannot support both audio and video to guarantee the quality of the audio. The SDK monitors the network quality and restores the video stream when the network conditions improve.
-         * 
+         *
          * When the remotely subscribed video stream falls back to audio only or when the audio-only stream switches back to the video stream, the SDK triggers the {@link agora_gaming_rtc.OnRemoteSubscribeFallbackToAudioOnlyHandler OnRemoteSubscribeFallbackToAudioOnlyHandler} callback.
-         * 
+         *
          * @param option Sets the fallback option for the remotely subscribed video stream. See #STREAM_FALLBACK_OPTIONS.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -1882,14 +1882,14 @@ namespace agora_gaming_rtc
         }
 
         /** Sets the default video-stream type for the video received by the local user when the remote user sends dual streams.
-         * 
+         *
          * - If the dual-stream mode is enabled by calling the {@link agora_gaming_rtc.IRtcEngine.EnableDualStreamMode EnableDualStreamMode} method, the user receives the high-stream video by default. The `SetRemoteDefaultVideoStreamType` method allows the application to adjust the corresponding video-stream type according to the size of the video window, reducing the bandwidth and resources.
          * - If the dual-stream mode is not enabled, the user receives the high-stream video by default.
-         * 
+         *
          * The result after calling this method is returned in the {@link agora_gaming_rtc.OnApiExecutedHandler OnApiExecutedHandler} callback. The Agora RTC SDK receives the high-stream video by default to reduce the bandwidth. If needed, users can switch to the low-stream video through this method.
-         * 
+         *
          * @param remoteVideoStreamType Sets the default video-stream type. See #REMOTE_VIDEO_STREAM_TYPE.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -1900,22 +1900,22 @@ namespace agora_gaming_rtc
         }
 
         /** Publishes the local stream to a specified CDN live RTMP address. (CDN live only.)
-         * 
+         *
          * The SDK returns the result of this method call in the {@link agora_gaming_rtc.OnStreamPublishedHandler OnStreamPublishedHandler} callback.
-         * 
+         *
          * The `AddPublishStreamUrl` method call triggers the {@link agora_gaming_rtc.OnRtmpStreamingStateChangedHandler OnRtmpStreamingStateChangedHandler} callback on the local client to report the state of adding a local stream to the CDN.
-         * 
+         *
          * @note
          * - Ensure that the user joins the channel before calling this method.
          * - Ensure that you enable the RTMP Converter service before using this function.
          * - This method adds only one stream RTMP URL address each time it is called.
          * - This method applies to Live Broadcast only.
-         * 
+         *
          * @param url The CDN streaming URL in the RTMP format. The maximum length of this parameter is 1024 bytes. The RTMP URL address must not contain special characters, such as Chinese language characters.
          * @param transcodingEnabled Sets whether transcoding is enabled/disabled:
          * - true: Enable transcoding. To [transcode](https://docs.agora.io/en/Agora%20Platform/terms?platform=All%20Platforms#transcoding) the audio or video streams when publishing them to CDN live, often used for combining the audio and video streams of multiple hosts in CDN live. If you set this parameter as `true`, ensure that you call the {@link agora_gaming_rtc.IRtcEngine.SetLiveTranscoding SetLiveTranscoding} method before this method.
          * - false: Disable transcoding.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -1928,18 +1928,18 @@ namespace agora_gaming_rtc
         }
 
         /** Removes an RTMP stream from the CDN. (CDN live only.)
-         * 
+         *
          * This method removes the RTMP URL address (added by the {@link agora_gaming_rtc.IRtcEngine.AddPublishStreamUrl AddPublishStreamUrl} method) from a CDN live stream. The SDK returns the result of this method call in the {@link agora_gaming_rtc.OnStreamUnpublishedHandler OnStreamUnpublishedHandler} callback.
-         * 
+         *
          * The `RemovePublishStreamUrl` method call triggers the {@link agora_gaming_rtc.OnRtmpStreamingStateChangedHandler OnRtmpStreamingStateChangedHandler} callback on the local client to report the state of removing an RTMP stream from the CDN.
-         * 
+         *
          * @note
          * - This method removes only one RTMP URL address each time it is called.
          * - The RTMP URL address must not contain special characters, such as Chinese language characters.
          * - This method applies to Live Broadcast only.
-         * 
+         *
          * @param url The RTMP URL address to be removed. The maximum length of this parameter is 1024 bytes.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -1952,7 +1952,7 @@ namespace agora_gaming_rtc
         /** Retrieves the description of a warning or error code.
          *
          * @param code The warning or error code that the {@link agora_gaming_rtc.OnSDKWarningHandler OnSDKWarningHandler} or {@link agora_gaming_rtc.OnSDKErrorHandler OnSDKErrorHandler} callback returns.
-         *  
+         *
          * @return [Warning Code](./index.html#warn) or [Error Code](./index.html#error).
          */
         public static string GetErrorDescription(int code)
@@ -1961,17 +1961,17 @@ namespace agora_gaming_rtc
         }
 
         /** Enables interoperability with the Agora Web SDK.
-         * 
+         *
          * @deprecated This method is deprecated. As of v3.0.1, the Unity SDK automatically enables interoperability with the Web SDK, so you no longer need to call this method.
          *
-         * @note 
+         * @note
          * - This method applies only to the Live-broadcast profile. In the Communication profile, interoperability with the Agora Web SDK is enabled by default.
          * - If the channel has Web SDK users, ensure that you call this method, or the video of the Unity user will be a black screen for the Web user.
-         * 
+         *
          * @param enabled Sets whether to enable/disable interoperability with the Agora Web SDK:
          * - true: Enable.
          * - false: (Default) Disable.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -1982,16 +1982,16 @@ namespace agora_gaming_rtc
         }
 
         /** Sets the video layout and audio settings for CDN live. (CDN live only.)
-         * 
+         *
          * The SDK triggers the {@link agora_gaming_rtc.OnTranscodingUpdatedHandler OnTranscodingUpdatedHandler} callback when you call the `SetLiveTranscoding` method to update the transcoding setting.
-         * 
+         *
          * @note
          * - This method applies to Live Broadcast only.
          * - Ensure that you enable the RTMP Converter service before using this function.
          * - If you call the `SetLiveTranscoding` method to update the transcoding setting for the first time, the SDK does not trigger the `OnTranscodingUpdatedHandler` callback.
-         * 
+         *
          * @param transcoding Sets the CDN live audio/video transcoding settings. See LiveTranscoding.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -2026,11 +2026,11 @@ namespace agora_gaming_rtc
         }
 
         /** Pushes the video frame using the {@link agora_gaming_rtc.ExternalVideoFrame ExternalVideoFrame} and passes the video frame to the Agora RTC SDK.
-         * 
+         *
          * @note This method does not support video frames in the Texture format.
-         * 
+         *
          * @param externalVideoFrame Video frame to be pushed. See {@link agora_gaming_rtc.ExternalVideoFrame ExternalVideoFrame}.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -2041,14 +2041,14 @@ namespace agora_gaming_rtc
         }
 
         /** Configures the external video source.
-         * 
+         *
          * @param enable Sets whether to use the external video source:
          * - true: Use the external video source.
          * - false: (Default) Do not use the external video source.
          * @param useTexture Sets whether to use texture as an input (Agora does not support texture now, please use `false`):
          * - true: Use texture as an input.
          * - false: (Default) Do not use texture as an input.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -2059,7 +2059,7 @@ namespace agora_gaming_rtc
         }
 
         /** Sets the external audio source. Please call this method before {@link agora_gaming_rtc.IRtcEngine.JoinChannelByKey JoinChannelByKey}.
-         * 
+         *
          * @param enabled Sets whether to enable/disable the external audio source:
          * - true: Enables the external audio source.
          * - false: (Default) Disables the external audio source.
@@ -2067,7 +2067,7 @@ namespace agora_gaming_rtc
          * @param channels Sets the number of audio channels of the external audio source:
          * - 1: Mono.
          * - 2: Stereo.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -2078,9 +2078,9 @@ namespace agora_gaming_rtc
         }
 
         /** Pushes the external audio frame.
-         * 
+         *
          * @param audioFrame The audio frame: {@link agora_gaming_rtc.AudioFrame AudioFrame}.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -2091,11 +2091,11 @@ namespace agora_gaming_rtc
         }
 
         /** Retrieves the audio mixing volume for local playback.
-         * 
+         *
          * This method helps troubleshoot audio volume related issues.
-         * 
+         *
          * @note Call this method when you are in a channel.
-         * 
+         *
          * @return
          * - &ge; 0: The audio mixing volume, if this method call succeeds. The value range is [0,100].
          * - < 0: Failure.
@@ -2106,11 +2106,11 @@ namespace agora_gaming_rtc
         }
 
         /** Retrieves the audio mixing volume for publishing.
-         * 
+         *
          * This method helps troubleshoot audio volume related issues.
-         * 
+         *
          * @note Call this method when you are in a channel.
-         * 
+         *
          * @return
          * - &ge; 0: The audio mixing volume for publishing, if this method call succeeds. The value range is [0,100].
          * - < 0: Failure.
@@ -2121,13 +2121,13 @@ namespace agora_gaming_rtc
         }
 
         /** Enables/Disables stereo panning for remote users.
-         * 
+         *
          * Ensure that you call this method before {@link agora_gaming_rtc.IRtcEngine.JoinChannelByKey JoinChannelByKey} to enable stereo panning for remote users so that the local user can track the position of a remote user by calling {@link agora_gaming_rtc.AudioEffectManagerImpl.SetRemoteVoicePosition SetRemoteVoicePosition}.
-         * 
+         *
          * @param enabled Sets whether or not to enable stereo panning for remote users:
          * - true: enables stereo panning.
          * - false: disables stereo panning.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -2138,27 +2138,27 @@ namespace agora_gaming_rtc
         }
 
         /** Sets the local voice changer option.
-         * 
+         *
          * This method can be used to set the local voice effect for users in a communication channel or broadcasters in a live broadcast channel.
          * Voice changer options include the following voice effects:
-         * 
+         *
          * - `VOICE_CHANGER_XXX`: Changes the local voice to an old man, a little boy, or the Hulk. Applies to the voice talk scenario.
          * - `VOICE_BEAUTY_XXX`: Beautifies the local voice by making it sound more vigorous, resounding, or adding spacial resonance. Applies to the voice talk and singing scenario.
          * - `GENERAL_BEAUTY_VOICE_XXX`: Adds gender-based beautification effect to the local voice. Applies to the voice talk scenario.
          *   - For a male voice: Adds magnetism to the voice.
          *   - For a female voice: Adds freshness or vitality to the voice.
-         * 
+         *
          * @note
          * - To achieve better voice effect quality, Agora recommends setting the profile parameter in {@link agora_gaming_rtc.IRtcEngine.SetAudioProfile SetAudioProfile} as `AUDIO_PROFILE_MUSIC_HIGH_QUALITY(4)` or `AUDIO_PROFILE_MUSIC_HIGH_QUALITY_STEREO(5)`.
          * - This method works best with the human voice, and Agora does not recommend using it for audio containing music and a human voice.
          * - Do not use this method with {@link agora_gaming_rtc.IRtcEngine.SetLocalVoiceReverbPreset SetLocalVoiceReverbPreset}, because the method called later overrides the one called earlier.
-         * 
-         * @param voiceChanger Sets the local voice changer option. The default value is `VOICE_CHANGER_OFF`, which means the original voice. See details in #VOICE_CHANGER_PRESET. 
+         *
+         * @param voiceChanger Sets the local voice changer option. The default value is `VOICE_CHANGER_OFF`, which means the original voice. See details in #VOICE_CHANGER_PRESET.
          * Gender-based beatification effect works best only when assigned a proper gender:
          * - For male: `GENERAL_BEAUTY_VOICE_MALE_MAGNETIC`
          * - For female: `GENERAL_BEAUTY_VOICE_FEMALE_FRESH` or `GENERAL_BEAUTY_VOICE_FEMALE_VITALITY`
          * Failure to do so can lead to voice distortion.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure. Check if the enumeration is properly set.
@@ -2169,22 +2169,22 @@ namespace agora_gaming_rtc
         }
 
         /** Sets the local voice reverberation option, including the virtual stereo.
-         * 
+         *
          * This method sets the local voice reverberation for users in a communication channel or broadcasters in a Live-broadcast channel.
          * After successfully calling this method, all users in the channel can hear the voice with reverberation.
-         * 
+         *
          * @note
-         * - When calling this method with enumerations that begin with `AUDIO_REVERB_FX`, ensure that you set profile in {@link agora_gaming_rtc.IRtcEngine.SetAudioProfile SetAudioProfile} 
+         * - When calling this method with enumerations that begin with `AUDIO_REVERB_FX`, ensure that you set profile in {@link agora_gaming_rtc.IRtcEngine.SetAudioProfile SetAudioProfile}
          * as `AUDIO_PROFILE_MUSIC_HIGH_QUALITY(4)` or `AUDIO_PROFILE_MUSIC_HIGH_QUALITY_STEREO(5)`; otherwise, this methods cannot set the corresponding voice reverberation option.
          * - When calling this method with `AUDIO_VIRTUAL_STEREO`, Agora recommends setting the `profile` parameter in `SetAudioProfile` as `AUDIO_PROFILE_MUSIC_HIGH_QUALITY_STEREO(5)`.
          * - This method works best with the human voice, and Agora does not recommend using it for audio containing music and a human voice.
          * - Do not use this method with {@link agora_gaming_rtc.IRtcEngine.SetLocalVoiceChanger SetLocalVoiceChanger}, because the method called later overrides the one called earlier.
          * For detailed considerations, see the advanced guide *Voice Enhancement and Effects*.
-         * 
+         *
          * @param audioReverbPreset The local voice reverberation option. The default value is `AUDIO_REVERB_OFF`,
          * which means the original voice. See #AUDIO_REVERB_PRESET.
          * To achieve better voice effects, Agora recommends the enumeration whose name begins with `AUDIO_REVERB_FX`.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -2195,9 +2195,9 @@ namespace agora_gaming_rtc
         }
 
         /** Changes the voice pitch of the local speaker.
-         * 
+         *
          * @param pitch Sets the voice pitch. The value ranges between 0.5 and 2.0. The lower the value, the lower the voice pitch. The default value is 1.0 (no change to the local voice pitch).
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -2208,10 +2208,10 @@ namespace agora_gaming_rtc
         }
 
         /** Sets the local voice equalization effect.
-         * 
+         *
          * @param bandFrequency Sets the band frequency. The value ranges between 0 and 9, representing the respective 10-band center frequencies of the voice effects, including 31, 62, 125, 500, 1k, 2k, 4k, 8k, and 16k Hz. See #AUDIO_EQUALIZATION_BAND_FREQUENCY.
          * @param bandGain Sets the gain of each band in dB. The value ranges between -15 and 15.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -2222,12 +2222,12 @@ namespace agora_gaming_rtc
         }
 
         /** Sets the local voice reverberation.
-         * 
+         *
          * @note v2.4.0 adds the {@link agora_gaming_rtc.IRtcEngine.SetLocalVoiceReverbPreset SetLocalVoiceReverbPreset} method, a more user-friendly method for setting the local voice reverberation. You can use this method to set the local reverberation effect, such as pop music, R&B, rock music, and hip-hop.
-         * 
+         *
          * @param reverbKey Sets the reverberation key. See #AUDIO_REVERB_TYPE.
          * @param value Sets the value of the reverberation key.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -2238,16 +2238,16 @@ namespace agora_gaming_rtc
         }
 
         /** Sets the camera capture configuration.
-         * 
+         *
          * For a video call or live broadcast, generally the SDK controls the camera output parameters. When the default camera capturer settings do not meet special requirements or cause performance problems, we recommend using this method to set the camera capturer configuration:
          * - If the resolution or frame rate of the captured raw video data are higher than those set by {@link agora_gaming_rtc.IRtcEngine.SetVideoEncoderConfiguration SetVideoEncoderConfiguration}, processing video frames requires extra CPU and RAM usage and degrades performance. We recommend setting config as {@link agora_gaming_rtc.CAPTURER_OUTPUT_PREFERENCE#CAPTURER_OUTPUT_PREFERENCE_PERFORMANCE CAPTURER_OUTPUT_PREFERENCE_PERFORMANCE(1)} to avoid such problems.
          * - If you do not need local video preview or are willing to sacrifice preview quality, we recommend setting config as {@link agora_gaming_rtc.CAPTURER_OUTPUT_PREFERENCE#CAPTURER_OUTPUT_PREFERENCE_PERFORMANCE CAPTURER_OUTPUT_PREFERENCE_PERFORMANCE(1)} to optimize CPU and RAM usage.
          * - If you want better quality for the local video preview, we recommend setting config as {@link agora_gaming_rtc.CAPTURER_OUTPUT_PREFERENCE#CAPTURER_OUTPUT_PREFERENCE_PREVIEW CAPTURER_OUTPUT_PREFERENCE_PREVIEW(2)}.
-         * 
+         *
          * @note Call this method before enabling the local camera. That said, you can call this method before calling {@link agora_gaming_rtc.IRtcEngine.JoinChannelByKey JoinChannelByKey}, {@link agora_gaming_rtc.IRtcEngine.EnableVideo EnableVideo}, or {@link agora_gaming_rtc.IRtcEngine.EnableLocalVideo EnableLocalVideo}, depending on which method you use to turn on your local camera.
-         * 
+         *
          * @param cameraCaptureConfiguration Sets the camera capturer configuration. See {@link agora_gaming_rtc.CameraCapturerConfiguration CameraCapturerConfiguration}.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -2258,14 +2258,14 @@ namespace agora_gaming_rtc
         }
 
         /** Prioritizes a remote user's stream.
-         * 
+         *
          * Use this method with the {@link agora_gaming_rtc.IRtcEngine.SetRemoteSubscribeFallbackOption SetRemoteSubscribeFallbackOption} method. If the fallback function is enabled for a subscribed stream, the SDK ensures the high-priority user gets the best possible stream quality.
-         * 
+         *
          * @note The Agora RTC SDK supports setting `userPriority` as high for one user only.
-         * 
+         *
          * @param uid The ID of the remote user.
          * @param userPriority Sets the priority of the remote user. See #PRIORITY_TYPE.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -2276,11 +2276,11 @@ namespace agora_gaming_rtc
         }
 
         /** Sets the log file size (KB).
-         * 
+         *
          * The SDK has two log files, each with a default size of 512 KB. If you set `fileSizeInKBytes` as 1024 KB, the SDK outputs log files with a total maximum size of 2 MB. If the total size of the log files exceed the set value, the new output log files overwrite the old output log files.
-         * 
+         *
          * @param fileSizeInKBytes The SDK log file size (KB).
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -2291,9 +2291,9 @@ namespace agora_gaming_rtc
         }
 
         /** Sets the external audio sink. This method applies to scenarios where you want to use external audio data for playback. After enabling the external audio sink, you can call the {@link agora_gaming_rtc.AudioRawDataManager.PullAudioFrame PullAudioFrame} method to pull the remote audio data, process it, and play it with the audio effects that you want.
-         * 
+         *
          * @note Once you enable the external audio sink, the app will not retrieve any audio data from the {@link agora_gaming_rtc.AudioRawDataManager.OnPlaybackAudioFrameHandler OnPlaybackAudioFrameHandler} callback.
-         * 
+         *
          * @param enabled
          * - true: Enables the external audio sink.
          * - false: (Default) Disables the external audio sink.
@@ -2301,7 +2301,7 @@ namespace agora_gaming_rtc
          * @param channels Sets the number of audio channels of the external audio sink:
          * - 1: Mono.
          * - 2: Stereo.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -2312,20 +2312,20 @@ namespace agora_gaming_rtc
         }
 
         /** Registers a user account.
-         * 
+         *
          * Once registered, the user account can be used to identify the local user when the user joins the channel. After the user successfully registers a user account, the SDK triggers the {@link agora_gaming_rtc.OnLocalUserRegisteredHandler OnLocalUserRegisteredHandler} callback on the local client, reporting the user ID and user account of the local user.
-         * 
+         *
          * To join a channel with a user account, you can choose either of the following:
          * - Call the `RegisterLocalUserAccount` method to create a user account, and then the {@link agora_gaming_rtc.IRtcEngine.JoinChannelWithUserAccount JoinChannelWithUserAccount} method to join the channel.
          * - Call the `JoinChannelWithUserAccount` method to join the channel.
-         * 
+         *
          * The difference between the two is that for the former, the time elapsed between calling the `JoinChannelWithUserAccount` method and joining the channel is shorter than the latter.
-         * 
-         * @note 
+         *
+         * @note
          * - Ensure that you set the `userAccount` parameter. Otherwise, this method does not take effect.
          * - Ensure that the value of the `userAccount` parameter is unique in the channel.
          * - To ensure smooth communication, use the same parameter type to identify the user. For example, if a user joins the channel with a user ID, then ensure all the other users use the user ID too. The same applies to the user account. If a user joins the channel with the Agora Web SDK, ensure that the uid of the user is set to the same parameter type.
-         * 
+         *
          * @param appId The App ID of your project.
          * @param userAccount The user account. The maximum length of this parameter is 255 bytes. Ensure that you set this parameter and do not set it as null. Supported character scopes are:
          * - All lowercase English letters: a to z.
@@ -2333,7 +2333,7 @@ namespace agora_gaming_rtc
          * - All numeric characters: 0 to 9.
          * - The space character.
          * - Punctuation characters and other symbols, including: "!", "#", "$", "%", "&", "(", ")", "+", "-", ":", ";", "<", "=", ".", ">", "?", "@", "[", "]", "^", "_", " {", "}", "|", "~", ",".
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -2344,13 +2344,13 @@ namespace agora_gaming_rtc
         }
 
         /** Joins the channel with a user account.
-         * 
+         *
          * After the user successfully joins the channel, the SDK triggers the following callbacks:
-         * - The local client: {@link agora_gaming_rtc.OnLocalUserRegisteredHandler OnLocalUserRegisteredHandler} and {@link agora_gaming_rtc.OnJoinChannelSuccessHandler OnJoinChannelSuccessHandler}. 
+         * - The local client: {@link agora_gaming_rtc.OnLocalUserRegisteredHandler OnLocalUserRegisteredHandler} and {@link agora_gaming_rtc.OnJoinChannelSuccessHandler OnJoinChannelSuccessHandler}.
          * - The remote client: {@link agora_gaming_rtc.OnUserJoinedHandler OnUserJoinedHandler} and {@link agora_gaming_rtc.OnUserInfoUpdatedHandler OnUserInfoUpdatedHandler}, if the user joining the channel is in the Communication profile, or is a BROADCASTER in the Live Broadcast profile.
-         * 
+         *
          * @note To ensure smooth communication, use the same parameter type to identify the user. For example, if a user joins the channel with a user ID, then ensure all the other users use the user ID too. The same applies to the user account. If a user joins the channel with the Agora Web SDK, ensure that the uid of the user is set to the same parameter type.
-         * 
+         *
          * @param token The token generated at your server:
          * - For low-security requirements: You can use the temporary token generated at Console. For details, see [Get a temporary toke](https://docs.agora.io/en/Agora%20Platform/token?platform=All%20Platforms#get-a-temporary-token).
          * - For high-security requirements: Set it as the token generated at your server. For details, see [Get a token](https://docs.agora.io/en/Agora%20Platform/token?platform=All%20Platforms#get-a-token).
@@ -2366,7 +2366,7 @@ namespace agora_gaming_rtc
          * - All numeric characters: 0 to 9.
          * - The space character.
          * - Punctuation characters and other symbols, including: "!", "#", "$", "%", "&", "(", ")", "+", "-", ":", ";", "<", "=", ".", ">", "?", "@", "[", "]", "^", "_", " {", "}", "|", "~", ",".
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -2377,13 +2377,13 @@ namespace agora_gaming_rtc
         }
 
         /** Gets the user information by passing in the user account.
-         * 
+         *
          * After a remote user joins the channel, the SDK gets the user ID and user account of the remote user, caches them in a mapping table object (`userInfo`), and triggers the {@link agora_gaming_rtc.OnUserInfoUpdatedHandler OnUserInfoUpdatedHandler} callback on the local client.
-         * 
+         *
          * After receiving the `OnUserInfoUpdatedHandler` callback, you can call this method to get the user ID of the remote user from the userInfo object by passing in the user account.
-         * 
+         *
          * @param account The user account of the user. Ensure that you set this parameter.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -2398,13 +2398,13 @@ namespace agora_gaming_rtc
         }
 
         /** Gets the user information by passing in the user ID.
-         * 
+         *
          * After a remote user joins the channel, the SDK gets the user ID and user account of the remote user, caches them in a mapping table object (`userInfo`), and triggers the {@link agora_gaming_rtc.OnUserInfoUpdatedHandler OnUserInfoUpdatedHandler} callback on the local client.
-         * 
+         *
          * After receiving the `OnUserInfoUpdatedHandler` callback, you can call this method to get the user account of the remote user from the userInfo object by passing in the user ID.
-         * 
+         *
          * @param uid The user ID of the remote user. Ensure that you set this parameter.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -2423,18 +2423,18 @@ namespace agora_gaming_rtc
         }
 
         /** Enables/Disables image enhancement and sets the options.
-         * 
+         *
          * @since v3.0.1
          *
          * @note
          * - Call this method after calling {@link agora_gaming_rtc.IRtcEngine.EnableVideo EnableVideo}.
          * - Currently this method does not apply for macOS.
-         * 
+         *
          * @param enabled Sets whether or not to enable image enhancement:
          * - true: Enables image enhancement.
          * - false: Disables image enhancement.
          * @param beautyOptions Sets the image enhancement option. See {@link agora_gaming_rtc.BeautyOptions BeautyOptions}.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -2445,13 +2445,13 @@ namespace agora_gaming_rtc
         }
 
         /** Shares the whole or part of a screen by specifying the display ID.
-         * 
+         *
          * @note This method is for macOS only.
-         * 
+         *
          * @param displayId The display ID of the screen to be shared. This parameter specifies which screen you want to share.
          * @param rectangle (Optional) Sets the relative location of the region to the screen. `NULL` means sharing the whole screen. See Rectangle. If the specified region overruns the screen, the SDK shares only the region within it; if you set width or height as 0, the SDK shares the whole screen.
          * @param screenCaptureParameters Sets the screen sharing encoding parameters. See ScreenCaptureParameters.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -2464,13 +2464,13 @@ namespace agora_gaming_rtc
         }
 
         /** Shares the whole or part of a screen by specifying the screen rect.
-         * 
+         *
          * @note This method is for Windows and macOS only.
          *
          * @param screenRectangle Sets the relative location of the screen to the virtual screen.
          * @param regionRectangle (Optional) Sets the relative location of the region to the screen. `NULL` means sharing the whole screen. See Rectangle. If the specified region overruns the screen, the SDK shares only the region within it; if you set width or height as 0, the SDK shares the whole screen.
          * @param screenCaptureParameters Sets the screen sharing encoding parameters. See ScreenCaptureParameters.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -2483,13 +2483,13 @@ namespace agora_gaming_rtc
         }
 
         /** Sets the content hint for screen sharing.
-         * 
+         *
          * A content hint suggests the type of the content being shared, so that the SDK applies different optimization algorithm to different types of content.
-         * 
+         *
          * @note This method is for Windows and macOS only.
          *
          * @param videoContentHint Sets the content hint for screen sharing. See VideoContentHint.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -2500,11 +2500,11 @@ namespace agora_gaming_rtc
         }
 
         /** Updates the screen sharing parameters.
-         * 
+         *
          * @note This method is for Windows and macOS only.
          *
          * @param screenCaptureParameters Sets the screen sharing encoding parameters. See ScreenCaptureParameters.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -2516,11 +2516,11 @@ namespace agora_gaming_rtc
         }
 
         /** Updates the screen sharing region.
-         * 
+         *
          * @note This method is for Windows and macOS only.
          *
          * @param rectangle Sets the relative location of the region to the screen or window. `NULL` means sharing the whole screen or window. See Rectangle. If the specified region overruns the screen or window, the SDK shares only the region within it; if you set width or height as 0, the SDK shares the whole screen or window.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -2532,7 +2532,7 @@ namespace agora_gaming_rtc
         }
 
         /** Stop screen sharing.
-         * 
+         *
          * @note This method is for Windows and macOS only.
          *
          * @return
@@ -2545,26 +2545,26 @@ namespace agora_gaming_rtc
         }
 
         /** Adds a voice or video stream URL address to a live broadcast.
-         * 
+         *
          * The {@link agora_gaming_rtc.OnStreamPublishedHandler OnStreamPublishedHandler} callback returns the inject status. If this method call is successful, the server pulls the voice or video stream and injects it into a live channel. This is applicable to scenarios where all audience members in the channel can watch a live show and interact with each other.
-         * 
+         *
          * The `AddInjectStreamUrl` method call triggers the following callbacks:
          * - The local client:
          *     - {@link agora_gaming_rtc.OnStreamInjectedStatusHandler OnStreamInjectedStatusHandler} , with the state of the injecting the online stream.
          *     - {@link agora_gaming_rtc.OnUserJoinedHandler OnUserJoinedHandler} (uid: 666), if the method call is successful and the online media stream is injected into the channel.
          * - The remote client:
          *     - `OnUserJoinedHandler` (uid: 666), if the method call is successful and the online media stream is injected into the channel.
-         * 
-         * @note 
+         *
+         * @note
          * - Ensure that you enable the RTMP Converter service before using this function.
          * - This method applies to the Live-Broadcast profile only.
          * - You can inject only one media stream into the channel at the same time.
-         * 
+         *
          * @param url The URL address which is added to the ongoing live broadcast. Valid protocols are RTMP, HLS, and HTTP-FLV.
          * - Supported FLV audio codec type: AAC.
          * - Supported FLV video codec type: H264 (AVC).
          * @param streamConfig The InjectStreamConfig object that contains the configuration of the added voice or video stream.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -2579,13 +2579,13 @@ namespace agora_gaming_rtc
         }
 
         /** Removes the voice or video stream URL address from a live broadcast.
-         * 
+         *
          * This method removes the URL address (added by the {@link agora_gaming_rtc.IRtcEngine.AddInjectStreamUrl AddInjectStreamUrl} method) from the live broadcast.
-         * 
+         *
          * @note If this method is called successfully, the SDK triggers the {@link agora_gaming_rtc.OnUserOfflineHandler OnUserOfflineHandler} callback and returns a stream uid of 666.
-         * 
+         *
          * @param url The URL address of the added stream to be removed.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -2596,18 +2596,18 @@ namespace agora_gaming_rtc
         }
 
         /** Enables loopback recording.
-         * 
+         *
          * If you enable loopback recording, the output of the sound card is mixed into the audio stream sent to the other end.
-         * 
+         *
          * @note
          * - This method is for macOS and Windows only.
          * - macOS does not support loopback recording of the default sound card. If you need to use this method, please use a virtual sound card and pass its name to the deviceName parameter. Agora has tested and recommends using soundflower.
-         * 
+         *
          * @param enabled Sets whether to enable/disable loopback recording.
          * - true: Enable loopback recording.
          * - false: (Default) Disable loopback recording.
          * @param deviceName The device name of the sound card. The default value is NULL (the default sound card).
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -2618,17 +2618,17 @@ namespace agora_gaming_rtc
         }
 
         /** Sets the audio session’s operational restriction.
-         * 
+         *
          * The SDK and the app can both configure the audio session by default. The app may occasionally use other apps or third-party components to manipulate the audio session and restrict the SDK from doing so. This method allows the app to restrict the SDK’s manipulation of the audio session.
-         * 
+         *
          * You can call this method at any time to return the control of the audio sessions to the SDK.
-         * 
+         *
          * @note
          * - This method is for iOS only.
          * - This method restricts the SDK’s manipulation of the audio session. Any operation to the audio session relies solely on the app, other apps, or third-party components.
-         * 
+         *
          * @param restriction The operational restriction (bit mask) of the SDK on the audio session. See #AUDIO_SESSION_OPERATION_RESTRICTION.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -2639,18 +2639,18 @@ namespace agora_gaming_rtc
         }
 
         /** Starts to relay media streams across channels.
-         * 
+         *
          * After a successful method call, the SDK triggers the {@link agora_gaming_rtc.OnChannelMediaRelayStateChangedHandler OnChannelMediaRelayStateChangedHandler} and {@link agora_gaming_rtc.OnChannelMediaRelayEventHandler OnChannelMediaRelayEventHandler} callbacks, and these callbacks return the state and events of the media stream relay.
          * - If the `OnChannelMediaRelayStateChangedHandler` callback returns {@link agora_gaming_rtc.CHANNEL_MEDIA_RELAY_STATE#RELAY_STATE_RUNNING RELAY_STATE_RUNNING(2)} and {@link agora_gaming_rtc.CHANNEL_MEDIA_RELAY_ERROR#RELAY_OK RELAY_OK(0)}, and the `OnChannelMediaRelayEventHandler` callback returns {@link agora_gaming_rtc.CHANNEL_MEDIA_RELAY_EVENT#RELAY_EVENT_PACKET_SENT_TO_DEST_CHANNEL RELAY_EVENT_PACKET_SENT_TO_DEST_CHANNEL(4)}, the broadcaster starts sending data to the destination channel.
          * - If the `OnChannelMediaRelayStateChangedHandler` callback returns {@link agora_gaming_rtc.CHANNEL_MEDIA_RELAY_STATE#RELAY_STATE_FAILURE RELAY_STATE_FAILURE(3)}, an exception occurs during the media stream relay.
-         * 
+         *
          * @note
          * - Call this method after the {@link agora_gaming_rtc.IRtcEngine.JoinChannelByKey JoinChannelByKey} method.
          * - This method takes effect only when you are a broadcaster in a Live-broadcast channel.
          * - After a successful method call, if you want to call this method again, ensure that you call the {@link agora_gaming_rtc.IRtcEngine.StopChannelMediaRelay StopChannelMediaRelay} method to quit the current relay.
-         * 
+         *
          * @param mediaRelayConfiguration The configuration of the media stream relay: ChannelMediaRelayConfiguration.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -2661,13 +2661,13 @@ namespace agora_gaming_rtc
         }
 
         /** Updates the channels for media stream relay. After a successful {@link agora_gaming_rtc.IRtcEngine.StartChannelMediaRelay StartChannelMediaRelay} method call, if you want to relay the media stream to more channels, or leave the current relay channel, you can call the `UpdateChannelMediaRelay` method.
-         * 
+         *
          * After a successful method call, the SDK triggers the {@link agora_gaming_rtc.OnChannelMediaRelayEventHandler OnChannelMediaRelayEventHandler} callback with the {@link agora_gaming_rtc.CHANNEL_MEDIA_RELAY_EVENT#RELAY_EVENT_PACKET_UPDATE_DEST_CHANNEL RELAY_EVENT_PACKET_UPDATE_DEST_CHANNEL(7)} state code.
-         * 
+         *
          * @note Call this method after the `StartChannelMediaRelay` method to update the destination channel.
-         * 
+         *
          * @param mediaRelayConfiguration The media stream relay configuration: ChannelMediaRelayConfiguration.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -2678,13 +2678,13 @@ namespace agora_gaming_rtc
         }
 
         /** Stops the media stream relay.
-         * 
+         *
          * Once the relay stops, the broadcaster quits all the destination channels.
-         * 
+         *
          * After a successful method call, the SDK triggers the {@link agora_gaming_rtc.OnChannelMediaRelayStateChangedHandler OnChannelMediaRelayStateChangedHandler} callback. If the callback returns {@link agora_gaming_rtc.CHANNEL_MEDIA_RELAY_STATE#RELAY_STATE_IDLE RELAY_STATE_IDLE(0)} and {@link agora_gaming_rtc.CHANNEL_MEDIA_RELAY_ERROR#RELAY_OK RELAY_OK(0)}, the broadcaster successfully stops the relay.
-         * 
+         *
          * @note If the method call fails, the SDK triggers the `OnChannelMediaRelayStateChangedHandler` callback with the {@link agora_gaming_rtc.CHANNEL_MEDIA_RELAY_ERROR#RELAY_ERROR_SERVER_NO_RESPONSE RELAY_ERROR_SERVER_NO_RESPONSE(2)} or {@link agora_gaming_rtc.CHANNEL_MEDIA_RELAY_ERROR#RELAY_ERROR_SERVER_CONNECTION_LOST RELAY_ERROR_SERVER_CONNECTION_LOST(8)} state code. You can leave the channel by calling the {@link agora_gaming_rtc.IRtcEngine.LeaveChannel LeaveChannel} method, and the media stream relay automatically stops.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -2695,13 +2695,13 @@ namespace agora_gaming_rtc
         }
 
         /** Switches to a different channel.
-         * 
+         *
          * This method allows the audience of a Live-broadcast channel to switch to a different channel.
-         * 
+         *
          * After the user successfully switches to another channel, the {@link agora_gaming_rtc.OnLeaveChannelHandler OnLeaveChannelHandler} and {@link agora_gaming_rtc.OnJoinChannelSuccessHandler OnJoinChannelSuccessHandler} callbacks are triggered to indicate that the user has left the original channel and joined a new one.
-         * 
+         *
          * @note This method applies to the audience role in a Live-broadcast channel only.
-         * 
+         *
          * @param token The token generated at your server:
          * - For low-security requirements: You can use the temporary token generated in Console. For details, see [Get a temporary token](https://docs.agora.io/en/Agora%20Platform/token?platfor%20*%20m=All%20Platforms#get-a-temporary-token).
          * - For high-security requirements: Use the token generated at your server. For details, see [Get a token](https://docs.agora.io/en/Agora%20Platform/token?platfor%20*%20m=All%20Platforms#get-a-token).
@@ -2711,7 +2711,7 @@ namespace agora_gaming_rtc
          * - All numeric characters: 0 to 9.
          * - The space character.
          * - Punctuation characters and other symbols, including: "!", "#", "$", "%", "&", "(", ")", "+", "-", ":", ";", "<", "=", ".", ">", "?", "@", "[", "]", "^", "_", " {", "}", "|", "~", ",".
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -2731,9 +2731,9 @@ namespace agora_gaming_rtc
          * @note Call this method before {@link agora_gaming_rtc.IRtcEngine.EnableVideoObserver EnableVideoObserver}.
          *
          * @param wheatherApply Sets whether to enable the mirror mode of both local video and remote video.
-         * - true: Enable. 
+         * - true: Enable.
          * - false: (Default) Disable.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -2744,11 +2744,11 @@ namespace agora_gaming_rtc
         }
 
         /** Sets the volume of the in-ear monitor.
-         * 
+         *
          * @note This method is for Android and iOS only.
-         * 
+         *
          * @param volume Sets the volume of the in-ear monitor. The value ranges between 0 and 100 (default).
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -2759,11 +2759,11 @@ namespace agora_gaming_rtc
         }
 
         /** Shares the whole or part of a window by specifying the window ID.
-         * 
+         *
          * @note This method is for Windows and macOS only.
-         * 
+         *
          * Since v3.0.0, this method supports sharing with common Windows platforms. Agora tests the mainstream Windows applications, see details as follows:
-         * 
+         *
          * <table>
          *     <tr>
          *         <td><b>OS version</b></td>
@@ -2873,11 +2873,11 @@ namespace agora_gaming_rtc
          *         <td>No</td>
          *     </tr>
          * </table>
-         * 
+         *
          * @param windowId The ID of the window to be shared.
          * @param regionRect (Optional) The relative location of the region to the window. `NULL` means sharing the whole window. See Rectangle. If the specified region overruns the window, the SDK shares only the region within it; if you set width or height as 0, the SDK shares the whole window.
          * @param screenCaptureParameters Window sharing encoding parameters. See ScreenCaptureParameters.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -2890,13 +2890,13 @@ namespace agora_gaming_rtc
         }
 
         /** Enables in-ear monitoring.
-         * 
+         *
          * @note This method is only for Android and iOS.
          *
          * @param enabled Sets whether to enable/disable in-ear monitoring:
          * - true: Enable.
          * - false: (Default) Disable.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -2907,21 +2907,21 @@ namespace agora_gaming_rtc
         }
 
         /** Adjusts the playback volume of a specified remote user.
-         * 
+         *
          * @since v3.0.1
          *
          * You can call this method as many times as necessary to adjust the playback volume of different remote users, or to repeatedly adjust the playback volume of the same remote user.
-         * 
+         *
          * @note
          * - Call this method after joining a channel.
          * - The playback volume here refers to the mixed volume of a specified remote user.
          * - This method can only adjust the playback volume of one specified remote user at a time. To adjust the playback volume of different remote users, call the method as many times, once for each remote user.
-         * 
+         *
          * @param uid The ID of the remote user.
          * @param volume The playback volume of the specified remote user. The value ranges from 0 to 100:
          * - 0: Mute.
          * - 100: Original volume.
-         * 
+         *
          * @return
          * - 0: Success.
          * - < 0: Failure.
@@ -2932,12 +2932,12 @@ namespace agora_gaming_rtc
         }
 
         /** Creates and gets an `AgoraChannel` object.
-         * 
+         *
          * @since v3.0.1
          *
          * To join more than one channel, call this method multiple times to create as many `AgoraChannel` objects as needed, and
          * call the {@link agora_gaming_rtc.AgoraChannel.JoinChannel JoinChannel} method of each created `AgoraChannel` object.
-         * 
+         *
          * After joining multiple channels, you can simultaneously subscribe to streams of all the channels, but publish a stream in only one channel at one time.
          * @param channelId The unique channel name for an Agora RTC session. It must be in the string format and not exceed 64 bytes in length. Supported character scopes are:
          * - All lowercase English letters: a to z.
@@ -2945,11 +2945,11 @@ namespace agora_gaming_rtc
          * - All numeric characters: 0 to 9.
          * - The space character.
          * - Punctuation characters and other symbols, including: "!", "#", "$", "%", "&", "(", ")", "+", "-", ":", ";", "<", "=", ".", ">", "?", "@", "[", "]", "^", "_", " {", "}", "|", "~", ",".
-         * 
+         *
          * @note
          * - This parameter does not have a default value. You must set it.
          * - Do not set it as the empty string "". Otherwise, the SDK returns `ERR_REFUSED(5)`.
-         * 
+         *
          * @return
          * - The `AgoraChannel` object, if the method call succeeds.
          * - An empty pointer `NULL`, if the method call fails.
@@ -2961,7 +2961,7 @@ namespace agora_gaming_rtc
         }
 
         /** Enables/Disables face detection for the local user. Applies to Android and iOS only.
-         * 
+         *
          * @since v3.0.1
          *
          * Once face detection is enabled, the SDK triggers the {@link agora_gaming_rtc.OnFacePositionChangedHandler OnFacePositionChangedHandler} callback
@@ -3007,19 +3007,19 @@ namespace agora_gaming_rtc
         }
 
         /** Initializes an IRtcEngine instance.
-         * 
+         *
          * Unless otherwise specified, all the methods provided by the IRtcEngine class are executed asynchronously. Agora recommends calling these methods in the same thread.
          *
-         * @note 
+         * @note
          * - You must initialize the IRtcEngine instance before calling any other method.
          * - You can initialize an IRtcEngine instance either by calling this method or by calling {@link agora_gaming_rtc.IRtcEngine.GetEngine(RtcEngineConfig engineConfig) GetEngine2}. The difference between `GetEngine2` and this method is that `GetEngine2` enables you to specify the connection area.
          * - The Agora RTC Unity SDK supports initializing only one IRtcEngine instance for an app for now.
-         * 
+         *
          * @param appId The App ID issued to you by Agora. See [How to get the App ID](https://docs.agora.io/en/Agora%20Platform/token#getappid).
          * Only users in apps with the same App ID can join the same channel and communicate with each other. Use an App ID to initialize only
          * one `IRtcEngine` instance. To change your App ID, call {@link agora_gaming_rtc.IRtcEngine.Destroy Destroy} to destroy the current `IRtcEngine` instance and then call this method to initialize an `IRtcEngine` instance with the new App ID.
-         * 
-         * @return 
+         *
+         * @return
          * - The IRtcEngine instance, if this method call succeeds.
          * - The error code, if this method call fails.
          *   - `ERR_INVALID_APP_ID (101)`: The App ID is invalid. Check if your App ID is in the correct format.
@@ -3034,17 +3034,17 @@ namespace agora_gaming_rtc
         }
 
         /** Initializes an IRtcEngine instance.
-         * 
+         *
          * Unless otherwise specified, all the methods provided by the IRtcEngine class are executed asynchronously. Agora recommends calling these methods in the same thread.
          *
-         * @note 
+         * @note
          * - You must initialize the IRtcEngine instance before calling any other method.
          * - You can initialize an IRtcEngine instance either by calling this method or by calling {@link agora_gaming_rtc.IRtcEngine.GetEngine(string appId) GetEngine1}. The difference between `GetEngine1` and this method is that this method enables you to specify the connection area.
          * - The Agora RTC Unity SDK supports initializing only one IRtcEngine instance for an app for now.
-         * 
+         *
          * @param engineConfig Configurations for the IRtcEngine instance. For details, see #RtcEngineConfig.
-         * 
-         * @return 
+         *
+         * @return
          * - The IRtcEngine instance, if this method call succeeds.
          * - The error code, if this method call fails.
          *   - `ERR_INVALID_APP_ID (101)`: The App ID is invalid. Check if your App ID is in the correct format.
@@ -3061,9 +3061,9 @@ namespace agora_gaming_rtc
         /** Initializes the IRtcEngine.
          *
          * @deprecated Use {@link agora_gaming_rtc.IRtcEngine.GetEngine GetEngine} instead.
-         * 
+         *
          * @param appId The App ID of your project.
-         * 
+         *
          * @return The IRtcEngine instance.
          */
         public static IRtcEngine getEngine(string appId)
@@ -3072,9 +3072,9 @@ namespace agora_gaming_rtc
         }
 
         /** Destroys the `IRtcEngine` instance and releases all resources used by the Agora RTC SDK.
-         * 
+         *
          * Use this method for apps in which users occasionally make voice or video calls. When users do not make calls, you can free up resources for other operations. Once you call `Destroy` to destroy the created `IRtcEngine` instance, you cannot use any method or callback in the SDK any more. If you want to use the real-time communication functions again, you must call {@link agora_gaming_rtc.IRtcEngine.GetEngine GetEngine} to initialize a new `RtcEngine` instance.
-         * 
+         *
          * @note
          * - Because `Destroy` is a synchronous method and the app cannot move on to another task until the execution completes, Agora suggests calling this method in a sub-thread to avoid congestion in the main thread. Besides, you **cannot** call `Destroy` in any method or callback of the SDK. Otherwise, the SDK cannot release the resources occupied by the `IRtcEngine` instance until the callbacks return results, which may result in a deadlock.
          * - If you want to create a new `IRtcEngine` instance after destroying the current one, ensure that you wait till the `destroy` method completes executing.
@@ -3146,7 +3146,7 @@ namespace agora_gaming_rtc
             GC.Collect();
         }
 
-        // only query, do not create 
+        // only query, do not create
         /** Query the IRtcEngine instance.
          *
          * @note Call this method after calling {@link agora_gaming_rtc.IRtcEngine.GetEngine(string appId) GetEngine}.
@@ -4778,4 +4778,3 @@ namespace agora_gaming_rtc
         }
     }
 };
-
