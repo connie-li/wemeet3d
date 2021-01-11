@@ -6,7 +6,7 @@ namespace agora_gaming_rtc
 {
     /* This example script demonstrates how to attach
     * video content to a GameObject
-    * 
+    *
     * Agora engine outputs one local preview video and some
     * remote user video. User ID (int) is used to identify
     * these video streams. 0 is used for local preview video
@@ -42,12 +42,15 @@ namespace agora_gaming_rtc
         private bool _initialized = false;
         public bool _enableFlipHorizontal = false;
         public bool _enableFlipVertical = false;
-        public uint videoFps = 30; 
+        public uint videoFps = 30;
         [SerializeField]
         AgoraVideoSurfaceType VideoSurfaceType = AgoraVideoSurfaceType.Renderer;
-        
+
         void Start()
         {
+            nativeTexture = new Texture2D((int)defWidth, (int)defHeight, TextureFormat.RGBA32, false);
+            //nativeTexture = gameObject.GetComponent<Renderer>().material.mainTexture;
+
             // render video
             if (VideoSurfaceType == AgoraVideoSurfaceType.Renderer)
             {
@@ -114,7 +117,7 @@ namespace agora_gaming_rtc
                         }
                         else
                         {
-                            tmpi = videoRender.UpdateVideoRawData(mChannelId, uid, data, ref defWidth, ref defHeight);    
+                            tmpi = videoRender.UpdateVideoRawData(mChannelId, uid, data, ref defWidth, ref defHeight);
                         }
                     }
                     else
@@ -142,13 +145,13 @@ namespace agora_gaming_rtc
                     }
                 }
                 else
-                { 
+                {
                     if (nativeTexture == null)
                     {
                         Debug.LogError("You didn't initialize native texture, please remove native texture and initialize it by agora.");
                         return;
                     }
-      
+
                     int width = 0;
                     int height = 0;
                     int tmpi = -1;
@@ -181,7 +184,7 @@ namespace agora_gaming_rtc
                             nativeTexture.LoadRawTextureData(data, (int)width * (int)height * 4);
                             nativeTexture.Apply();
                         } else {
-                            /* 
+                            /*
                             * if width or height changed ,we need to resize texture.
                             */
                             defWidth = width;
@@ -245,26 +248,26 @@ namespace agora_gaming_rtc
         }
 
         /** Sets the video rendering frame rate.
-        * 
-        * @note 
+        *
+        * @note
         * - Ensure that you call this method in the main thread.
         * - Ensure that you call this method before binding VideoSurface.cs.
-        * 
+        *
         * @param fps The real video refreshing frame rate of the program.
         */
         public void SetGameFps(uint fps)
         {
-            videoFps = fps; 
+            videoFps = fps;
         }
 
         // call this to render video stream from uid on this game object
         /** Sets the local or remote video.
-        * 
-        * @note 
+        *
+        * @note
         * - Do not call this method and {@link agora_gaming_rtc.VideoSurface.SetForMultiChannelUser SetForMultiChannelUser} together.
         * - Ensure that you call this method in the main thread.
         * - Ensure that you call this method before binding VideoSurface.cs.
-        * 
+        *
         * @param uid The ID of the remote user, which is retrieved from {@link agora_gaming_rtc.OnUserJoinedHandler OnUserJoinedHandler}. The default value is 0, which means you can see the local video.
         */
         public void SetForUser(uint uid)
@@ -281,18 +284,18 @@ namespace agora_gaming_rtc
 
         /** Sets the local or remote video of users in multiple channels.
          *
-         * @note 
+         * @note
          * - This method only applies to the multi-channel feature.
          * - Do not call this method and {@link agora_gaming_rtc.VideoSurface.SetForUser SetForUser} together.
          * - Ensure that you call this method in the main thread.
          * - Ensure that you call this method before binding VideoSurface.cs.
-         * 
+         *
          * @param channelId The channel name.
          * @param uid The ID of the remote user, which is retrieved from {@link agora_gaming_rtc.OnUserJoinedHandler OnUserJoinedHandler}. The default value is 0, which means you can see the local video.
          */
 
         public void SetForMultiChannelUser(string channelId, uint uid)
-        { 
+        {
             if (IRtcEngine.QueryEngine() != null)
             {
                 isMultiChannelWant = true;
@@ -307,11 +310,11 @@ namespace agora_gaming_rtc
         }
 
         /** Enables/Disables the mirror mode when renders the Texture.
-        * 
-        * @note 
+        *
+        * @note
         * - Ensure that you call this method in the main thread.
         * - Ensure that you call this method before binding VideoSurface.cs.
-        * 
+        *
         * @param enableFlipHorizontal Whether to enable the horizontal mirror mode of Texture.
         * - true: Enable.
         * - false: (Default) Disable.
@@ -334,7 +337,7 @@ namespace agora_gaming_rtc
         }
 
         /** Set the video renderer type.
-        * 
+        *
         * @param agoraVideoSurfaceType The renderer type, see AgoraVideoSurfaceType.
         */
         public void SetVideoSurfaceType(AgoraVideoSurfaceType agoraVideoSurfaceType)
@@ -343,7 +346,7 @@ namespace agora_gaming_rtc
         }
 
         /** Starts/Stops the video rendering.
-        * 
+        *
         * @param enable Whether to start/stop the video rendering.
         * - true: (Default) Start.
         * - false: Stop.
@@ -407,7 +410,7 @@ namespace agora_gaming_rtc
         /*
          *
          */
-        private string mChannelId = "_0_";    
+        private string mChannelId = "_0_";
 
         /*
         *if disabled, then no rendering happens
