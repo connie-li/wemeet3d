@@ -12,8 +12,8 @@ namespace DapperDino.Mirror.Tutorials.Lobby
         [SerializeField] private int minPlayers = 2;
         [Scene] [SerializeField] private string menuScene = string.Empty;
 
-        [Header("Maps")]
-        [SerializeField] private int numberOfRounds = 1;
+      //  [Header("Maps")]
+        //[SerializeField] private int numberOfRounds = 1;
       //  [SerializeField] private MapSet mapSet = null;
 
         [Header("Room")]
