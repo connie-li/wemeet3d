@@ -4,14 +4,5 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 0
-    path: Assets/Mirror/Examples/Pong/Scenes/Scene.unity
-    guid: 89a84548859e3b643b4fb27984dc2b0d
-  - enabled: 1
-    path: Assets/Scenes/Join Scene.unity
-    guid: 16293edaaf1ef644f921f77519b70598
-  - enabled: 1
-    path: Assets/Scenes/Scene.unity
-    guid: fbd3f31aad2d3324e968dcffff8a6b4d
+  m_Scenes: []
   m_configObjects: {}
