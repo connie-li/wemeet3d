@@ -121,6 +121,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &124772489 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7892255130033953082, guid: c1ef342f97e94ef48adb3e2b8534fb71,
+    type: 3}
+  m_PrefabInstance: {fileID: 3315401828077044160}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &358144302
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,30 +416,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b0fecffa3f624585964b0d0eb21b18e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnClientConnected:
-    m_PersistentCalls:
-      m_Calls: []
-  OnClientDataReceived:
-    m_PersistentCalls:
-      m_Calls: []
-  OnClientError:
-    m_PersistentCalls:
-      m_Calls: []
-  OnClientDisconnected:
-    m_PersistentCalls:
-      m_Calls: []
-  OnServerConnected:
-    m_PersistentCalls:
-      m_Calls: []
-  OnServerDataReceived:
-    m_PersistentCalls:
-      m_Calls: []
-  OnServerError:
-    m_PersistentCalls:
-      m_Calls: []
-  OnServerDisconnected:
-    m_PersistentCalls:
-      m_Calls: []
   Port: 7777
   NoDelay: 1
   Interval: 10
@@ -441,6 +423,7 @@ MonoBehaviour:
   CongestionWindow: 1
   SendWindowSize: 128
   ReceiveWindowSize: 128
+  debugLog: 0
   debugGUI: 0
 --- !u!114 &1789675198
 MonoBehaviour:
@@ -633,6 +616,16 @@ PrefabInstance:
       propertyPath: networkManager
       value: 
       objectReference: {fileID: 1789675198}
+    - target: {fileID: 5136455456656396387, guid: c1ef342f97e94ef48adb3e2b8534fb71,
+        type: 3}
+      propertyPath: landingPagePanel
+      value: 
+      objectReference: {fileID: 124772489}
+    - target: {fileID: 5136455456656396387, guid: c1ef342f97e94ef48adb3e2b8534fb71,
+        type: 3}
+      propertyPath: ipAddressInputField
+      value: 
+      objectReference: {fileID: 2004771439}
     - target: {fileID: 5858376097468323525, guid: c1ef342f97e94ef48adb3e2b8534fb71,
         type: 3}
       propertyPath: m_LocalPosition.z
