@@ -157,15 +157,44 @@ public class PlayerController : MonoBehaviour
             float moveVertical = Input.GetAxis("Vertical");
            // Vector3 movement = new Vector3(rotation, 0.0f, translation);
             //char_RB.AddForce(movement*speed);
-
-            if(translation != 0)
+            if(Input.GetButtonDown("Jump"))
             {
-                anim.SetBool("isWalking", true);
+                anim.SetBool("isSitting",true);
+            }
+
+            if(anim.GetBool("isSitting")==true)
+            {
+                if(translation != 0)
+                {
+                    anim.SetBool("isWalking", true);
+                    anim.SetBool("isIdle", false);
+                    anim.SetBool("isSitting",false);
+
+                }
+                else
+                {
+                    anim.SetBool("isWalking", false);
+                    anim.SetBool("isIdle", false);
+                    anim.SetBool("isSitting",true);
+                }
             }
             else
             {
-                anim.SetBool("isWalking", false);
+                if(translation != 0)
+                {
+                    anim.SetBool("isWalking", true);
+                    anim.SetBool("isIdle", false);
+                    anim.SetBool("isSitting",false);
+
+                }
+                else
+                {
+                    anim.SetBool("isWalking", false);
+                    anim.SetBool("isIdle", true);
+                    anim.SetBool("isSitting",false);
+                }
             }
+            
     }
 
 }
