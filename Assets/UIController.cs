@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,6 +39,15 @@ public class UIController : MonoBehaviour
             }
 
             this.pwInputCreate.ForceLabelUpdate();
+        }
+    }
+
+    public UnityEngine.UI.Text m_text;
+    public void copyToClipboard()
+    {
+        if (this.m_text.text != null)
+        {
+            GUIUtility.systemCopyBuffer = this.m_text.text;
         }
     }
 }
