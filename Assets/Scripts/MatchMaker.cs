@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 using Mirror;
@@ -9,16 +11,10 @@ namespace MirrorBasics {
     [System.Serializable]
     public class Match {
         public string matchID;
-        public bool publicMatch;
-        public bool inMatch;
-        public bool matchFull;
         public SyncListGameObject players = new SyncListGameObject ();
 
-        public Match (string matchID, GameObject player, bool publicMatch) {
-            matchFull = false;
-            inMatch = false;
+        public Match (string matchID, GameObject player) {
             this.matchID = matchID;
-            this.publicMatch = publicMatch;
             players.Add (player);
         }
 
@@ -33,27 +29,24 @@ namespace MirrorBasics {
 
     public class MatchMaker : NetworkBehaviour {
 
-        public static MatchMaker instance;
+        public static MatchMaker instance = null;
 
         public SyncListMatch matches = new SyncListMatch ();
         public SyncListString matchIDs = new SyncListString ();
 
-        [SerializeField] GameObject turnManagerPrefab;
-        [SerializeField] int maxMatchPlayers = 12;
+        //[SerializeField] GameObject turnManagerPrefab;
 
-        void Start () {
+        void Awake () {
             instance = this;
         }
 
-        public bool HostGame (string _matchID, GameObject _player, bool publicMatch, out int playerIndex) {
+        public bool HostGame (string _matchID, GameObject _player, out int playerIndex) {
             playerIndex = -1;
 
             if (!matchIDs.Contains (_matchID)) {
                 matchIDs.Add (_matchID);
-                Match match = new Match (_matchID, _player, publicMatch);
-                matches.Add (match);
+                matches.Add (new Match (_matchID, _player));
                 Debug.Log ($"Match generated");
-                _player.GetComponent<Player> ().currentMatch = match;
                 playerIndex = 1;
                 return true;
             } else {
@@ -69,19 +62,9 @@ namespace MirrorBasics {
 
                 for (int i = 0; i < matches.Count; i++) {
                     if (matches[i].matchID == _matchID) {
-                        if (!matches[i].inMatch && !matches[i].matchFull) {
-                            matches[i].players.Add (_player);
-                            _player.GetComponent<Player> ().currentMatch = matches[i];
-                            playerIndex = matches[i].players.Count;
-
-                            if (matches[i].players.Count == maxMatchPlayers) {
-                                matches[i].matchFull = true;
-                            }
-
-                            break;
-                        } else {
-                            return false;
-                        }
+                        matches[i].players.Add (_player);
+                        playerIndex = matches[i].players.Count;
+                        break;
                     }
                 }
 
@@ -93,39 +76,23 @@ namespace MirrorBasics {
             }
         }
 
-        public bool SearchGame (GameObject _player, out int playerIndex, out string matchID) {
-            playerIndex = -1;
-            matchID = "";
-
-            for (int i = 0; i < matches.Count; i++) {
-                Debug.Log ($"Checking match {matches[i].matchID} | inMatch {matches[i].inMatch} | matchFull {matches[i].matchFull} | publicMatch {matches[i].publicMatch}");
-                if (!matches[i].inMatch && !matches[i].matchFull && matches[i].publicMatch) {
-                    if (JoinGame (matches[i].matchID, _player, out playerIndex)) {
-                        matchID = matches[i].matchID;
-                        return true;
-                    }
-                }
-            }
-
-            return false;
-        }
-
         public void BeginGame (string _matchID) {
-            GameObject newTurnManager = Instantiate (turnManagerPrefab);
-            NetworkServer.Spawn (newTurnManager);
-            newTurnManager.GetComponent<NetworkMatchChecker> ().matchId = _matchID.ToGuid ();
-            TurnManager turnManager = newTurnManager.GetComponent<TurnManager> ();
+            //GameObject newTurnManager = Instantiate (turnManagerPrefab);
+            //NetworkServer.Spawn (newTurnManager);
+            //newTurnManager.GetComponent<NetworkMatchChecker> ().matchId = _matchID.ToGuid ();
+            //TurnManager turnManager = newTurnManager.GetComponent<TurnManager> ();
 
             for (int i = 0; i < matches.Count; i++) {
                 if (matches[i].matchID == _matchID) {
-                    matches[i].inMatch = true;
                     foreach (var player in matches[i].players) {
                         Player _player = player.GetComponent<Player> ();
+                        //turnManager.AddPlayer (_player);
                         _player.StartGame ();
                     }
                     break;
                 }
             }
+
         }
 
         public static string GetRandomMatchID () {
@@ -140,23 +107,6 @@ namespace MirrorBasics {
             }
             Debug.Log ($"Random Match ID: {_id}");
             return _id;
-        }
-
-        public void PlayerDisconnected (Player player, string _matchID) {
-            for (int i = 0; i < matches.Count; i++) {
-                if (matches[i].matchID == _matchID) {
-                    int playerIndex = matches[i].players.IndexOf (player.gameObject);
-                    matches[i].players.RemoveAt (playerIndex);
-                    Debug.Log ($"Player disconnected from match {_matchID} | {matches[i].players.Count} players remaining");
-
-                    if (matches[i].players.Count == 0) {
-                        Debug.Log ($"No more players in Match. Terminating {_matchID}");
-                        matches.RemoveAt (i);
-                        matchIDs.Remove (_matchID);
-                    }
-                    break;
-                }
-            }
         }
 
     }
