@@ -13,7 +13,8 @@ namespace MirrorBasics {
         [SerializeField] InputField joinMatchInput;
         [SerializeField] Button joinButton;
         [SerializeField] Button hostButton;
-        [SerializeField] GameObject lobbyCanvas;
+        [SerializeField] GameObject lobbyClient;
+        [SerializeField] GameObject lobbyHost;
         [SerializeField] GameObject hostCanvas;
         [SerializeField] GameObject joinCanvas;
 
@@ -39,6 +40,17 @@ namespace MirrorBasics {
             instance = this;
         }
 
+        public void waitALittle()
+        {
+          StartCoroutine(waiter());
+        }
+
+        IEnumerator waiter()
+        {
+          //Wait for 4 seconds
+          yield return new WaitForSeconds(4);
+        }
+
         public void Host () {
             joinMatchInput.interactable = false;
             joinButton.interactable = false;
@@ -55,7 +67,7 @@ namespace MirrorBasics {
 
         public void HostSuccess (bool success, string matchID) {
             if (success) {
-                lobbyCanvas.SetActive(true);
+                lobbyHost.SetActive(true);
                 hostCanvas.SetActive(false);
                 joinCanvas.SetActive(false);
                 Debug.Log ($"<color = green>before Spawn</color>");
@@ -80,7 +92,7 @@ namespace MirrorBasics {
 
         public void JoinSuccess (bool success, string matchID) {
             if (success) {
-                lobbyCanvas.SetActive(true);
+                lobbyClient.SetActive(true);
                 hostCanvas.SetActive(false);
                 joinCanvas.SetActive(false);
                 SpawnPlayerUIPrefab (Player.localPlayer);
