@@ -48,7 +48,7 @@ public class NetworkManagerEdit : NetworkManager
       Debug.Log ($"End of wait");
       UILobby.instance.Join();
     }
-
+    
 
 }
 

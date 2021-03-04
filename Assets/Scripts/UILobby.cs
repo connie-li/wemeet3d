@@ -11,6 +11,7 @@ namespace MirrorBasics {
 
         [Header ("Host Join")]
         [SerializeField] InputField joinMatchInput;
+        [SerializeField] InputField passwordInput;
         [SerializeField] Button joinButton;
         [SerializeField] Button hostButton;
         [SerializeField] GameObject lobbyClient;
@@ -23,6 +24,7 @@ namespace MirrorBasics {
         //[SerializeField] Transform UIPlayerParent;
         [SerializeField] GameObject UIPlayerPrefab;
         [SerializeField] Text matchIDText;
+        [SerializeField] Text passwordText;
         [SerializeField] GameObject beginGameButton;
         [SerializeField] GameObject PlayerPrefab;
 
@@ -65,7 +67,7 @@ namespace MirrorBasics {
 
         }
 
-        public void HostSuccess (bool success, string matchID) {
+        public void HostSuccess (bool success, string matchID, string meetingPassword) {
             if (success) {
                 lobbyHost.SetActive(true);
                 hostCanvas.SetActive(false);
@@ -74,6 +76,7 @@ namespace MirrorBasics {
                 SpawnPlayerUIPrefab (Player.localPlayer);
                 Debug.Log ($"<color = green>after spawn</color>");
                 matchIDText.text = matchID;
+                passwordText.text = meetingPassword;
                 beginGameButton.SetActive (true);
             } else {
                 joinMatchInput.interactable = true;
@@ -87,16 +90,17 @@ namespace MirrorBasics {
             joinButton.interactable = false;
             hostButton.interactable = false;
 
-            Player.localPlayer.JoinGame (joinMatchInput.text.ToUpper ());
+            Player.localPlayer.JoinGame (joinMatchInput.text.ToUpper (), passwordInput.text.ToUpper ());
         }
 
-        public void JoinSuccess (bool success, string matchID) {
+        public void JoinSuccess (bool success, string matchID, string meetingPassword) {
             if (success) {
                 lobbyClient.SetActive(true);
                 hostCanvas.SetActive(false);
                 joinCanvas.SetActive(false);
                 SpawnPlayerUIPrefab (Player.localPlayer);
                 matchIDText.text = matchID;
+                passwordText.text = meetingPassword;
             } else {
                 joinMatchInput.interactable = true;
                 joinButton.interactable = true;

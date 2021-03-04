@@ -11,10 +11,12 @@ namespace MirrorBasics {
     [System.Serializable]
     public class Match {
         public string matchID;
+        public string meetingPassword;
         public SyncListGameObject players = new SyncListGameObject ();
 
-        public Match (string matchID, GameObject player) {
+        public Match (string matchID, GameObject player, string meetingPassword) {
             this.matchID = matchID;
+            this.meetingPassword = meetingPassword;
             players.Add (player);
         }
 
@@ -40,12 +42,12 @@ namespace MirrorBasics {
             instance = this;
         }
 
-        public bool HostGame (string _matchID, GameObject _player, out int playerIndex) {
+        public bool HostGame (string _matchID, GameObject _player, out int playerIndex, string _meetingPassword) {
             playerIndex = -1;
 
             if (!matchIDs.Contains (_matchID)) {
                 matchIDs.Add (_matchID);
-                matches.Add (new Match (_matchID, _player));
+                matches.Add (new Match (_matchID, _player,_meetingPassword));
                 Debug.Log ($"Match generated");
                 playerIndex = 1;
                 return true;
@@ -55,21 +57,26 @@ namespace MirrorBasics {
             }
         }
 
-        public bool JoinGame (string _matchID, GameObject _player, out int playerIndex) {
+        public bool JoinGame (string _matchID, GameObject _player, out int playerIndex, string _meetingPassword) {
             playerIndex = -1;
 
             if (matchIDs.Contains (_matchID)) {
 
                 for (int i = 0; i < matches.Count; i++) {
                     if (matches[i].matchID == _matchID) {
+                      if(matches[i].meetingPassword == _meetingPassword)
+                      {
                         matches[i].players.Add (_player);
                         playerIndex = matches[i].players.Count;
-                        break;
+                        Debug.Log ($"Match joined");
+                        return true;
+                      }else
+                      {
+                          Debug.Log ($"Wrong password");
+                      }
                     }
                 }
-
-                Debug.Log ($"Match joined");
-                return true;
+                return false;
             } else {
                 Debug.Log ($"Match ID does not exist");
                 return false;
@@ -106,6 +113,20 @@ namespace MirrorBasics {
                 }
             }
             Debug.Log ($"Random Match ID: {_id}");
+            return _id;
+        }
+
+        public static string GetRandomPassword () {
+            string _id = string.Empty;
+            for (int i = 0; i < 5; i++) {
+                int random = UnityEngine.Random.Range (0, 36);
+                if (random < 26) {
+                    _id += (char) (random + 65);
+                } else {
+                    _id += (random - 26).ToString ();
+                }
+            }
+            Debug.Log ($"Random Password: {_id}");
             return _id;
         }
 
