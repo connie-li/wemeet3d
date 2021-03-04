@@ -109,6 +109,7 @@ public class PlayerController : MonoBehaviour
  using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -116,6 +117,9 @@ public class PlayerController : MonoBehaviour
     public float speed = 2;
     static Animator anim;
     public Rigidbody char_RB;
+    public GameObject panelSitDown;
+    public Button yourButton;
+    bool UserInput = true;
     //public GameObject Camera;
     
 
@@ -125,6 +129,8 @@ public class PlayerController : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         char_RB = GetComponent<Rigidbody>();
+        Button btn = yourButton.GetComponent<Button>();
+        btn.onClick.AddListener(TaskOnClick);
     }
 
     // Update is called once per frame
@@ -139,6 +145,8 @@ public class PlayerController : MonoBehaviour
     */
     void Update()
     {
+        
+        
             //float translation = Input.GetAxis("Vertical") * speed;
             float translation = Input.GetAxis("Vertical") * speed;
             //char_RB.MovePosition(char_RB.gameObject.transform.forward * speed);
@@ -147,7 +155,8 @@ public class PlayerController : MonoBehaviour
             //movement = Vector3.ClampMagnitude(movement,speed);
             //movement *= Time.deltaTime;
             //transform.Translate(movement);
-            
+            if(UserInput)
+            {
             translation *= Time.deltaTime;
             rotation *= Time.deltaTime;
             transform.Translate(0,0,translation);
@@ -194,7 +203,31 @@ public class PlayerController : MonoBehaviour
                     anim.SetBool("isSitting",false);
                 }
             }
-            
+        }
     }
+
+    //private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
+     {
+         if(other.gameObject.tag == "Chair")
+         {
+            
+            panelSitDown.SetActive(true);
+            anim.SetBool("isWalking", false);
+            anim.SetBool("isIdle", true);
+            anim.SetBool("isSitting",false);
+            UserInput = false;
+         }
+     }
+
+     void TaskOnClick()
+     {
+         anim.SetBool("isSitting",true);
+         Debug.Log("Clicked");
+         UserInput = true;
+         panelSitDown.SetActive(false);
+     }
+
+
 
 }
