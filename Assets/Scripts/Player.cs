@@ -103,7 +103,12 @@ namespace MirrorBasics {
             matchID = _matchID;
             meetingPassword = _meetingPassword;
             Debug.Log ($"MatchID: {matchID} == {_matchID}");
-            UILobby.instance.JoinSuccess (success, _matchID, _meetingPassword);
+            Debug.Log ($"PasswordID: {meetingPassword} == {_meetingPassword}");
+            if(!success)
+            {
+                Debug.Log("Password is wrong. Please try again");
+            }
+                UILobby.instance.JoinSuccess (success, _matchID, _meetingPassword);
         }
 
         /*
