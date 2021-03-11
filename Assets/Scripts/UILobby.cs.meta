@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 4ce5a380753d66b44a879708c0f7e16e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - joinMatchInput: {instanceID: 0}
+  - currentCanvas: {instanceID: 0}
+  - lobbyCanvas: {instanceID: 0}
+  - UIPlayerParent: {fileID: 4563732799383576469, guid: c85eb9ab7bcca09499b522ee392f6254,
+      type: 3}
+  - UIPlayerPrefab: {fileID: 39254547051457587, guid: c85eb9ab7bcca09499b522ee392f6254,
+      type: 3}
+  - matchIDText: {instanceID: 0}
+  - beginGameButton: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
