@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace MirrorBasics {
 
     public class UILobby : MonoBehaviour {
 
         public static UILobby instance = null;
-
+        //public TextMeshProUGUI RoomPass;
         [Header ("Host Join")]
         [SerializeField] InputField joinMatchInput;
         [SerializeField] InputField passwordInput;
@@ -18,7 +19,7 @@ namespace MirrorBasics {
         [SerializeField] GameObject lobbyHost;
         [SerializeField] GameObject hostCanvas;
         [SerializeField] GameObject joinCanvas;
-
+        [SerializeField] TextMeshProUGUI RoomPass;
 
         [Header ("Lobby")]
         //[SerializeField] Transform UIPlayerParent;
@@ -101,10 +102,13 @@ namespace MirrorBasics {
                 SpawnPlayerUIPrefab (Player.localPlayer);
                 matchIDText.text = matchID;
                 passwordText.text = meetingPassword;
+                RoomPass.text = "";
             } else {
                 joinMatchInput.interactable = true;
                 joinButton.interactable = true;
                 hostButton.interactable = true;
+                RoomPass.text = "The room code or password you entered is incorrect";
+
             }
         }
 
