@@ -177,7 +177,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1d37b37796d761c4e9fb654400356074, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fd0bf9c6d0b4dc64c9fc514bf2cf5fe0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6543,7 +6543,6 @@ GameObject:
   - component: {fileID: 1146957460}
   - component: {fileID: 1146957459}
   - component: {fileID: 1146957458}
-  - component: {fileID: 1146957461}
   m_Layer: 5
   m_Name: chat-toggle-button
   m_TagString: Untagged
@@ -6614,7 +6613,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1146957461}
+      - m_Target: {fileID: 0}
         m_MethodName: OnButtonClick
         m_Mode: 1
         m_Arguments:
@@ -9593,7 +9592,6 @@ GameObject:
   - component: {fileID: 1821951225}
   - component: {fileID: 1821951224}
   - component: {fileID: 1821951223}
-  - component: {fileID: 1821951226}
   m_Layer: 5
   m_Name: mic-toggle-button
   m_TagString: Untagged
@@ -9664,7 +9662,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1821951226}
+      - m_Target: {fileID: 0}
         m_MethodName: OnButtonClick
         m_Mode: 1
         m_Arguments:
@@ -11679,7 +11677,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3ad5101cf09e01745821ba70988a5483, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3670819014d970f43a580e5abbf0faf1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
