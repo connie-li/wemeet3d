@@ -90,8 +90,12 @@ namespace MirrorBasics {
             joinMatchInput.interactable = false;
             joinButton.interactable = false;
             hostButton.interactable = false;
-
-            Player.localPlayer.JoinGame (joinMatchInput.text.ToUpper (), passwordInput.text.ToUpper ());
+            if(Player.localPlayer == null)
+            {
+              Debug.Log ($"Failed to Connect");
+            }
+            else
+            {Player.localPlayer.JoinGame (joinMatchInput.text.ToUpper (), passwordInput.text.ToUpper ());}
         }
 
         public void JoinSuccess (bool success, string matchID, string meetingPassword) {
