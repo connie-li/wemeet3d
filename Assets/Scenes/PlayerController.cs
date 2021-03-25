@@ -113,8 +113,8 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    public float rotationSpeed = 10;
-    public float speed = 2;
+    public float rotationSpeed = 100;
+    public float speed = 10;
     static Animator anim;
     public Rigidbody char_RB;
     public GameObject panelSitDown;
