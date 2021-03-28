@@ -22,9 +22,9 @@ namespace io.agora.rtm.demo
         [SerializeField] InputField userNameInput, channelNameInput;
         [SerializeField] InputField channelMsgInputBox;
         [SerializeField] MessageDisplay messageDisplay;
+        [SerializeField] GameObject roomCode;
 
 #pragma warning restore 0649
-
 
         private RtmClient rtmClient = null;
         private RtmChannel channel;
@@ -34,6 +34,7 @@ namespace io.agora.rtm.demo
         private RtmChannelEventHandler channelEventHandler;
         private RtmCallEventHandler callEventHandler;
 
+        //channelNameInput.text = roomCode.text;
         string _userName = "";
         string UserName {
             get { return _userName; }
@@ -132,8 +133,9 @@ namespace io.agora.rtm.demo
 
         public void JoinChannel()
         {
-            ChannelName = channelNameInput.GetComponent<InputField>().text;
-            Debug.Log(ChannelName);
+            ChannelName = roomCode.GetComponent<Text>().text;
+            //channelNameInput.GetComponent<InputField>().text;
+            //Debug.Log(ChannelName);
             channel = rtmClient.CreateChannel(ChannelName, channelEventHandler);
             ShowCurrentChannelName();
             UserName = userNameInput.GetComponent<InputField>().text;
@@ -163,7 +165,7 @@ namespace io.agora.rtm.demo
 
         void ShowCurrentChannelName()
         {
-            ChannelName = channelNameInput.GetComponent<InputField>().text;
+            ChannelName = roomCode.GetComponent<Text>().text;
             Debug.Log("Channel name is " + ChannelName);
         }
 
