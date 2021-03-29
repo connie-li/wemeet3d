@@ -113,7 +113,24 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!95 &1887855149
+--- !u!114 &1887855148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5593114697170388214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27f1a03ffbbe7934aa18c447e799a8a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 100
+  speed: 10
+  char_RB: {fileID: 0}
+  panelSitDown: {fileID: 0}
+  yourButton: {fileID: 0}
+--- !u!95 &-7404476012069540983
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -132,23 +149,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1887855148
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5593114697170388214}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27f1a03ffbbe7934aa18c447e799a8a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationSpeed: 100
-  speed: 10
-  char_RB: {fileID: 0}
-  panelSitDown: {fileID: 0}
-  yourButton: {fileID: 0}
 --- !u!1001 &4710719026930039207
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -229,7 +229,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 21c2b283ef683eb4baa5750d67ad1836,
         type: 3}
       propertyPath: m_Name
-      value: Ch29_nonPBR@Idle
+      value: Ch29_nonPBR@Idle Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21c2b283ef683eb4baa5750d67ad1836, type: 3}
