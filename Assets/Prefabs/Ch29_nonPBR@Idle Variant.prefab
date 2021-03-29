@@ -130,7 +130,7 @@ MonoBehaviour:
   char_RB: {fileID: 0}
   panelSitDown: {fileID: 0}
   yourButton: {fileID: 0}
---- !u!95 &-7404476012069540983
+--- !u!95 &-6381591364482606377
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
