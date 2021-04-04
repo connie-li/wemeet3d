@@ -8,6 +8,7 @@ namespace MirrorBasics {
 
 public class NetworkManagerEdit : NetworkManager
 {
+
     public void BeingHost()
     {
       StartHost();
@@ -48,7 +49,7 @@ public class NetworkManagerEdit : NetworkManager
       Debug.Log ($"End of wait");
       UILobby.instance.Join();
     }
-    
+
 
 }
 
