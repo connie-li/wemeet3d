@@ -40,7 +40,6 @@ namespace MirrorBasics {
           Debug.Log ($"<color = green>hereeeee</color>");
             string matchID = MatchMaker.GetRandomMatchID ();
             string meetingPassword = MatchMaker.GetRandomPassword ();
-            Debug.Log("WTF");
             if (gameObject.activeSelf)
             {
             	Debug.Log ($"<color = green>YEP, ACTIVE</color>");
