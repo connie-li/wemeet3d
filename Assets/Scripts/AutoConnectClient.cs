@@ -21,7 +21,7 @@ public class AutoConnectClient : MonoBehaviour
 
     public void JoinLocal ()
     {
-      networkManager.networkAddress = "localhost";
+      networkManager.networkAddress = "140.186.107.42";
       networkManager.StartClient();
 
     }
