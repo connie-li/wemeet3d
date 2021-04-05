@@ -218,8 +218,8 @@ public class PlayerController : MonoBehaviour
              float moveHorizontal = Input.GetAxis("Horizontal");
             float moveVertical = Input.GetAxis("Vertical");
              float translation = 0;
-            double temp = other.gameObject.transform.position.x + 0.531;//- 0.01;//-0.6-0.33;
-            double temp1 = other.gameObject.transform.position.z + 0.25;//+ 0.514;
+            double temp = other.gameObject.transform.position.x + 0.536;//- 0.01;//-0.6-0.33;
+            double temp1 = other.gameObject.transform.position.z + 0.2492;//+ 0.514;
             Debug.Log(other.gameObject.transform.position.x);
             Debug.Log(other.gameObject.transform.position.z);
             Vector3 position = new Vector3((float)temp,(float)0.3,(float)temp1);//new Vector3((float)-0.93,(float)0.3,(float)-0.62);
