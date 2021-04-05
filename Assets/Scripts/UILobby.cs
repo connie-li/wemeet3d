@@ -55,9 +55,9 @@ namespace MirrorBasics {
         }
 
         public void Host () {
-            joinMatchInput.interactable = false;
-            joinButton.interactable = false;
-            hostButton.interactable = false;
+          //  joinMatchInput.interactable = false;
+          //  joinButton.interactable = false;
+            //hostButton.interactable = false;
 
             //Player p = new Player();
           //  Player p = PlayerPrefab.AddComponent<Player>();
@@ -87,9 +87,9 @@ namespace MirrorBasics {
         }
 
         public void Join () {
-            joinMatchInput.interactable = false;
-            joinButton.interactable = false;
-            hostButton.interactable = false;
+          //  joinMatchInput.interactable = false;
+          //  joinButton.interactable = false;
+          //  hostButton.interactable = false;
             if(Player.localPlayer == null)
             {
               Debug.Log ($"Failed to Connect");
