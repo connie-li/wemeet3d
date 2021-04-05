@@ -42,12 +42,34 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public UnityEngine.UI.Text m_text;
+    public UnityEngine.UI.Text m_roomCode;
+    public UnityEngine.UI.Text m_password;
     public void copyToClipboard()
     {
-        if (this.m_text.text != null)
+        string roomCode;
+        string password;
+        
+        if (this.m_roomCode.text != null)
         {
-            GUIUtility.systemCopyBuffer = this.m_text.text;
+            GUIUtility.systemCopyBuffer = this.m_roomCode.text;
+            roomCode = GUIUtility.systemCopyBuffer;
         }
+        else
+        {
+            roomCode = "ERROR, no room code generated.";
+        }
+
+        if (this.m_password.text != null)
+        {
+            GUIUtility.systemCopyBuffer = this.m_password.text;
+            password = GUIUtility.systemCopyBuffer;
+        }
+        else
+        {
+            password = "ERROR, no password generated.";
+        }
+
+        string invitation = $"You are invited to a WeMeet3D meeting!  Use the following login details to join the meeting.\n\nRoom code: {roomCode}\nPassword: {password}";
+        GUIUtility.systemCopyBuffer = invitation;
     }
 }
