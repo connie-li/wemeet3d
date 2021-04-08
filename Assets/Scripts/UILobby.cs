@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace MirrorBasics {
 
     public class UILobby : MonoBehaviour {
 
         public static UILobby instance = null;
-
+        //public TextMeshProUGUI RoomPass;
         [Header ("Host Join")]
         [SerializeField] InputField joinMatchInput;
         [SerializeField] InputField passwordInput;
@@ -18,7 +19,7 @@ namespace MirrorBasics {
         [SerializeField] GameObject lobbyHost;
         [SerializeField] GameObject hostCanvas;
         [SerializeField] GameObject joinCanvas;
-
+        [SerializeField] TextMeshProUGUI RoomPass;
 
         [Header ("Lobby")]
         //[SerializeField] Transform UIPlayerParent;
@@ -54,9 +55,9 @@ namespace MirrorBasics {
         }
 
         public void Host () {
-            joinMatchInput.interactable = false;
-            joinButton.interactable = false;
-            hostButton.interactable = false;
+          //  joinMatchInput.interactable = false;
+          //  joinButton.interactable = false;
+            //hostButton.interactable = false;
 
             //Player p = new Player();
           //  Player p = PlayerPrefab.AddComponent<Player>();
@@ -86,11 +87,15 @@ namespace MirrorBasics {
         }
 
         public void Join () {
-            joinMatchInput.interactable = false;
-            joinButton.interactable = false;
-            hostButton.interactable = false;
-
-            Player.localPlayer.JoinGame (joinMatchInput.text.ToUpper (), passwordInput.text.ToUpper ());
+          //  joinMatchInput.interactable = false;
+          //  joinButton.interactable = false;
+          //  hostButton.interactable = false;
+            if(Player.localPlayer == null)
+            {
+              Debug.Log ($"Failed to Connect");
+            }
+            else
+            {Player.localPlayer.JoinGame (joinMatchInput.text.ToUpper (), passwordInput.text.ToUpper ());}
         }
 
         public void JoinSuccess (bool success, string matchID, string meetingPassword) {
@@ -101,10 +106,13 @@ namespace MirrorBasics {
                 SpawnPlayerUIPrefab (Player.localPlayer);
                 matchIDText.text = matchID;
                 passwordText.text = meetingPassword;
+                RoomPass.text = "";
             } else {
                 joinMatchInput.interactable = true;
                 joinButton.interactable = true;
                 hostButton.interactable = true;
+                RoomPass.text = "The room code or password you entered is incorrect";
+
             }
         }
 
