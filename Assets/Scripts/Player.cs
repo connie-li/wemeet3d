@@ -132,7 +132,7 @@ namespace MirrorBasics {
         void TargetBeginGame () {
             Debug.Log ($"MatchID: {matchID} | Beginning");
             //Additively load game scene
-            SceneManager.LoadScene ("Test", LoadSceneMode.Additive);
+            SceneManager.LoadScene ("conference-room-new", LoadSceneMode.Additive);
         }
 
     }

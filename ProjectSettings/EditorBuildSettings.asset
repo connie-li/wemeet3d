@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Test.unity
     guid: 12d6564e426b1f841aa142b12f8e1066
+  - enabled: 1
+    path: Assets/Scenes/conference-room-new.unity
+    guid: c0dc1c6c1d178e24e85c9ce6ef522ec1
   m_configObjects: {}
