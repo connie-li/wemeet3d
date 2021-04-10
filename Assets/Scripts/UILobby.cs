@@ -128,8 +128,12 @@ namespace MirrorBasics {
         }
 
         public void BeginGame () {
-            mainCanvas.SetActive(false);
             Player.localPlayer.BeginGame ();
+        }
+
+        public void removeCanvas()
+        {
+          mainCanvas.SetActive(false);
         }
 
     }

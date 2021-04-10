@@ -12,6 +12,8 @@ namespace MirrorBasics {
         [SyncVar] public string matchID;
         [SyncVar] public string meetingPassword;
         [SyncVar] public int playerIndex;
+        [Header ("MainGAME")]
+      //  [SerializeField] GameObject mainCanvas;
 
         NetworkMatchChecker networkMatchChecker;
 
@@ -128,8 +130,10 @@ namespace MirrorBasics {
         void TargetBeginGame () {
             Debug.Log ($"MatchID: {matchID} | Beginning");
             //Additively load game scene
-            SceneManager.UnloadScene("main-menu");
-            SceneManager.LoadScene ("NetworkTest", LoadSceneMode.Additive);
+            //SceneManager.UnloadScene("main-menu");
+          //  mainCanvas.SetActive(false);
+          UILobby.instance.removeCanvas();
+          SceneManager.LoadScene ("conference-room-new", LoadSceneMode.Additive);
         }
 
     }
