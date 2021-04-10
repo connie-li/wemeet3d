@@ -102,7 +102,7 @@ public class BL_BuildPostProcess
     }
 #endif
     /// <summary>
-    ///   Update the permission 
+    ///   Update the permission
     /// </summary>
     /// <param name="pListPath">path to the Info.plist file</param>
     static void UpdatePermission(string pListPath)

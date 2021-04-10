@@ -8,7 +8,7 @@ namespace agora_rtm {
 		private IntPtr _rtmChannelPtr = IntPtr.Zero;
 		private bool _disposed = false;
 		private RtmChannelEventHandler _channelEventHandler;
-		
+
 		public RtmChannel(IntPtr rtmChannelPtr, RtmChannelEventHandler rtmChannelEventHandler) {
 			_rtmChannelPtr = rtmChannelPtr;
 			_channelEventHandler = rtmChannelEventHandler;
@@ -28,7 +28,7 @@ namespace agora_rtm {
 		/// </summary>
 		/// <returns>
 		/// 0: Success.
-		/// ≠0: Failure. 
+		/// ≠0: Failure.
 		/// </returns>
 		public int Join() {
 			if (_rtmChannelPtr == IntPtr.Zero)
@@ -36,6 +36,7 @@ namespace agora_rtm {
 				Debug.LogError("_rtmChannelPtr is null");
 				return (int)COMMON_ERR_CODE.ERROR_NULL_PTR;
 			}
+			Debug.Log("test1");
 			return channel_join(_rtmChannelPtr);
 		}
 
@@ -114,7 +115,7 @@ namespace agora_rtm {
 		/// </summary>
 		/// <returns>
 		/// 0: Success.
-		/// ≠0: Failure. 
+		/// ≠0: Failure.
 		/// </returns>
 		public int GetMembers() {
 			if (_rtmChannelPtr == IntPtr.Zero)

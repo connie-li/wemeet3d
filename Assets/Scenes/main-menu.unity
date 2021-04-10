@@ -346,7 +346,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &116597113
 Transform:
   m_ObjectHideFlags: 0
@@ -375,11 +375,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   appId: 5b605d324a8d4fe082de1236e69872af
   token: 
-  userNameInput: {fileID: 641768470}
-  channelNameInput: {fileID: 1259942660}
+  userNameI: {fileID: 641768470}
+  userNameITwo: {fileID: 1837450269}
+  channelNameInputTwo: {fileID: 1560935157}
+  roomCode: {fileID: 1604468037}
   channelMsgInputBox: {fileID: 833916013}
   messageDisplay: {fileID: 116597115}
-  roomCode: {fileID: 1604468037}
 --- !u!114 &116597115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1764,6 +1765,17 @@ MonoBehaviour:
       - m_Target: {fileID: 2118713553}
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 116597114}
+        m_MethodName: Login
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5923,6 +5935,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 116597114}
+        m_MethodName: OnCreateButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &988189432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5985,7 +6008,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1013334392}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1013334394
 Camera:
   m_ObjectHideFlags: 0
@@ -6733,6 +6756,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1108214536}
   m_CullTransparentMesh: 0
+--- !u!1 &1109963845
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1109963846}
+  m_Layer: 0
+  m_Name: UsernameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1109963846
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1109963845}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 760.1029, y: 237.10632, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1145073008
 GameObject:
   m_ObjectHideFlags: 0
@@ -9611,6 +9664,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1860354745}
         m_MethodName: BeingClient
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 116597114}
+        m_MethodName: OnJoinButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
