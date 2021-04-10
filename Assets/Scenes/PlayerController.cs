@@ -129,7 +129,7 @@ public class PlayerController : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
+
         char_RB = GetComponent<Rigidbody>();
         //Button btn = yourButton.GetComponent<Button>();
         //btn.onClick.AddListener(TaskOnClick);
@@ -150,6 +150,7 @@ public class PlayerController : NetworkBehaviour
     {
       if(hasAuthority){
           myCam.SetActive(true);
+          anim = GetComponent<Animator>();
         }
 
         if(!hasAuthority)
