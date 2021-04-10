@@ -3787,6 +3787,7 @@ MonoBehaviour:
   beginGameButton: {fileID: 988189429}
   PlayerPrefab: {fileID: 39254547051457587, guid: c85eb9ab7bcca09499b522ee392f6254,
     type: 3}
+  mainCanvas: {fileID: 642734232}
 --- !u!1 &646546763
 GameObject:
   m_ObjectHideFlags: 0

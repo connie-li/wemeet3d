@@ -26,11 +26,7 @@ namespace MirrorBasics {
             }
         }
 
-      //  void Start()
-      //  {
-      //      Debug.Log ($"<color = green>activating</color>");
-        //  gameObject.SetActive(true);
-      //  }
+
 
         /*
             HOST MATCH
@@ -132,7 +128,8 @@ namespace MirrorBasics {
         void TargetBeginGame () {
             Debug.Log ($"MatchID: {matchID} | Beginning");
             //Additively load game scene
-            SceneManager.LoadScene ("conference-room-new", LoadSceneMode.Additive);
+            SceneManager.UnloadScene("main-menu");
+            SceneManager.LoadScene ("NetworkTest", LoadSceneMode.Additive);
         }
 
     }

@@ -29,6 +29,9 @@ namespace MirrorBasics {
         [SerializeField] GameObject beginGameButton;
         [SerializeField] GameObject PlayerPrefab;
 
+        [Header ("MainGAME")]
+        [SerializeField] GameObject mainCanvas;
+
         void Awake()
         {
           if (instance == null) {
@@ -125,6 +128,7 @@ namespace MirrorBasics {
         }
 
         public void BeginGame () {
+            mainCanvas.SetActive(false);
             Player.localPlayer.BeginGame ();
         }
 
