@@ -110,6 +110,13 @@ namespace MirrorBasics {
                 matchIDText.text = matchID;
                 passwordText.text = meetingPassword;
                 RoomPass.text = "";
+                //to check if meeting already meeting already started
+                Debug.Log("Checking if started in next line");
+                Debug.Log (Player.localPlayer.checkIfStarted(matchID));
+                if(Player.localPlayer.checkIfStarted(matchID))
+                {
+                  Player.localPlayer.BeginGame();
+                }
             } else {
                 joinMatchInput.interactable = true;
                 joinButton.interactable = true;

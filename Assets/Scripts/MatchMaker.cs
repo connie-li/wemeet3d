@@ -12,11 +12,13 @@ namespace MirrorBasics {
     public class Match {
         public string matchID;
         public string meetingPassword;
+        public bool meetingStarted;
         public SyncListGameObject players = new SyncListGameObject ();
 
         public Match (string matchID, GameObject player, string meetingPassword) {
             this.matchID = matchID;
             this.meetingPassword = meetingPassword;
+            this.meetingStarted = false;
             players.Add (player);
         }
 
@@ -57,6 +59,41 @@ namespace MirrorBasics {
             }
         }
 
+        public bool checkIfMeetingStarted(string _matchID)
+        {
+            if (matchIDs.Contains (_matchID)) {
+              for (int i = 0; i < matches.Count; i++) {
+                  if (matches[i].matchID == _matchID) {
+                      Debug.Log ($"Meeting ID");
+                      Debug.Log (matches[i].matchID);
+                      Debug.Log (matches[i].meetingStarted);
+                    if (matches[i].meetingStarted == true)
+                    {
+                      Debug.Log ($"Found meeting started");
+                      return true;
+                    }
+                  }
+                }
+            }
+            Debug.Log ($"Found meeting NOT started");
+            return false;
+        }
+
+        public void markMeetingAsStarted(string _matchID)
+        {
+          Debug.Log ($"iNSIDE MARKING METING");
+            if (matchIDs.Contains (_matchID)) {
+              for (int i = 0; i < matches.Count; i++) {
+                  if (matches[i].matchID == _matchID) {
+                    if (matches[i].meetingStarted == true)
+                    {
+                      matches[i].meetingStarted = true;
+                    }
+                  }
+                }
+            }
+        }
+
         public bool JoinGame (string _matchID, GameObject _player, out int playerIndex, string _meetingPassword) {
             playerIndex = -1;
 
@@ -91,6 +128,10 @@ namespace MirrorBasics {
 
             for (int i = 0; i < matches.Count; i++) {
                 if (matches[i].matchID == _matchID) {
+                    matches[i].meetingStarted = true; //marking as started
+                    Debug.Log ($"MAKING THIS MATCH TRUE FOR STARTED");
+                    Debug.Log (matches[i].matchID);
+                    Debug.Log (matches[i].meetingStarted);
                     foreach (var player in matches[i].players) {
                         Player _player = player.GetComponent<Player> ();
                         //turnManager.AddPlayer (_player);

@@ -12,6 +12,7 @@ namespace MirrorBasics {
         [SyncVar] public string matchID;
         [SyncVar] public string meetingPassword;
         [SyncVar] public int playerIndex;
+        [SyncVar] public bool meetingStarted = false;
         [Header ("MainGAME")]
       //  [SerializeField] GameObject mainCanvas;
 
@@ -112,12 +113,23 @@ namespace MirrorBasics {
             BEGIN MATCH
         */
 
+        public bool checkIfStarted(string _matchID)
+        {
+          return (MatchMaker.instance.checkIfMeetingStarted(_matchID));
+        }
+
+        //public void markAsStarted(string _matchID)
+      //  {
+      //    MatchMaker.instance.markMeetingAsStarted(_matchID);
+        //}
+
         public void BeginGame () {
             CmdBeginGame ();
         }
 
         [Command]
         void CmdBeginGame () {
+            //Player.localPlayer.markAsStarted(matchID);
             MatchMaker.instance.BeginGame (matchID);
             Debug.Log ($"<color = red>Game Beginning</color>");
         }
@@ -132,6 +144,7 @@ namespace MirrorBasics {
             //Additively load game scene
             //SceneManager.UnloadScene("main-menu");
           //  mainCanvas.SetActive(false);
+          meetingStarted = true;
           UILobby.instance.removeCanvas();
           SceneManager.LoadScene ("conference-room-new", LoadSceneMode.Additive);
         }
