@@ -383,6 +383,7 @@ MonoBehaviour:
   channelNameInput: {fileID: 1259942660}
   channelMsgInputBox: {fileID: 833916013}
   messageDisplay: {fileID: 116597115}
+  roomCode: {fileID: 1604468037}
 --- !u!114 &116597115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8944,7 +8945,7 @@ MonoBehaviour:
     m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
+    m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: CODE
