@@ -122,6 +122,7 @@ public class PlayerController : NetworkBehaviour
   //  public Button yourButton;
     bool UserInput = true;
     [SerializeField] public GameObject myCam;
+    [SerializeField] public GameObject myCanvas;
     //public GameObject Camera;
 
 
@@ -150,6 +151,7 @@ public class PlayerController : NetworkBehaviour
     {
       if(hasAuthority){
           myCam.SetActive(true);
+          myCanvas.SetActive(true);
           anim = GetComponent<Animator>();
         }
 
