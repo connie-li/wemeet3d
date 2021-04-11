@@ -145,7 +145,7 @@ public class PlayerController : NetworkBehaviour
      }
  }
     */
-    [Client]
+  //  [Client]
     void Update()
     {
       if(hasAuthority){
