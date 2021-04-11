@@ -8,6 +8,7 @@ TagManager:
   - ChairBack
   - ChairRight
   - ChairLeft
+  - orangeLounge
   layers:
   - Default
   - TransparentFX
