@@ -184,7 +184,10 @@ public class AgoraInterface
         go.name = goName;
 
         // to be renderered onto
-        go.AddComponent<RawImage>();
+        RawImage img = go.AddComponent<RawImage>();
+        img.rectTransform.position = new Vector3(900,900,0);
+        img.rectTransform.sizeDelta = new Vector2(250,250);
+        img.rectTransform.Rotate(new Vector3(0,0,-180));
 
         // make the object draggable
         go.AddComponent<UIElementDragger>();

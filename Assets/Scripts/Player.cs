@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using io.agora.rtm.demo;
+using agora_rtm;
 
 namespace MirrorBasics {
 
@@ -17,6 +19,7 @@ namespace MirrorBasics {
       //  [SerializeField] GameObject mainCanvas;
 
         NetworkMatchChecker networkMatchChecker;
+        RtmChatManager rtmChat;
 
         void Start () {
             Debug.Log ($"<color = green>Player is start</color>");
@@ -71,6 +74,19 @@ namespace MirrorBasics {
             meetingPassword = _meetingPassword;
             Debug.Log ($"MatchID: {matchID} == {_matchID}");
             UILobby.instance.HostSuccess (success, _matchID, _meetingPassword);
+
+            var channelName = "test";
+            Debug.Log("Check1");
+            RtmClientEventHandler clientEventHandler = new RtmClientEventHandler();
+            RtmChannel channel;
+            RtmCallEventHandler callEventHandler = new RtmCallEventHandler();
+            RtmClient rtmClient = new RtmClient("5b605d324a8d4fe082de1236e69872af", clientEventHandler);
+            RtmChannelEventHandler channelEventHandler = new RtmChannelEventHandler();
+            channel = rtmClient.CreateChannel(channelName, channelEventHandler);
+            Debug.Log("Chec2");
+            channel.Join();
+            //rtmChat.JoinChannel()
+
         }
 
         /*
@@ -79,6 +95,9 @@ namespace MirrorBasics {
 
         public void JoinGame (string _inputID, string _inputPassword) {
             CmdJoinGame (_inputID,_inputPassword );
+            //rtmChat.JoinChannel();
+            //RtmChannel channel;
+            //channel.Join();
         }
 
         [Command]
@@ -148,6 +167,21 @@ namespace MirrorBasics {
           UILobby.instance.removeCanvas();
           SceneManager.LoadScene ("conference-room-new", LoadSceneMode.Additive);
         }
+
+        /*[TargetRpc]
+        void TargetShowMessage(string msg,string peer,string username,MessageDisplay messageDisplay,string displayMsg,RtmChannel channel,RtmClient rtmClient){
+          Debug.Log("check");
+          //string peer = "[channel:" + ChannelName + "]";
+
+
+          //messageDisplay.AddTextToDisplay(displayMsg, Message.MessageType.PlayerMessage);
+          channel.SendMessage(rtmClient.CreateMessage(msg));
+
+        }
+
+        public void showMessage(string msg,string peer,string username,MessageDisplay messageDisplay,string displayMsg,RtmChannel channel,RtmClient rtmClient){
+          TargetShowMessage(msg,peer,username,messageDisplay,displayMsg,channel,rtmClient);
+        }*/
 
     }
 

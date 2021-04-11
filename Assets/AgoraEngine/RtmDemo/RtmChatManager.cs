@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using MirrorBasics;
+using UnityEngine.SceneManagement;
 
 using agora_rtm;
 
@@ -19,16 +21,24 @@ namespace io.agora.rtm.demo
         [Header("Application Properties")]
         // put absolute path like /Users/yournameonmac/Downloads/mono-boad.jpg  in the Inspector
 
-        [SerializeField] InputField userNameInput, channelNameInput;
+        [SerializeField] InputField userNameI;
+        [SerializeField] InputField userNameITwo, channelNameInputTwo;
+        string userNameInput;
+        private string userNameName;
+        //string channelNameInput;
+        [SerializeField] GameObject roomCode;
         [SerializeField] InputField channelMsgInputBox;
         [SerializeField] MessageDisplay messageDisplay;
-        [SerializeField] GameObject roomCode;
+
+        //[SerializeField] GameObject roomCode;
 
 #pragma warning restore 0649
 
         private RtmClient rtmClient = null;
-        private RtmChannel channel;
+        private RtmChannel channel = null;
         private RtmCallManager callManager;
+
+        UIController uiInfo;
 
         private RtmClientEventHandler clientEventHandler;
         private RtmChannelEventHandler channelEventHandler;
@@ -63,8 +73,12 @@ namespace io.agora.rtm.demo
 
         private void Awake()
         {
-            userNameInput.text = PlayerPrefs.GetString("RTM_USER", "");
-            channelNameInput.text = PlayerPrefs.GetString("RTM_CHANNEL", "");
+            //userNameInput.text = PlayerPrefs.GetString("RTM_USER", "");
+            //channelNameInput.text = PlayerPrefs.GetString("RTM_CHANNEL", "");
+            //userNameI =  GetComponent<Text>();
+            //userNameI.text = PlayerPrefs.GetString("name");
+
+          //  userNameI.text = save_names.save_Names.userName;
         }
 
         // Start is called before the first frame update
@@ -78,7 +92,6 @@ namespace io.agora.rtm.demo
 
             clientEventHandler.OnLoginSuccess = OnClientLoginSuccessHandler;
             clientEventHandler.OnLoginFailure = OnClientLoginFailureHandler;
-
             channelEventHandler.OnJoinSuccess = OnJoinSuccessHandler;
             channelEventHandler.OnJoinFailure = OnJoinFailureHandler;
             channelEventHandler.OnLeave = OnLeaveHandler;
@@ -93,7 +106,19 @@ namespace io.agora.rtm.demo
             callManager = rtmClient.GetRtmCallManager(callEventHandler);
             // state
             clientEventHandler.OnConnectionStateChanged = OnConnectionStateChangedHandler;
+            //Scene currentScene = SceneManager.GetActiveScene ();
+            userNameI.text = PlayerPrefs.GetString("name");
+            userNameITwo.text = PlayerPrefs.GetString("name");
+            roomCode.GetComponent<Text>().text = PlayerPrefs.GetString("code");
+            channelNameInputTwo.text = PlayerPrefs.GetString("code");
 
+        }
+        void Update()
+        {
+          if (Input.GetKeyUp(KeyCode.Return))
+          {
+             SendMessageToChannel();
+          }
         }
 
         void OnApplicationQuit()
@@ -113,8 +138,24 @@ namespace io.agora.rtm.demo
         #region Button Events
         public void Login()
         {
-            UserName = userNameInput.text;
+            //if()
+            UserName = PlayerPrefs.GetString("name");
+            Debug.Log(UserName);
+            Debug.Log("first person");
+            if (string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(appId))
+            {
+                Debug.LogError("We need a username and appId to login");
+                return;
+            }
 
+            rtmClient.Login(token, UserName);
+        }
+        public void LoginOne()
+        {
+            //UserName = PlayerPrefs.GetString("name");
+            UserName= "JI";
+            //userNameInput.text;
+            Debug.Log("second person");
             if (string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(appId))
             {
                 Debug.LogError("We need a username and appId to login");
@@ -130,16 +171,36 @@ namespace io.agora.rtm.demo
             rtmClient.Logout();
         }
 
+        public void OnCreateButton()
+        {
+          PlayerPrefs.SetString("name", userNameI.text);
+          PlayerPrefs.SetString("code", roomCode.GetComponent<Text>().text);
+          Debug.Log(PlayerPrefs.GetString("name"));
+          Debug.Log(PlayerPrefs.GetString("code"));
+        }
+
+        public void OnJoinButton()
+        {
+          PlayerPrefs.SetString("name", userNameITwo.text);
+          PlayerPrefs.SetString("code", channelNameInputTwo.text);
+          Debug.Log(PlayerPrefs.GetString("name"));
+          Debug.Log(PlayerPrefs.GetString("code"));
+        }
+
 
         public void JoinChannel()
         {
-            ChannelName = roomCode.GetComponent<Text>().text;
+            ChannelName = PlayerPrefs.GetString("code");
+            //roomCode.GetComponent<Text>().text;
             //channelNameInput.GetComponent<InputField>().text;
             //Debug.Log(ChannelName);
             channel = rtmClient.CreateChannel(ChannelName, channelEventHandler);
             ShowCurrentChannelName();
-            UserName = userNameInput.GetComponent<InputField>().text;
-            Debug.Log(UserName);
+            //UserName = userNameInput.GetComponent<InputField>().text;
+            Debug.Log("button clicked");
+            //this was commented out
+            //UserName = "sindhu";
+            //Debug.Log(UserName);
             channel.Join();
         }
 
@@ -154,10 +215,16 @@ namespace io.agora.rtm.demo
             string msg = channelMsgInputBox.text;
             string peer = "[channel:" + ChannelName + "]";
 
+            Debug.Log("USERNAME IS");
+            Debug.Log(UserName);
             string displayMsg = string.Format("{0}->{1}: {2}", UserName, peer, msg);
 
+            //messageDisplay.AddTextToDisplay(displayMsg, Message.MessageType.PlayerMessage);
+            //channel.SendMessage(rtmClient.CreateMessage(msg));
             messageDisplay.AddTextToDisplay(displayMsg, Message.MessageType.PlayerMessage);
             channel.SendMessage(rtmClient.CreateMessage(msg));
+            channelMsgInputBox.text = "";
+          //  Player.localPlayer.showMessage(msg,peer,UserName,messageDisplay,displayMsg,channel,rtmClient);
         }
 
         #endregion
@@ -165,8 +232,8 @@ namespace io.agora.rtm.demo
 
         void ShowCurrentChannelName()
         {
-            ChannelName = roomCode.GetComponent<Text>().text;
-            Debug.Log("Channel name is " + ChannelName);
+            //ChannelName = roomCode.GetComponent<Text>().text;
+            //Debug.Log("Channel name is " + ChannelName);
         }
 
         #region EventHandlers
@@ -174,6 +241,7 @@ namespace io.agora.rtm.demo
 
         void OnJoinSuccessHandler(int id)
         {
+            Debug.Log("CHECK!");
             string msg = "channel:" + ChannelName + " OnJoinSuccess id = " + id;
             Debug.Log(msg);
         }
