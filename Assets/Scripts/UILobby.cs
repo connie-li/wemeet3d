@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
@@ -115,7 +116,8 @@ namespace MirrorBasics {
                 Debug.Log (Player.localPlayer.checkIfStarted(matchID));
                 if(Player.localPlayer.checkIfStarted(matchID))
                 {
-                  Player.localPlayer.BeginGame();
+                  removeCanvas();
+                  SceneManager.LoadScene ("conference-room-new", LoadSceneMode.Additive);
                 }
             } else {
                 joinMatchInput.interactable = true;
