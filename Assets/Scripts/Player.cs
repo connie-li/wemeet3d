@@ -165,7 +165,7 @@ namespace MirrorBasics {
           //  mainCanvas.SetActive(false);
           meetingStarted = true;
           UILobby.instance.removeCanvas();
-          SceneManager.LoadScene ("Test", LoadSceneMode.Additive);
+          SceneManager.LoadScene ("conference-room-new", LoadSceneMode.Additive);
         }
 
         /*[TargetRpc]

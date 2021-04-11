@@ -87,8 +87,9 @@ public class TestHome : MonoBehaviour
 		//Debug.Log(username.text);
 		app.join(channelname);
 		//app.addCamera();
-		SceneManager.sceneLoaded += OnLevelFinishedLoading; // configure GameObject after scene is loaded
-		SceneManager.LoadScene(PlaySceneName, LoadSceneMode.Single);
+
+		//SceneManager.sceneLoaded += OnLevelFinishedLoading; // configure GameObject after scene is loaded
+		//SceneManager.LoadScene(PlaySceneName, LoadSceneMode.Single);
 	}
 
 	public void onLeaveButtonClicked()
