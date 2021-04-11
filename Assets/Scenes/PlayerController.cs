@@ -104,9 +104,12 @@ public class PlayerController : MonoBehaviour
     static Animator anim;
     public Rigidbody char_RB;
     public GameObject panelSitDown;
-    public Button yourButton;
+    public Button yesButton;
+    public Button noButton;
     bool UserInput = true;
     bool sitDown = false;
+    bool yesSit = false;
+    bool noSit = true;
     //public GameObject Camera;
     
 
@@ -116,8 +119,11 @@ public class PlayerController : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         char_RB = GetComponent<Rigidbody>();
-        Button btn = yourButton.GetComponent<Button>();
-        btn.onClick.AddListener(TaskOnClick);
+        Button yesbtn = yesButton.GetComponent<Button>();
+        yesbtn.onClick.AddListener(TaskOnClick);
+        Button nobtn = noButton.GetComponent<Button>();
+        nobtn.onClick.AddListener(TaskOnClickNo);
+        
     }
 
     // Update is called once per frame
@@ -197,9 +203,11 @@ public class PlayerController : MonoBehaviour
 
     //private void OnTriggerEnter(Collider other)
     private void OnCollisionEnter(Collision other)
-     {
+     {  
          if(other.gameObject.tag == "Chair")
          {
+             panelSitDown.SetActive(true);
+             UserInput = false;
              float rotation = 178;
              float moveHorizontal = Input.GetAxis("Horizontal");
             float moveVertical = Input.GetAxis("Vertical");
@@ -214,12 +222,15 @@ public class PlayerController : MonoBehaviour
             transform.position = position;
             rotation *= Time.deltaTime;
             transform.rotation = Quaternion.Euler(0, 178, 0);
-             anim.SetBool("isWalking", false);
-             anim.SetBool("isIdle", false);
-             anim.SetBool("isSitting",true);
+            anim.SetBool("isWalking", false);
+            anim.SetBool("isIdle", true);
+            anim.SetBool("isSitting",false);
+            //  anim.SetBool("isWalking", false);
+            //  anim.SetBool("isIdle", false);
+            //  anim.SetBool("isSitting",true);
              Debug.Log(anim.GetBool("isSiting"));
-             sitDown = true;
-            // transform.position.x = temp;
+             //sitDown = true;
+                         // transform.position.x = temp;
             // transform.position.z = temp1;
             // translation *= Time.deltaTime;
             // //rotation *= Time.deltaTime;
@@ -236,11 +247,13 @@ public class PlayerController : MonoBehaviour
             // anim.SetBool("isWalking", false);
             // anim.SetBool("isIdle", true);
             // anim.SetBool("isSitting",false);
-            // UserInput = false;
+            // 
          }
 
          if(other.gameObject.tag == "ChairBack")
          {
+             panelSitDown.SetActive(true);
+             UserInput = false;
              float rotation = (float)3.124;
              float moveHorizontal = Input.GetAxis("Horizontal");
             float moveVertical = Input.GetAxis("Vertical");
@@ -256,10 +269,13 @@ public class PlayerController : MonoBehaviour
             rotation *= Time.deltaTime;
             transform.rotation = Quaternion.Euler(0, (float)3.124, 0);
              anim.SetBool("isWalking", false);
-             anim.SetBool("isIdle", false);
-             anim.SetBool("isSitting",true);
+            anim.SetBool("isIdle", true);
+            anim.SetBool("isSitting",false);
+            //  anim.SetBool("isWalking", false);
+            //  anim.SetBool("isIdle", false);
+            //  anim.SetBool("isSitting",true);
              Debug.Log(anim.GetBool("isSiting"));
-             sitDown = true;
+             //sitDown = true;
             // transform.position.x = temp;
             // transform.position.z = temp1;
             // translation *= Time.deltaTime;
@@ -282,6 +298,8 @@ public class PlayerController : MonoBehaviour
 
         if(other.gameObject.tag == "ChairRight")
          {
+             panelSitDown.SetActive(true);
+             UserInput = false;
              float rotation = (float)91.119;
              float moveHorizontal = Input.GetAxis("Horizontal");
             float moveVertical = Input.GetAxis("Vertical");
@@ -296,11 +314,11 @@ public class PlayerController : MonoBehaviour
             transform.position = position;
             rotation *= Time.deltaTime;
             transform.rotation = Quaternion.Euler(0, (float)91.119, 0);
-             anim.SetBool("isWalking", false);
-             anim.SetBool("isIdle", false);
-             anim.SetBool("isSitting",true);
+              anim.SetBool("isWalking", false);
+            anim.SetBool("isIdle", true);
+            anim.SetBool("isSitting",false);
              Debug.Log(anim.GetBool("isSiting"));
-             sitDown = true;
+             //sitDown = true;
             // transform.position.x = temp;
             // transform.position.z = temp1;
             // translation *= Time.deltaTime;
@@ -324,6 +342,8 @@ public class PlayerController : MonoBehaviour
 
          if(other.gameObject.tag == "ChairLeft")
          {
+             panelSitDown.SetActive(true);
+             UserInput = false;
              float rotation = (float)-88.05;
              float moveHorizontal = Input.GetAxis("Horizontal");
             float moveVertical = Input.GetAxis("Vertical");
@@ -338,11 +358,11 @@ public class PlayerController : MonoBehaviour
             transform.position = position;
             rotation *= Time.deltaTime;
             transform.rotation = Quaternion.Euler(0, (float)-88.05, 0);
-             anim.SetBool("isWalking", false);
-             anim.SetBool("isIdle", false);
-             anim.SetBool("isSitting",true);
+              anim.SetBool("isWalking", false);
+            anim.SetBool("isIdle", true);
+            anim.SetBool("isSitting",false);
              Debug.Log(anim.GetBool("isSiting"));
-             sitDown = true;
+             //sitDown = true;
             // transform.position.x = temp;
             // transform.position.z = temp1;
             // translation *= Time.deltaTime;
@@ -366,6 +386,8 @@ public class PlayerController : MonoBehaviour
 
          if(other.gameObject.tag == "orangeLounge")
          {
+             panelSitDown.SetActive(true);
+             UserInput = false;
              float rotation = (float)93.24;
              float moveHorizontal = Input.GetAxis("Horizontal");
             float moveVertical = Input.GetAxis("Vertical");
@@ -380,11 +402,11 @@ public class PlayerController : MonoBehaviour
             transform.position = position;
             rotation *= Time.deltaTime;
             transform.rotation = Quaternion.Euler(0, (float)93.24, 0);
-             anim.SetBool("isWalking", false);
-             anim.SetBool("isIdle", false);
-             anim.SetBool("isSitting",true);
+              anim.SetBool("isWalking", false);
+            anim.SetBool("isIdle", true);
+            anim.SetBool("isSitting",false);
              Debug.Log(anim.GetBool("isSiting"));
-             sitDown = true;
+             //sitDown = true;
             // transform.position.x = temp;
             // transform.position.z = temp1;
             // translation *= Time.deltaTime;
@@ -417,6 +439,14 @@ public class PlayerController : MonoBehaviour
          anim.SetBool("isSitting",true);
          Debug.Log("Clicked");
          UserInput = true;
+         panelSitDown.SetActive(false);
+     }
+
+     void TaskOnClickNo()
+     {
+        //  anim.SetBool("isSitting",true);
+        //  Debug.Log("Clicked");
+          UserInput = true;
          panelSitDown.SetActive(false);
      }
 
