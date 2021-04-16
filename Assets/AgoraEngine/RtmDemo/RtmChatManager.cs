@@ -213,10 +213,12 @@ namespace io.agora.rtm.demo
         public void SendMessageToChannel()
         {
             string msg = channelMsgInputBox.text;
+            ChannelName = PlayerPrefs.GetString("code");
             string peer = "[channel:" + ChannelName + "]";
 
-            Debug.Log("USERNAME IS");
-            Debug.Log(UserName);
+            //Debug.Log("USERNAME IS");
+            //Debug.Log(UserName);
+            UserName = PlayerPrefs.GetString("name");
             string displayMsg = string.Format("{0}->{1}: {2}", UserName, peer, msg);
 
             //messageDisplay.AddTextToDisplay(displayMsg, Message.MessageType.PlayerMessage);
