@@ -147,19 +147,18 @@ public class PlayerController : NetworkBehaviour
  }
     */
   //  [Client]
+    [ClientCallback]
     void Update()
     {
-      if(hasAuthority){
+      if(!hasAuthority)
+      {
+        return;
+      }
+
           myCam.SetActive(true);
           myCanvas.SetActive(true);
           anim = GetComponent<Animator>();
-        }
 
-        if(!hasAuthority)
-        {
-          return;
-        }else
-        {
             //float translation = Input.GetAxis("Vertical") * speed;
             float translation = Input.GetAxis("Vertical") * speed;
             //char_RB.MovePosition(char_RB.gameObject.transform.forward * speed);
@@ -169,7 +168,7 @@ public class PlayerController : NetworkBehaviour
             //movement *= Time.deltaTime;
             //transform.Translate(movement);
 
-            if(UserInput && hasAuthority)
+            if(UserInput)
             {
               //Client code
             translation *= Time.deltaTime;
@@ -219,7 +218,8 @@ public class PlayerController : NetworkBehaviour
                 }
             }
         }
-      }
+
+
     }
 
     //private void OnTriggerEnter(Collider other)
