@@ -12,7 +12,7 @@ public class AgoraInterface
 
     public IRtcEngine mRtcEngine;
     private Text MessageText;
-
+    public string test;
 
     //initializating agora RTC engine
     public void loadEngine(string appId)
@@ -49,9 +49,15 @@ public class AgoraInterface
       };
       mRtcEngine.OnError = HandleError;
       //enable video
+
+      //recently commented
       mRtcEngine.EnableVideo();
+
       //allow for camera output callback
+
+      //recently commented
       mRtcEngine.EnableVideoObserver();
+
       // join channel
       //mRtcEngine.StartPreview();
       mRtcEngine.JoinChannel(channel, null, 0);
@@ -70,7 +76,63 @@ public class AgoraInterface
       mRtcEngine.StartPreview();
     }*/
 
+    public void turnCamera(bool OnOffButton)
+    {
+      //mRtcEngine.DisableVideoObserver();
+      if (OnOffButton == true)
+      {
+        GameObject go = new GameObject("RawImage");
+        //GameObject RawImage = GameObject.Find("RawImage");
+        //RawImage.active = true;
 
+        mRtcEngine.EnableLocalVideo(true);
+        //mRtcEngine.EnableVideo();
+
+        RawImage img = go.AddComponent<RawImage>();
+        img.rectTransform.position = new Vector3(900,900,0);
+        img.rectTransform.sizeDelta = new Vector2(250,250);
+        img.rectTransform.Rotate(new Vector3(0,0,-180));
+        //make the object draggable
+        go.AddComponent<UIElementDragger>();
+        GameObject canvas = GameObject.Find("Canvas");
+        if (canvas != null)
+        {
+            go.transform.parent = canvas.transform;
+        }
+        VideoSurface videoSurface = go.AddComponent<VideoSurface>();
+        //this was added
+        go.AddComponent<UIElementDragger>();
+        Debug.Log("vid on");
+      }
+      else
+      {
+        mRtcEngine.EnableLocalVideo(false);
+        //mRtcEngine.DisableVideo();
+        //GameObject go = GameObject.Find("RawImage");
+        GameObject go = GameObject.Find("RawImage");
+        Debug.Log(test);
+        //GameObject go1 = GameObject.Find(test);
+        //RawImage.active = false;
+        //Object.Destroy(go1);
+        Object.Destroy(go);
+        Debug.Log("vid off");
+      }
+    }
+
+    public void turnMic(bool OnOffButton)
+    {
+      //mRtcEngine.DisableVideoObserver();
+      if (OnOffButton == true)
+      {
+        mRtcEngine.EnableLocalAudio(true);
+        Debug.Log("audio on");
+      }
+      else
+      {
+        mRtcEngine.EnableLocalAudio(false);
+        Debug.Log("audio off");
+      }
+    }
     public void leaveMeeting()
     {
       Debug.Log("Leaving meeting");
@@ -102,13 +164,11 @@ public class AgoraInterface
       //Debug.Log("check 2");
     }
 
-
-
     public void addCamera()
     {
         // Attach the SDK Script VideoSurface for video rendering
         //GameObject go = GameObject.Find("GameController");
-        GameObject video = GameObject.Find("Video");
+        GameObject video = GameObject.Find("RawImage");
 
         if (ReferenceEquals(video, null))
         {
@@ -121,6 +181,21 @@ public class AgoraInterface
         }
 
     }
+
+    public void EnableVideo(bool pauseVideo)
+    {
+      if (mRtcEngine != null)
+      {
+          if (!pauseVideo)
+          {
+              mRtcEngine.EnableVideo();
+          }
+          else
+          {
+              mRtcEngine.DisableVideo();
+          }
+      }
+   }
 
     // implement engine callbacks
     private void onJoinChannelSuccess(string channelName, uint uid, int elapsed)
@@ -142,7 +217,7 @@ public class AgoraInterface
         {
             return; // reuse
         }
-
+        test = uid.ToString();
         // create a GameObject and assign to this new user
         VideoSurface videoSurface = makeImageSurface(uid.ToString());
         if (!ReferenceEquals(videoSurface, null))
@@ -153,22 +228,7 @@ public class AgoraInterface
             videoSurface.SetVideoSurfaceType(AgoraVideoSurfaceType.RawImage);
             videoSurface.SetGameFps(30);
         }
-    }
 
-    public VideoSurface makePlaneSurface(string goName)
-    {
-        GameObject go = GameObject.CreatePrimitive(PrimitiveType.Plane);
-
-        if (go == null)
-        {
-            return null;
-        }
-        go.name = goName;
-        // set up transform
-
-        // configure videoSurface
-        VideoSurface videoSurface = go.AddComponent<VideoSurface>();
-        return videoSurface;
     }
 
     private const float Offset = 100;
@@ -188,6 +248,10 @@ public class AgoraInterface
         img.rectTransform.position = new Vector3(900,900,0);
         img.rectTransform.sizeDelta = new Vector2(250,250);
         img.rectTransform.Rotate(new Vector3(0,0,-180));
+        //Color color;
+        //color = new Color(0,0,0,255);
+        //img.color = new Color(0.0f ,0.0f ,0.0f ,0.0f);
+        //go.active = false;
 
         // make the object draggable
         go.AddComponent<UIElementDragger>();

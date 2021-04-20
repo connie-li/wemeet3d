@@ -32,6 +32,8 @@ namespace MirrorBasics {
 
         [Header ("MainGAME")]
         [SerializeField] GameObject mainCanvas;
+        [SerializeField] TextMeshProUGUI errorMessageSceneSelection;
+        [SerializeField] SceneSelect ChooseRoomGroup;
 
         void Awake()
         {
@@ -137,7 +139,17 @@ namespace MirrorBasics {
         }
 
         public void BeginGame () {
-            Player.localPlayer.BeginGame ();
+          if(ChooseRoomGroup.SceneWasSelected() == true)
+          {
+              string selectedScene = ChooseRoomGroup.getSelectedScene();
+              Player.localPlayer.BeginGame (selectedScene);
+          }
+          else
+          {
+            errorMessageSceneSelection.text = "Please select a room";
+          }
+
+
         }
 
         public void removeCanvas()

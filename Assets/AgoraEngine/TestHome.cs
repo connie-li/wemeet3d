@@ -91,6 +91,19 @@ public class TestHome : MonoBehaviour
 		//SceneManager.sceneLoaded += OnLevelFinishedLoading; // configure GameObject after scene is loaded
 		//SceneManager.LoadScene(PlaySceneName, LoadSceneMode.Single);
 	}
+	public void turnOff(bool OnOff)
+	{
+		app.turnCamera(OnOff);
+		//app.unloadEngine ();
+		//Destroy(gameObject);
+	}
+
+	public void turnOffMic(bool OnOff)
+	{
+		app.turnMic(OnOff);
+		//app.unloadEngine ();
+		//Destroy(gameObject);
+	}
 
 	public void onLeaveButtonClicked()
 	{
@@ -103,7 +116,8 @@ public class TestHome : MonoBehaviour
 			app = null; // delete app
 			//SceneManager.LoadScene (HomeSceneName, LoadSceneMode.Single);
 		}
-		Destroy(gameObject);
+		GameObject go = GameObject.Find("RawImage");
+		Destroy(go);
 	}
 
 	public void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
@@ -118,7 +132,7 @@ public class TestHome : MonoBehaviour
 		}
 	}
 
-	/*void OnApplicationPause(bool paused)
+	public void OnApplicationPause(bool paused)
 	{
 		if (!ReferenceEquals(app, null))
 		{
@@ -126,7 +140,7 @@ public class TestHome : MonoBehaviour
 		}
 	}
 
-	void OnApplicationQuit()
+	/*void OnApplicationQuit()
 	{
 		if (!ReferenceEquals(app, null))
 		{
