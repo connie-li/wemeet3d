@@ -120,7 +120,7 @@ namespace MirrorBasics {
             }
         }
 
-        public void BeginGame (string _matchID) {
+        public void BeginGame (string _matchID, string selectedScene) {
             //GameObject newTurnManager = Instantiate (turnManagerPrefab);
             //NetworkServer.Spawn (newTurnManager);
             //newTurnManager.GetComponent<NetworkMatchChecker> ().matchId = _matchID.ToGuid ();
@@ -135,7 +135,7 @@ namespace MirrorBasics {
                     foreach (var player in matches[i].players) {
                         Player _player = player.GetComponent<Player> ();
                         //turnManager.AddPlayer (_player);
-                        _player.StartGame ();
+                        _player.StartGame (selectedScene);
                     }
                     break;
                 }

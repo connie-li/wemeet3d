@@ -142,30 +142,30 @@ namespace MirrorBasics {
       //    MatchMaker.instance.markMeetingAsStarted(_matchID);
         //}
 
-        public void BeginGame () {
-            CmdBeginGame ();
+        public void BeginGame (string selectedScene) {
+            CmdBeginGame (selectedScene);
         }
 
         [Command]
-        void CmdBeginGame () {
+        void CmdBeginGame (string selectedScene) {
             //Player.localPlayer.markAsStarted(matchID);
-            MatchMaker.instance.BeginGame (matchID);
+            MatchMaker.instance.BeginGame (matchID, selectedScene);
             Debug.Log ($"<color = red>Game Beginning</color>");
         }
 
-        public void StartGame () {
-            TargetBeginGame ();
+        public void StartGame (string selectedScene) {
+            TargetBeginGame (selectedScene);
         }
 
         [TargetRpc]
-        void TargetBeginGame () {
+        void TargetBeginGame (string selectedScene) {
             Debug.Log ($"MatchID: {matchID} | Beginning");
             //Additively load game scene
             //SceneManager.UnloadScene("main-menu");
           //  mainCanvas.SetActive(false);
           meetingStarted = true;
           UILobby.instance.removeCanvas();
-          SceneManager.LoadScene ("conference-room-new", LoadSceneMode.Additive);
+          SceneManager.LoadScene (selectedScene, LoadSceneMode.Additive);
         }
 
         /*[TargetRpc]
