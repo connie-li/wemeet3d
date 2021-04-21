@@ -133,11 +133,11 @@ namespace MirrorBasics {
         */
 
         [Command]
-        public void joinIfStarted(string _matchID)
+        public void joinIfStarted(string _matchID, string selectedScene)
         {
           if(MatchMaker.instance.checkIfMeetingStarted(_matchID))
           {
-            StartGame("conference-room-new");
+            StartGame(selectedScene);
           }else
           {
             Debug.Log("Meeting has not been detected as started :(");
