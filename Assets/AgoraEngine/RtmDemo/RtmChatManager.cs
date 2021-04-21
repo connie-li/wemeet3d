@@ -111,6 +111,8 @@ namespace io.agora.rtm.demo
             userNameITwo.text = PlayerPrefs.GetString("name");
             roomCode.GetComponent<Text>().text = PlayerPrefs.GetString("code");
             channelNameInputTwo.text = PlayerPrefs.GetString("code");
+            Login();
+            JoinChannel();
 
         }
         void Update()
@@ -216,13 +218,9 @@ namespace io.agora.rtm.demo
             ChannelName = PlayerPrefs.GetString("code");
             string peer = "[channel:" + ChannelName + "]";
 
-            //Debug.Log("USERNAME IS");
-            //Debug.Log(UserName);
             UserName = PlayerPrefs.GetString("name");
             string displayMsg = string.Format("{0}->{1}: {2}", UserName, peer, msg);
 
-            //messageDisplay.AddTextToDisplay(displayMsg, Message.MessageType.PlayerMessage);
-            //channel.SendMessage(rtmClient.CreateMessage(msg));
             messageDisplay.AddTextToDisplay(displayMsg, Message.MessageType.PlayerMessage);
             channel.SendMessage(rtmClient.CreateMessage(msg));
             channelMsgInputBox.text = "";
@@ -243,7 +241,7 @@ namespace io.agora.rtm.demo
 
         void OnJoinSuccessHandler(int id)
         {
-            Debug.Log("CHECK!");
+            Debug.Log("Chat started");
             string msg = "channel:" + ChannelName + " OnJoinSuccess id = " + id;
             Debug.Log(msg);
         }

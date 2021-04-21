@@ -12,25 +12,21 @@ using UnityEngine.Android;
 /// </summary>
 public class TestHome : MonoBehaviour
 {
-	//public InputField textName;
 
 	// Use this for initialization
 //	#if(UNITY_2018_3_OR_NEWER && UNITY_ANDROID)
   //  private ArrayList permissionList = new ArrayList();
 	//#endif
 	static AgoraInterface app = null;
-	//public string stringTheName;
-	//public GameObject TextArea1;
-	//public TextMeshProUGUI username;
 	[SerializeField] InputField username;
 	[SerializeField] InputField channelName;
-	private string PlaySceneName = "conference-room-new";
+	public GameObject Panel;
+	//private string PlaySceneName = "conference-room-new";
 
 	// PLEASE KEEP THIS App ID IN SAFE PLACE
 	// Get your own App ID at https://dashboard.agora.io/
 	[SerializeField]
 	private string AppID = "your_appid";
-
 
 	void Awake ()
 	{
@@ -47,7 +43,13 @@ public class TestHome : MonoBehaviour
 	void Start ()
 	{
 		 AudioListener.volume = 0;
-		//CheckAppId();
+		 //start engine and turn vid and mic off
+		 onJoinButtonClicked();
+		 turnOffOnVid(false);
+		 turnOffOnMic(false);
+		 //go = GameObject.Find("text-chat-panel");
+		 Panel.SetActive(false);
+
 	}
 
     void Update()
@@ -80,29 +82,32 @@ public class TestHome : MonoBehaviour
 			app.loadEngine(AppID); // load engine
 		}
 
-		// join channel and jump to next scene
-		//string channelName = username.text;
+		// join channel
 		string channelname = channelName.text;
-		//"testName";
-		//Debug.Log(username.text);
 		app.join(channelname);
-		//app.addCamera();
-
-		//SceneManager.sceneLoaded += OnLevelFinishedLoading; // configure GameObject after scene is loaded
-		//SceneManager.LoadScene(PlaySceneName, LoadSceneMode.Single);
 	}
-	public void turnOff(bool OnOff)
+	public void turnOffOnVid(bool OnOff)
 	{
 		app.turnCamera(OnOff);
-		//app.unloadEngine ();
-		//Destroy(gameObject);
 	}
 
-	public void turnOffMic(bool OnOff)
+	public void turnOffOnChat(bool OnOff)
+	{
+		if (OnOff == true)
+		{
+			Panel.SetActive(true);
+			Debug.Log("Chat on");
+		}
+		else
+		{
+			Panel.SetActive(false);
+			Debug.Log("Chat off");
+		}
+	}
+
+	public void turnOffOnMic(bool OnOff)
 	{
 		app.turnMic(OnOff);
-		//app.unloadEngine ();
-		//Destroy(gameObject);
 	}
 
 	public void onLeaveButtonClicked()
@@ -114,21 +119,6 @@ public class TestHome : MonoBehaviour
 			app.leaveMeeting(); // leave channel
 			app.unloadEngine (); // delete engine
 			app = null; // delete app
-			//SceneManager.LoadScene (HomeSceneName, LoadSceneMode.Single);
-		}
-		GameObject go = GameObject.Find("RawImage");
-		Destroy(go);
-	}
-
-	public void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
-	{
-		if (scene.name == PlaySceneName)
-		{
-			if (!ReferenceEquals (app, null))
-			{
-				app.addCamera(); // call this after scene is loaded
-			}
-			SceneManager.sceneLoaded -= OnLevelFinishedLoading;
 		}
 	}
 
@@ -140,11 +130,13 @@ public class TestHome : MonoBehaviour
 		}
 	}
 
-	/*void OnApplicationQuit()
+	void OnApplicationQuit()
 	{
 		if (!ReferenceEquals(app, null))
 		{
-			app.unloadEngine();
+			Debug.Log("turning off");
+			onLeaveButtonClicked();
 		}
-	}*/
+
+	}
 }
