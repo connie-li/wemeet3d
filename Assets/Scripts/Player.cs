@@ -5,12 +5,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using io.agora.rtm.demo;
 using agora_rtm;
+using agora_gaming_rtc;
 
 namespace MirrorBasics {
 
     public class Player : NetworkBehaviour {
 
         public static Player localPlayer = null;
+        //public static AgoraInterface ai = null;
         [SyncVar] public string matchID;
         [SyncVar] public string meetingPassword;
         [SyncVar] public int playerIndex;
@@ -87,6 +89,15 @@ namespace MirrorBasics {
             channel.Join();
             //rtmChat.JoinChannel()
 
+        }
+        public void DeleteGameObject(GameObject go,string uidString){
+          ClientDeleteGameObject(go,uidString);
+        }
+
+        [ClientRpc]
+        void ClientDeleteGameObject(GameObject go,string uidString){
+          AgoraInterface ai = new AgoraInterface();
+          ai.deleteObject(go,uidString);
         }
 
         /*

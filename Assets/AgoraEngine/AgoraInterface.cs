@@ -6,6 +6,8 @@ using agora_gaming_rtc;
 using agora_utilities;
 using UnityEngine.SceneManagement;
 using MirrorBasics;
+using Mirror;
+
 
 public class AgoraInterface
 {
@@ -68,12 +70,12 @@ public class AgoraInterface
 
       if (OnOffButton == true)
       {
-
         GameObject go = new GameObject(uidString);
         go.AddComponent<UIElementDragger>();
         //GameObject go = GameObject.Find(uidString);
         mRtcEngine.EnableLocalVideo(true);
         RawImage img = go.AddComponent<RawImage>();
+        NetworkIdentity iden = go.AddComponent<NetworkIdentity>();
         img.rectTransform.position = new Vector3(900,900,0);
         img.rectTransform.sizeDelta = new Vector2(200,200);
         img.rectTransform.Rotate(new Vector3(0,0,-180));
@@ -92,13 +94,34 @@ public class AgoraInterface
         mRtcEngine.EnableLocalVideo(false);
         GameObject go = GameObject.Find(uidString);
         //turn off video feed for all remote users
-        mRtcEngine.OnRemoteVideoStateChanged = OnRemoteVideoStateChanged;
+        //mRtcEngine.OnRemoteVideoStateChanged = OnRemoteVideoStateChanged;
         //Destroy
         //NetworkServer.Destroy(go);
         //Network.Destroy(go);
-        GameObject.Destroy(go);
+        //GameObject.Destroy(go);
+        //mRtcEngine.OnRemoteVideoStateChanged = OnRemoteVideoStateChanged;
+        Player.localPlayer.DeleteGameObject(go,uidString);
+        //GameObject.Destroy(go);
+        //deleteObject(go);
+        //DeleteGameObject()
         Debug.Log("Video off");
       }
+    }
+
+    public void turnCameraOne(bool OnOffButton)
+    {
+      mRtcEngine.EnableLocalVideo(false);
+      Debug.Log("Video off");
+    }
+
+
+
+    public void deleteObject(GameObject go,string uidString)
+    {
+      go = GameObject.Find(uidString);
+      Debug.Log(uidString);
+      GameObject.Destroy(go);
+      Debug.Log("testobject");
     }
 
     public void turnMic(bool OnOffButton)

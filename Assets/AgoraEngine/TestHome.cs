@@ -45,7 +45,7 @@ public class TestHome : MonoBehaviour
 		 AudioListener.volume = 0;
 		 //start engine and turn vid and mic off
 		 onJoinButtonClicked();
-		 turnOffOnVid(false);
+		 turnOffOnVidOne(false);
 		 turnOffOnMic(false);
 		 //go = GameObject.Find("text-chat-panel");
 		 Panel.SetActive(false);
@@ -91,6 +91,11 @@ public class TestHome : MonoBehaviour
 		app.turnCamera(OnOff);
 	}
 
+
+	public void turnOffOnVidOne(bool OnOff)
+	{
+		app.turnCameraOne(OnOff);
+	}
 	public void turnOffOnChat(bool OnOff)
 	{
 		if (OnOff == true)
