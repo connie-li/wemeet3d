@@ -133,10 +133,11 @@ namespace MirrorBasics {
         */
 
         [Command]
-        public void joinIfStarted(string _matchID, string selectedScene)
+        public void joinIfStarted(string _matchID)
         {
           if(MatchMaker.instance.checkIfMeetingStarted(_matchID))
           {
+            string selectedScene = MatchMaker.instance.getMeetingScene(_matchID);
             StartGame(selectedScene);
           }else
           {
@@ -158,7 +159,7 @@ namespace MirrorBasics {
         void CmdBeginGame (string selectedScene) {
             //Player.localPlayer.markAsStarted(matchID);
             MatchMaker.instance.BeginGame (matchID, selectedScene);
-            ClientTellAllAMeetingStarted(matchID);
+            ClientTellAllAMeetingStarted(matchID, selectedScene);
             Debug.Log ($"<color = red>Game Beginning</color>");
         }
 
@@ -177,9 +178,9 @@ namespace MirrorBasics {
         }
 
         [ClientRpc]
-        void ClientTellAllAMeetingStarted(string matchID)
+        void ClientTellAllAMeetingStarted(string matchID, string selectedScene)
         {
-            MatchMaker.instance.markMeetingAsStarted (matchID);
+            MatchMaker.instance.markMeetingAsStarted (matchID, selectedScene);
         }
 
         /*[TargetRpc]
