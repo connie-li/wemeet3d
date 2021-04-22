@@ -457,7 +457,7 @@ public class PlayerController : NetworkBehaviour
          UserInput = true;
          panelSitDown.SetActive(false);
      }
-*/
+
 
      void TaskOnClickNo()
      {
