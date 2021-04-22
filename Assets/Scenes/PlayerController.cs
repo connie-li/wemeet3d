@@ -130,8 +130,8 @@ public class PlayerController : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         char_RB = GetComponent<Rigidbody>();
-        Button btn = yourButton.GetComponent<Button>();
-        btn.onClick.AddListener(TaskOnClick);
+        //Button btn = yourButton.GetComponent<Button>();
+        //btn.onClick.AddListener(TaskOnClick);
     }
 
     // Update is called once per frame
