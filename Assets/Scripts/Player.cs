@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using io.agora.rtm.demo;
+using agora_rtm;
 
 namespace MirrorBasics {
 
@@ -12,8 +14,12 @@ namespace MirrorBasics {
         [SyncVar] public string matchID;
         [SyncVar] public string meetingPassword;
         [SyncVar] public int playerIndex;
+        [SyncVar] public bool meetingStarted = false;
+        [Header ("MainGAME")]
+      //  [SerializeField] GameObject mainCanvas;
 
         NetworkMatchChecker networkMatchChecker;
+        RtmChatManager rtmChat;
 
         void Start () {
             Debug.Log ($"<color = green>Player is start</color>");
@@ -26,11 +32,7 @@ namespace MirrorBasics {
             }
         }
 
-      //  void Start()
-      //  {
-      //      Debug.Log ($"<color = green>activating</color>");
-        //  gameObject.SetActive(true);
-      //  }
+
 
         /*
             HOST MATCH
@@ -72,6 +74,19 @@ namespace MirrorBasics {
             meetingPassword = _meetingPassword;
             Debug.Log ($"MatchID: {matchID} == {_matchID}");
             UILobby.instance.HostSuccess (success, _matchID, _meetingPassword);
+
+            var channelName = "test";
+            Debug.Log("Check1");
+            RtmClientEventHandler clientEventHandler = new RtmClientEventHandler();
+            RtmChannel channel;
+            RtmCallEventHandler callEventHandler = new RtmCallEventHandler();
+            RtmClient rtmClient = new RtmClient("5b605d324a8d4fe082de1236e69872af", clientEventHandler);
+            RtmChannelEventHandler channelEventHandler = new RtmChannelEventHandler();
+            channel = rtmClient.CreateChannel(channelName, channelEventHandler);
+            Debug.Log("Chec2");
+            channel.Join();
+            //rtmChat.JoinChannel()
+
         }
 
         /*
@@ -80,6 +95,9 @@ namespace MirrorBasics {
 
         public void JoinGame (string _inputID, string _inputPassword) {
             CmdJoinGame (_inputID,_inputPassword );
+            //rtmChat.JoinChannel();
+            //RtmChannel channel;
+            //channel.Join();
         }
 
         [Command]
@@ -114,26 +132,71 @@ namespace MirrorBasics {
             BEGIN MATCH
         */
 
-        public void BeginGame () {
-            CmdBeginGame ();
+        [Command]
+        public void joinIfStarted(string _matchID)
+        {
+          if(MatchMaker.instance.checkIfMeetingStarted(_matchID))
+          {
+            string selectedScene = MatchMaker.instance.getMeetingScene(_matchID);
+            StartGame(selectedScene);
+          }else
+          {
+            Debug.Log("Meeting has not been detected as started :(");
+          }
+
+        }
+
+        //public void markAsStarted(string _matchID)
+      //  {
+      //    MatchMaker.instance.markMeetingAsStarted(_matchID);
+        //}
+
+        public void BeginGame (string selectedScene) {
+            CmdBeginGame (selectedScene);
         }
 
         [Command]
-        void CmdBeginGame () {
-            MatchMaker.instance.BeginGame (matchID);
+        void CmdBeginGame (string selectedScene) {
+            //Player.localPlayer.markAsStarted(matchID);
+            MatchMaker.instance.BeginGame (matchID, selectedScene);
+            ClientTellAllAMeetingStarted(matchID, selectedScene);
             Debug.Log ($"<color = red>Game Beginning</color>");
         }
 
-        public void StartGame () {
-            TargetBeginGame ();
+        public void StartGame (string selectedScene) {
+            TargetBeginGame (selectedScene);
         }
 
         [TargetRpc]
-        void TargetBeginGame () {
+        void TargetBeginGame (string selectedScene) {
             Debug.Log ($"MatchID: {matchID} | Beginning");
             //Additively load game scene
-            SceneManager.LoadScene ("Test", LoadSceneMode.Additive);
+            //SceneManager.UnloadScene("main-menu");
+          //  mainCanvas.SetActive(false);
+          UILobby.instance.removeCanvas();
+          SceneManager.LoadScene (selectedScene, LoadSceneMode.Additive);
         }
+
+        [ClientRpc]
+        void ClientTellAllAMeetingStarted(string matchID, string selectedScene)
+        {
+            MatchMaker.instance.markMeetingAsStarted (matchID, selectedScene);
+        }
+
+        /*[TargetRpc]
+        void TargetShowMessage(string msg,string peer,string username,MessageDisplay messageDisplay,string displayMsg,RtmChannel channel,RtmClient rtmClient){
+          Debug.Log("check");
+          //string peer = "[channel:" + ChannelName + "]";
+
+
+          //messageDisplay.AddTextToDisplay(displayMsg, Message.MessageType.PlayerMessage);
+          channel.SendMessage(rtmClient.CreateMessage(msg));
+
+        }
+
+        public void showMessage(string msg,string peer,string username,MessageDisplay messageDisplay,string displayMsg,RtmChannel channel,RtmClient rtmClient){
+          TargetShowMessage(msg,peer,username,messageDisplay,displayMsg,channel,rtmClient);
+        }*/
 
     }
 
