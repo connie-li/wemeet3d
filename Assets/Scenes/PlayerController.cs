@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody rb;
     public float distance = 5;
     //public GameObject Camera;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -112,7 +112,7 @@ public class PlayerController : NetworkBehaviour
     bool yesSit = false;
     bool noSit = true;
     [SerializeField] public GameObject myCam;
-    [SerializeField] public GameObject myCanvas;
+  //  [SerializeField] public GameObject myCanvas;
     //public GameObject Camera;
 
 
@@ -126,7 +126,7 @@ public class PlayerController : NetworkBehaviour
         yesbtn.onClick.AddListener(TaskOnClick);
         Button nobtn = noButton.GetComponent<Button>();
         nobtn.onClick.AddListener(TaskOnClickNo);
-        
+
     }
 
     // Update is called once per frame
@@ -149,7 +149,7 @@ public class PlayerController : NetworkBehaviour
       }
 
           myCam.SetActive(true);
-          myCanvas.SetActive(true);
+          //myCanvas.SetActive(true);
           anim = GetComponent<Animator>();
 
             //float translation = Input.GetAxis("Vertical") * speed;
@@ -219,7 +219,7 @@ public class PlayerController : NetworkBehaviour
 
     //private void OnTriggerEnter(Collider other)
     private void OnCollisionEnter(Collision other)
-     {  
+     {
          if(other.gameObject.tag == "Chair")
          {
              panelSitDown.SetActive(true);
@@ -256,14 +256,14 @@ public class PlayerController : NetworkBehaviour
             //float rotation = 178 * rotationSpeed;
             //transform.Rotate(0,rotation,0);
             //char_RB.MovePosition(char_RB.gameObject.transform.forward * speed);
-            // float rotation = Input.GetAxis("Horizontal") * rotationSpeed;    
+            // float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
             // transform.Translate(0,0,translation);
             // transform.Rotate(0,rotation,0);
             // panelSitDown.SetActive(true);
             // anim.SetBool("isWalking", false);
             // anim.SetBool("isIdle", true);
             // anim.SetBool("isSitting",false);
-            // 
+            //
          }
 
          if(other.gameObject.tag == "ChairBack")
@@ -302,7 +302,7 @@ public class PlayerController : NetworkBehaviour
             //float rotation = 178 * rotationSpeed;
             //transform.Rotate(0,rotation,0);
             //char_RB.MovePosition(char_RB.gameObject.transform.forward * speed);
-            // float rotation = Input.GetAxis("Horizontal") * rotationSpeed;    
+            // float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
             // transform.Translate(0,0,translation);
             // transform.Rotate(0,rotation,0);
             // panelSitDown.SetActive(true);
@@ -345,7 +345,7 @@ public class PlayerController : NetworkBehaviour
             //float rotation = 178 * rotationSpeed;
             //transform.Rotate(0,rotation,0);
             //char_RB.MovePosition(char_RB.gameObject.transform.forward * speed);
-            // float rotation = Input.GetAxis("Horizontal") * rotationSpeed;    
+            // float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
             // transform.Translate(0,0,translation);
             // transform.Rotate(0,rotation,0);
             // panelSitDown.SetActive(true);
@@ -389,7 +389,7 @@ public class PlayerController : NetworkBehaviour
             //float rotation = 178 * rotationSpeed;
             //transform.Rotate(0,rotation,0);
             //char_RB.MovePosition(char_RB.gameObject.transform.forward * speed);
-            // float rotation = Input.GetAxis("Horizontal") * rotationSpeed;    
+            // float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
             // transform.Translate(0,0,translation);
             // transform.Rotate(0,rotation,0);
             // panelSitDown.SetActive(true);
@@ -433,7 +433,7 @@ public class PlayerController : NetworkBehaviour
             //float rotation = 178 * rotationSpeed;
             //transform.Rotate(0,rotation,0);
             //char_RB.MovePosition(char_RB.gameObject.transform.forward * speed);
-            // float rotation = Input.GetAxis("Horizontal") * rotationSpeed;    
+            // float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
             // transform.Translate(0,0,translation);
             // transform.Rotate(0,rotation,0);
             // panelSitDown.SetActive(true);

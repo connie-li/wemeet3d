@@ -175,6 +175,8 @@ namespace MirrorBasics {
           //  mainCanvas.SetActive(false);
           UILobby.instance.removeCanvas();
           SceneManager.LoadScene (selectedScene, LoadSceneMode.Additive);
+          Rigidbody rb = GetComponent<Rigidbody>();
+          rb.useGravity = true; 
         }
 
         [ClientRpc]
