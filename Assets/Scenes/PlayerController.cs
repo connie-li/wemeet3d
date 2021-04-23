@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody rb;
     public float distance = 5;
     //public GameObject Camera;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,9 +23,9 @@ public class PlayerController : MonoBehaviour
      {
              float moveHorizontal = Input.GetAxis("Horizontal");
              float moveVertical = Input.GetAxis("Vertical");
- 
+
              Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
- 
+
              rb.AddForce(movement*speed);
              if(Input.GetKeyUp(KeyCode.UpArrow))
             {
@@ -55,16 +55,16 @@ public class PlayerController : MonoBehaviour
      {
          rb = GetComponent<Rigidbody>();
      }
- 
+
      void FixedUpdate()
      {
          if (!isGameOver)
          {
              float moveHorizontal = Input.GetAxis("Horizontal");
              float moveVertical = Input.GetAxis("Vertical");
- 
+
              Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
- 
+
              rb.AddForce(movement*speed);
          }
      }
@@ -96,8 +96,9 @@ public class PlayerController : MonoBehaviour
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Mirror;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     public float rotationSpeed = 100;
     public float speed = 10;
@@ -110,36 +111,47 @@ public class PlayerController : MonoBehaviour
     bool sitDown = false;
     bool yesSit = false;
     bool noSit = true;
+    [SerializeField] public GameObject myCam;
+  //  [SerializeField] public GameObject myCanvas;
     //public GameObject Camera;
-    
+
 
 
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
+
         char_RB = GetComponent<Rigidbody>();
         Button yesbtn = yesButton.GetComponent<Button>();
         yesbtn.onClick.AddListener(TaskOnClick);
         Button nobtn = noButton.GetComponent<Button>();
         nobtn.onClick.AddListener(TaskOnClickNo);
-        
+
     }
 
     // Update is called once per frame
     /*
     public Rigidbody char_RB;
- 
+
  void FixedUpdate(){
      if(Input.GetAxis("Vertical")){
          char_RB.MovePosition(char_RB.gameObject.transform.forward * speed);
      }
  }
     */
+  //  [Client]
+    [ClientCallback]
     void Update()
     {
-        
-        
+      if(!hasAuthority)
+      {
+        return;
+      }
+
+          myCam.SetActive(true);
+          //myCanvas.SetActive(true);
+          anim = GetComponent<Animator>();
+
             //float translation = Input.GetAxis("Vertical") * speed;
             float translation = Input.GetAxis("Vertical") * speed;
             //char_RB.MovePosition(char_RB.gameObject.transform.forward * speed);
@@ -148,8 +160,10 @@ public class PlayerController : MonoBehaviour
             //movement = Vector3.ClampMagnitude(movement,speed);
             //movement *= Time.deltaTime;
             //transform.Translate(movement);
+
             if(UserInput)
             {
+              //Client code
             translation *= Time.deltaTime;
             rotation *= Time.deltaTime;
             transform.Translate(0,0,translation);
@@ -199,11 +213,13 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+
+
     }
 
     //private void OnTriggerEnter(Collider other)
     private void OnCollisionEnter(Collision other)
-     {  
+     {
          if(other.gameObject.tag == "Chair")
          {
              panelSitDown.SetActive(true);
@@ -240,14 +256,14 @@ public class PlayerController : MonoBehaviour
             //float rotation = 178 * rotationSpeed;
             //transform.Rotate(0,rotation,0);
             //char_RB.MovePosition(char_RB.gameObject.transform.forward * speed);
-            // float rotation = Input.GetAxis("Horizontal") * rotationSpeed;    
+            // float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
             // transform.Translate(0,0,translation);
             // transform.Rotate(0,rotation,0);
             // panelSitDown.SetActive(true);
             // anim.SetBool("isWalking", false);
             // anim.SetBool("isIdle", true);
             // anim.SetBool("isSitting",false);
-            // 
+            //
          }
 
          if(other.gameObject.tag == "ChairBack")
@@ -286,7 +302,7 @@ public class PlayerController : MonoBehaviour
             //float rotation = 178 * rotationSpeed;
             //transform.Rotate(0,rotation,0);
             //char_RB.MovePosition(char_RB.gameObject.transform.forward * speed);
-            // float rotation = Input.GetAxis("Horizontal") * rotationSpeed;    
+            // float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
             // transform.Translate(0,0,translation);
             // transform.Rotate(0,rotation,0);
             // panelSitDown.SetActive(true);
@@ -329,7 +345,7 @@ public class PlayerController : MonoBehaviour
             //float rotation = 178 * rotationSpeed;
             //transform.Rotate(0,rotation,0);
             //char_RB.MovePosition(char_RB.gameObject.transform.forward * speed);
-            // float rotation = Input.GetAxis("Horizontal") * rotationSpeed;    
+            // float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
             // transform.Translate(0,0,translation);
             // transform.Rotate(0,rotation,0);
             // panelSitDown.SetActive(true);
@@ -373,7 +389,7 @@ public class PlayerController : MonoBehaviour
             //float rotation = 178 * rotationSpeed;
             //transform.Rotate(0,rotation,0);
             //char_RB.MovePosition(char_RB.gameObject.transform.forward * speed);
-            // float rotation = Input.GetAxis("Horizontal") * rotationSpeed;    
+            // float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
             // transform.Translate(0,0,translation);
             // transform.Rotate(0,rotation,0);
             // panelSitDown.SetActive(true);
@@ -417,7 +433,7 @@ public class PlayerController : MonoBehaviour
             //float rotation = 178 * rotationSpeed;
             //transform.Rotate(0,rotation,0);
             //char_RB.MovePosition(char_RB.gameObject.transform.forward * speed);
-            // float rotation = Input.GetAxis("Horizontal") * rotationSpeed;    
+            // float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
             // transform.Translate(0,0,translation);
             // transform.Rotate(0,rotation,0);
             // panelSitDown.SetActive(true);
@@ -442,6 +458,7 @@ public class PlayerController : MonoBehaviour
          panelSitDown.SetActive(false);
      }
 
+
      void TaskOnClickNo()
      {
         //  anim.SetBool("isSitting",true);
@@ -449,6 +466,5 @@ public class PlayerController : MonoBehaviour
           UserInput = true;
          panelSitDown.SetActive(false);
      }
-
 
 }

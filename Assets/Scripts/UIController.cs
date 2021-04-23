@@ -8,6 +8,11 @@ public class UIController : MonoBehaviour
     public UnityEngine.UI.InputField pwInputJoin = null;
     public UnityEngine.UI.InputField pwInputCreate = null;
 
+    //public UnityEngine.UI.InputField createMeeting;
+
+    //public static string textval;
+    //textval = createMeeting.text;
+
     public void ToggleInputTypeJoinPW()
     {
         if (this.pwInputJoin != null)

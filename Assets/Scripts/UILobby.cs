@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
@@ -28,6 +29,11 @@ namespace MirrorBasics {
         [SerializeField] Text passwordText;
         [SerializeField] GameObject beginGameButton;
         [SerializeField] GameObject PlayerPrefab;
+
+        [Header ("MainGAME")]
+        [SerializeField] GameObject mainCanvas;
+        [SerializeField] TextMeshProUGUI errorMessageSceneSelection;
+        [SerializeField] SceneSelect ChooseRoomGroup;
 
         void Awake()
         {
@@ -107,6 +113,15 @@ namespace MirrorBasics {
                 matchIDText.text = matchID;
                 passwordText.text = meetingPassword;
                 RoomPass.text = "";
+                //to check if meeting already meeting already started
+                Debug.Log("Checking if started in next line");
+              //  Debug.Log (Player.localPlayer.checkIfStarted(matchID));
+            //  if(ChooseRoomGroup.SceneWasSelected() == true)
+              //{
+                  //string selectedScene = ChooseRoomGroup.getSelectedScene();
+                  Player.localPlayer.joinIfStarted(matchID);
+              //}
+
             } else {
                 joinMatchInput.interactable = true;
                 joinButton.interactable = true;
@@ -125,7 +140,22 @@ namespace MirrorBasics {
         }
 
         public void BeginGame () {
-            Player.localPlayer.BeginGame ();
+          if(ChooseRoomGroup.SceneWasSelected() == true)
+          {
+              string selectedScene = ChooseRoomGroup.getSelectedScene();
+              Player.localPlayer.BeginGame (selectedScene);
+          }
+          else
+          {
+            errorMessageSceneSelection.text = "Please select a room";
+          }
+
+
+        }
+
+        public void removeCanvas()
+        {
+          mainCanvas.SetActive(false);
         }
 
     }

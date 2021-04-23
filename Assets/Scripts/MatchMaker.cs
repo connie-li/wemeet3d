@@ -12,11 +12,15 @@ namespace MirrorBasics {
     public class Match {
         public string matchID;
         public string meetingPassword;
+        public bool meetingStarted;
+        public string meetingScene;
         public SyncListGameObject players = new SyncListGameObject ();
 
-        public Match (string matchID, GameObject player, string meetingPassword) {
+        public Match (string matchID, GameObject player, string meetingPassword, string meetingScene) {
             this.matchID = matchID;
             this.meetingPassword = meetingPassword;
+            this.meetingStarted = false;
+            this.meetingScene = meetingScene;
             players.Add (player);
         }
 
@@ -47,7 +51,7 @@ namespace MirrorBasics {
 
             if (!matchIDs.Contains (_matchID)) {
                 matchIDs.Add (_matchID);
-                matches.Add (new Match (_matchID, _player,_meetingPassword));
+                matches.Add (new Match (_matchID, _player,_meetingPassword, null));
                 Debug.Log ($"Match generated");
                 playerIndex = 1;
                 return true;
@@ -56,6 +60,57 @@ namespace MirrorBasics {
                 return false;
             }
         }
+
+        public bool checkIfMeetingStarted(string _matchID)
+        {
+            if (matchIDs.Contains (_matchID)) {
+              for (int i = 0; i < matches.Count; i++) {
+                  if (matches[i].matchID == _matchID) {
+                      Debug.Log ($"Meeting ID");
+                      Debug.Log (matches[i].matchID);
+                      Debug.Log (matches[i].meetingStarted);
+                    if (matches[i].meetingStarted == true)
+                    {
+                      Debug.Log ($"Found meeting started");
+                      return true;
+                    }
+                  }
+                }
+            }
+            Debug.Log ($"Found meeting NOT started");
+            return false;
+        }
+
+        public void markMeetingAsStarted(string _matchID, string meetingScene)
+        {
+          Debug.Log ($"iNSIDE MARKING METING");
+            if (matchIDs.Contains (_matchID)) {
+              for (int i = 0; i < matches.Count; i++) {
+                  if (matches[i].matchID == _matchID) {
+                    if (matches[i].meetingStarted == true)
+                    {
+                      matches[i].meetingStarted = true;
+                      matches[i].meetingScene = meetingScene;
+                    }
+                  }
+                }
+            }
+        }
+
+
+        public string getMeetingScene(string _matchID)
+        {
+          Debug.Log ($"iNSIDE get meeting scene");
+            if (matchIDs.Contains (_matchID)) {
+              for (int i = 0; i < matches.Count; i++) {
+                  if (matches[i].matchID == _matchID) {
+                      return (matches[i].meetingScene);
+                  }
+                }
+            }
+            return ("main-menu");
+        }
+
 
         public bool JoinGame (string _matchID, GameObject _player, out int playerIndex, string _meetingPassword) {
             playerIndex = -1;
@@ -83,7 +138,7 @@ namespace MirrorBasics {
             }
         }
 
-        public void BeginGame (string _matchID) {
+        public void BeginGame (string _matchID, string selectedScene) {
             //GameObject newTurnManager = Instantiate (turnManagerPrefab);
             //NetworkServer.Spawn (newTurnManager);
             //newTurnManager.GetComponent<NetworkMatchChecker> ().matchId = _matchID.ToGuid ();
@@ -91,10 +146,15 @@ namespace MirrorBasics {
 
             for (int i = 0; i < matches.Count; i++) {
                 if (matches[i].matchID == _matchID) {
+                    matches[i].meetingStarted = true; //marking as started
+                    matches[i].meetingScene = selectedScene;
+                    Debug.Log ($"MAKING THIS MATCH TRUE FOR STARTED");
+                    Debug.Log (matches[i].matchID);
+                    Debug.Log (matches[i].meetingStarted);
                     foreach (var player in matches[i].players) {
                         Player _player = player.GetComponent<Player> ();
                         //turnManager.AddPlayer (_player);
-                        _player.StartGame ();
+                        _player.StartGame (selectedScene);
                     }
                     break;
                 }
