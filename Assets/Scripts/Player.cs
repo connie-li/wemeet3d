@@ -77,18 +77,6 @@ namespace MirrorBasics {
             Debug.Log ($"MatchID: {matchID} == {_matchID}");
             UILobby.instance.HostSuccess (success, _matchID, _meetingPassword);
 
-            var channelName = "test";
-            Debug.Log("Check1");
-            RtmClientEventHandler clientEventHandler = new RtmClientEventHandler();
-            RtmChannel channel;
-            RtmCallEventHandler callEventHandler = new RtmCallEventHandler();
-            RtmClient rtmClient = new RtmClient("5b605d324a8d4fe082de1236e69872af", clientEventHandler);
-            RtmChannelEventHandler channelEventHandler = new RtmChannelEventHandler();
-            channel = rtmClient.CreateChannel(channelName, channelEventHandler);
-            Debug.Log("Chec2");
-            channel.Join();
-            //rtmChat.JoinChannel()
-
         }
         public void DeleteGameObject(GameObject go,string uidString){
           ClientDeleteGameObject(go,uidString);

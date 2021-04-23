@@ -79,7 +79,7 @@ public class AgoraInterface
         img.rectTransform.position = new Vector3(900,900,0);
         img.rectTransform.sizeDelta = new Vector2(200,200);
         img.rectTransform.Rotate(new Vector3(0,0,-180));
-        GameObject canvas = GameObject.Find("Canvas");
+        GameObject canvas = GameObject.Find("VideoObject");
         if (canvas != null)
         {
             go.transform.SetParent(canvas.transform);
@@ -93,17 +93,8 @@ public class AgoraInterface
       {
         mRtcEngine.EnableLocalVideo(false);
         GameObject go = GameObject.Find(uidString);
-        //turn off video feed for all remote users
-        //mRtcEngine.OnRemoteVideoStateChanged = OnRemoteVideoStateChanged;
-        //Destroy
-        //NetworkServer.Destroy(go);
-        //Network.Destroy(go);
-        //GameObject.Destroy(go);
-        //mRtcEngine.OnRemoteVideoStateChanged = OnRemoteVideoStateChanged;
+        //delete game object
         Player.localPlayer.DeleteGameObject(go,uidString);
-        //GameObject.Destroy(go);
-        //deleteObject(go);
-        //DeleteGameObject()
         Debug.Log("Video off");
       }
     }
@@ -111,7 +102,6 @@ public class AgoraInterface
     public void turnCameraOne(bool OnOffButton)
     {
       mRtcEngine.EnableLocalVideo(false);
-      Debug.Log("Video off");
     }
 
 
@@ -121,7 +111,6 @@ public class AgoraInterface
       go = GameObject.Find(uidString);
       Debug.Log(uidString);
       GameObject.Destroy(go);
-      Debug.Log("testobject");
     }
 
     public void turnMic(bool OnOffButton)
@@ -256,15 +245,16 @@ public class AgoraInterface
 
         // to be renderered onto
         RawImage img = go.AddComponent<RawImage>();
+        NetworkIdentity iden = go.AddComponent<NetworkIdentity>();
         img.rectTransform.position = new Vector3(900,900,0);
         img.rectTransform.sizeDelta = new Vector2(200,200);
         img.rectTransform.Rotate(new Vector3(0,0,-180));
         //img.color = new Color(0 ,0 ,0 ,255);
-        GameObject canvas = GameObject.Find("Canvas");
+        GameObject canvas = GameObject.Find("VideoObject");
         if (canvas != null)
         {
             go.transform.SetParent(canvas.transform);
-            go.transform.parent = canvas.transform;
+            //go.transform.parent = canvas.transform;
         }
 
         // configure videoSurface
