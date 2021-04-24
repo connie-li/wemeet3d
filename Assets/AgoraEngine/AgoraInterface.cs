@@ -76,7 +76,7 @@ public class AgoraInterface
         mRtcEngine.EnableLocalVideo(true);
         RawImage img = go.AddComponent<RawImage>();
         NetworkIdentity iden = go.AddComponent<NetworkIdentity>();
-        img.rectTransform.position = new Vector3(900,900,0);
+        img.rectTransform.position = new Vector3(600,600,0);
         img.rectTransform.sizeDelta = new Vector2(200,200);
         img.rectTransform.Rotate(new Vector3(0,0,-180));
         GameObject canvas = GameObject.Find("VideoObject");
@@ -103,8 +103,6 @@ public class AgoraInterface
     {
       mRtcEngine.EnableLocalVideo(false);
     }
-
-
 
     public void deleteObject(GameObject go,string uidString)
     {

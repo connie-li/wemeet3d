@@ -79,9 +79,18 @@ namespace MirrorBasics {
 
         }
         public void DeleteGameObject(GameObject go,string uidString){
-          ClientDeleteGameObject(go,uidString);
+          if(localPlayer == this)
+          {
+            AgoraInterface ai = new AgoraInterface();
+            ai.deleteObject(go,uidString);
+            CmdDeleteGameObject(go,uidString);
+          }
         }
 
+        [Command]
+        void CmdDeleteGameObject(GameObject go,string uidString){
+          ClientDeleteGameObject(go,uidString);
+        }
         [ClientRpc]
         void ClientDeleteGameObject(GameObject go,string uidString){
           AgoraInterface ai = new AgoraInterface();
