@@ -9,6 +9,8 @@ TagManager:
   - ChairRight
   - ChairLeft
   - orangeLounge
+  - orangeLounge1
+  - blueLounge
   layers:
   - Default
   - TransparentFX
