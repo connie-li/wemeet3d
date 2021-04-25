@@ -104,6 +104,7 @@ namespace MirrorBasics {
             if (matchIDs.Contains (_matchID)) {
               for (int i = 0; i < matches.Count; i++) {
                   if (matches[i].matchID == _matchID) {
+                      Debug.Log(matches[i].meetingScene);
                       return (matches[i].meetingScene);
                   }
                 }
