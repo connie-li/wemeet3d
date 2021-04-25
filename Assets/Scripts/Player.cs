@@ -78,6 +78,21 @@ namespace MirrorBasics {
             UILobby.instance.HostSuccess (success, _matchID, _meetingPassword);
 
         }
+
+        public void AddGameObject(string uidString){
+            CmdAddGameObject(uidString);
+        }
+
+        [Command]
+        void CmdAddGameObject(string uidString){
+          ClientAddGameObject(uidString);
+        }
+        [ClientRpc]
+        void ClientAddGameObject(string uidString){
+          AgoraInterface ai = new AgoraInterface();
+          ai.addObject(uidString);
+        }
+
         public void DeleteGameObject(GameObject go,string uidString){
           if(localPlayer == this)
           {

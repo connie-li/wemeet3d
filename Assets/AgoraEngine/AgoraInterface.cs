@@ -15,6 +15,8 @@ public class AgoraInterface
     public IRtcEngine mRtcEngine;
     private Text MessageText;
     public string uidString;
+    uint num;
+    public string appID;
 
 
    void Start()
@@ -23,9 +25,11 @@ public class AgoraInterface
    }
 
     //initializating agora RTC engine
+
     public void loadEngine(string appId)
     {
       //starting SDK
+      appID = appId;
       Debug.Log("initializating engine");
 
       if(mRtcEngine != null)
@@ -48,7 +52,7 @@ public class AgoraInterface
           return;
 
       mRtcEngine.OnJoinChannelSuccess = onJoinChannelSuccess;
-      mRtcEngine.OnUserJoined = onUserJoined;
+      //mRtcEngine.OnUserJoined = onUserJoined;
       mRtcEngine.OnUserOffline = onUserOffline;
 
       //ignore warnings
@@ -70,23 +74,10 @@ public class AgoraInterface
 
       if (OnOffButton == true)
       {
-        GameObject go = new GameObject(uidString);
-        go.AddComponent<UIElementDragger>();
-        //GameObject go = GameObject.Find(uidString);
+        //GameObject go = new GameObject(uidString);
         mRtcEngine.EnableLocalVideo(true);
-        RawImage img = go.AddComponent<RawImage>();
-        NetworkIdentity iden = go.AddComponent<NetworkIdentity>();
-        img.rectTransform.position = new Vector3(600,600,0);
-        img.rectTransform.sizeDelta = new Vector2(200,200);
-        img.rectTransform.Rotate(new Vector3(0,0,-180));
-        GameObject canvas = GameObject.Find("VideoObject");
-        if (canvas != null)
-        {
-            go.transform.SetParent(canvas.transform);
-        }
-        VideoSurface videoSurface = go.AddComponent<VideoSurface>();
-        //make element draggable
-        go.AddComponent<UIElementDragger>();
+        Player.localPlayer.AddGameObject(uidString);
+        //mRtcEngine.EnableVideo();
         Debug.Log("Video on");
       }
       else
@@ -104,10 +95,30 @@ public class AgoraInterface
       mRtcEngine.EnableLocalVideo(false);
     }
 
+    public void addObject(string uidString)
+    {
+      mRtcEngine = IRtcEngine.getEngine(appID);
+      //mRtcEngine.SetLogFilter(LOG_FILTER.DEBUG | LOG_FILTER.INFO | LOG_FILTER.WARNING | LOG_FILTER.ERROR | LOG_FILTER.CRITICAL);
+      mRtcEngine.EnableLocalVideo(true);
+      VideoSurface videoSurface = makeImageSurface(uidString);
+      if (!ReferenceEquals(videoSurface, null))
+      {
+          // configure videoSurface
+          videoSurface.SetForUser(num);
+          videoSurface.SetEnable(true);
+          videoSurface.SetVideoSurfaceType(AgoraVideoSurfaceType.RawImage);
+          videoSurface.SetGameFps(30);
+      }
+
+      //GameObject.Destroy(go);
+    }
+
     public void deleteObject(GameObject go,string uidString)
     {
       go = GameObject.Find(uidString);
-      Debug.Log(uidString);
+      mRtcEngine = IRtcEngine.getEngine(appID);
+      //mRtcEngine.SetLogFilter(LOG_FILTER.DEBUG | LOG_FILTER.INFO | LOG_FILTER.WARNING | LOG_FILTER.ERROR | LOG_FILTER.CRITICAL);
+      mRtcEngine.EnableLocalVideo(false);
       GameObject.Destroy(go);
     }
 
@@ -189,6 +200,7 @@ public class AgoraInterface
     private void onJoinChannelSuccess(string channelName, uint uid, int elapsed)
     {
         uidString = uid.ToString();
+        num = uid;
         Debug.Log("JoinChannelSuccessHandler: uid = " + uid);
 
     }
@@ -202,7 +214,6 @@ public class AgoraInterface
             go.GetComponent<VideoSurface>().SetEnable(false);
 	    }
     }
-
     // When a remote user joined, this delegate will be called. Typically
     // create a GameObject to render video on it
     private void onUserJoined(uint uid, int elapsed)
@@ -244,7 +255,7 @@ public class AgoraInterface
         // to be renderered onto
         RawImage img = go.AddComponent<RawImage>();
         NetworkIdentity iden = go.AddComponent<NetworkIdentity>();
-        img.rectTransform.position = new Vector3(900,900,0);
+        img.rectTransform.position = new Vector3(600,600,0);
         img.rectTransform.sizeDelta = new Vector2(200,200);
         img.rectTransform.Rotate(new Vector3(0,0,-180));
         //img.color = new Color(0 ,0 ,0 ,255);
@@ -254,6 +265,8 @@ public class AgoraInterface
             go.transform.SetParent(canvas.transform);
             //go.transform.parent = canvas.transform;
         }
+        //go.SetActive(false);
+        //go.SetActive(false);
 
         // configure videoSurface
         VideoSurface videoSurface = go.AddComponent<VideoSurface>();
