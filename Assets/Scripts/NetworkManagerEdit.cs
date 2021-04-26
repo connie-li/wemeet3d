@@ -9,7 +9,6 @@ namespace MirrorBasics {
 
 public class NetworkManagerEdit : NetworkManager
 {
-  [SerializeField] GameObject prefab;
 
     public void BeingHost()
     {
@@ -52,17 +51,6 @@ public class NetworkManagerEdit : NetworkManager
       UILobby.instance.Join();
     }
 
-    public GameObject getPlayerPrefab()
-    {
-      return playerPrefab;
-    }
-
-    public void setPlayerPrefab(NetworkConnection conn, GameObject newPlayerPrefab)
-    {
-      //playerPrefab = newPlayerPrefab;
-      NetworkServer.AddPlayerForConnection(conn, newPlayerPrefab);
-    }
-
     public virtual void OnServerAddPlayer(NetworkConnection conn, int playerControllerId)
     {
       var player = (GameObject)GameObject.Instantiate(playerPrefab);
@@ -70,17 +58,8 @@ public class NetworkManagerEdit : NetworkManager
 
     }
 
-  //  public override void OnClientConnect(NetworkConnection conn)
-  //    {
-  //        base.OnClientConnect(conn);
-  //    }
-
-
-    public void ReplacePlayer(int characterIndex, Character[] characters, NetworkConnection conn)
+    public void ReplacePlayer(GameObject characterInstance, NetworkConnection conn)
     {
-        //base.OnClientConnect(conn);
-      //NetworkConnection conn = NetworkBehaviour.connectionToClient();
-      GameObject characterInstance = prefab;
 
       // Cache a reference to the current player object
       GameObject oldPlayer = conn.identity.gameObject;
