@@ -1209,7 +1209,7 @@ PrefabInstance:
         type: 3}
       propertyPath: spawnPrefabs.Array.data[1]
       value: 
-      objectReference: {fileID: 5593114697170388214, guid: c706c1c4373431c479410d0bd605908b,
+      objectReference: {fileID: 4023542983778120364, guid: 849edf0dce90c644091e895340fae60b,
         type: 3}
     m_RemovedComponents:
     - {fileID: 2327895040099534544, guid: f3185f0325feec64b860c38a2a47263f, type: 3}
