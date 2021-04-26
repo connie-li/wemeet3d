@@ -2,31 +2,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class PlayerController : MonoBehaviour
 {
     public float speed = 5;
     Rigidbody rb;
     public float distance = 5;
-
     //public GameObject Camera;
-
-
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
-
     }
-
     // Update is called once per frame
     void Update()
     {
         //transform.position = transform.position + Camera.main.transform.forward * distance * Time.deltaTime;
     }
-
     void FixedUpdate()
      {
              float moveHorizontal = Input.GetAxis("Horizontal");
@@ -42,9 +34,7 @@ public class PlayerController : MonoBehaviour
              }
             rb.velocity = new Vector3(moveHorizontal*speed, 0.0f, moveVertical*speed);
             //Debug.Log("Text: " + transform.forward);
-
      }
-
 }
 */
 
@@ -53,7 +43,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
 public class PlayerController : MonoBehaviour
  {
      public float speed = 5;
@@ -79,7 +68,6 @@ public class PlayerController : MonoBehaviour
              rb.AddForce(movement*speed);
          }
      }
-
      private void OnTriggerEnter(Collider other)
      {
          if(other.gameObject.tag == "Coin")
@@ -88,7 +76,6 @@ public class PlayerController : MonoBehaviour
              score++;
              txtScore.text = "Score : " + score;
          }
-
          if(other.gameObject.tag == "Enemy")
          {
              //GameOver
@@ -98,7 +85,6 @@ public class PlayerController : MonoBehaviour
              panelGameOver.SetActive(true);
          }
      }
-
      public void playAgainUI()
      {
          SceneManager.LoadScene("SceneOne");
@@ -118,11 +104,15 @@ public class PlayerController : NetworkBehaviour
     public float speed = 10;
     static Animator anim;
     public Rigidbody char_RB;
-  //  public GameObject panelSitDown;
-  //  public Button yourButton;
+    public GameObject panelSitDown;
+    public Button yesButton;
+    public Button noButton;
     bool UserInput = true;
+    bool sitDown = false;
+    bool yesSit = false;
+    bool noSit = true;
     [SerializeField] public GameObject myCam;
-    [SerializeField] public GameObject myCanvas;
+  //  [SerializeField] public GameObject myCanvas;
     //public GameObject Camera;
 
 
@@ -132,8 +122,11 @@ public class PlayerController : NetworkBehaviour
     {
 
         char_RB = GetComponent<Rigidbody>();
-        //Button btn = yourButton.GetComponent<Button>();
-        //btn.onClick.AddListener(TaskOnClick);
+        Button yesbtn = yesButton.GetComponent<Button>();
+        yesbtn.onClick.AddListener(TaskOnClick);
+        Button nobtn = noButton.GetComponent<Button>();
+        nobtn.onClick.AddListener(TaskOnClickNo);
+
     }
 
     // Update is called once per frame
@@ -147,19 +140,18 @@ public class PlayerController : NetworkBehaviour
  }
     */
   //  [Client]
+    [ClientCallback]
     void Update()
     {
-      if(hasAuthority){
-          myCam.SetActive(true);
-          myCanvas.SetActive(true);
-          anim = GetComponent<Animator>();
-        }
+      if(!hasAuthority)
+      {
+        return;
+      }
 
-        if(!hasAuthority)
-        {
-          return;
-        }else
-        {
+          myCam.SetActive(true);
+          //myCanvas.SetActive(true);
+          anim = GetComponent<Animator>();
+
             //float translation = Input.GetAxis("Vertical") * speed;
             float translation = Input.GetAxis("Vertical") * speed;
             //char_RB.MovePosition(char_RB.gameObject.transform.forward * speed);
@@ -169,7 +161,7 @@ public class PlayerController : NetworkBehaviour
             //movement *= Time.deltaTime;
             //transform.Translate(movement);
 
-            if(UserInput && hasAuthority)
+            if(UserInput)
             {
               //Client code
             translation *= Time.deltaTime;
@@ -186,7 +178,7 @@ public class PlayerController : NetworkBehaviour
                 anim.SetBool("isSitting",true);
             }
 
-            if(anim.GetBool("isSitting")==true)
+            if(anim.GetBool("isSitting")==true || sitDown == true)
             {
                 if(translation != 0)
                 {
@@ -200,6 +192,8 @@ public class PlayerController : NetworkBehaviour
                     anim.SetBool("isWalking", false);
                     anim.SetBool("isIdle", false);
                     anim.SetBool("isSitting",true);
+                    sitDown = false;
+
                 }
             }
             else
@@ -219,21 +213,328 @@ public class PlayerController : NetworkBehaviour
                 }
             }
         }
-      }
+
+
     }
 
     //private void OnTriggerEnter(Collider other)
-    /*private void OnCollisionEnter(Collision other)
+    private void OnCollisionEnter(Collision other)
      {
          if(other.gameObject.tag == "Chair")
          {
-
-            panelSitDown.SetActive(true);
+             panelSitDown.SetActive(true);
+             UserInput = false;
+             float rotation = 178;
+             float moveHorizontal = Input.GetAxis("Horizontal");
+            float moveVertical = Input.GetAxis("Vertical");
+             float translation = 0;
+            double temp = other.gameObject.transform.position.x + 1.196;//- 0.01;//-0.6-0.33;
+            double temp1 = other.gameObject.transform.position.z + 0.2492;//+ 0.514;
+            Debug.Log(other.gameObject.transform.position.x);
+            Debug.Log(other.gameObject.transform.position.z);
+            Vector3 position = new Vector3((float)temp,(float)-15,(float)temp1);//new Vector3((float)-0.93,(float)0.3,(float)-0.62);
+            position.x += moveHorizontal * speed * Time.deltaTime;
+            position.z += moveVertical * speed * Time.deltaTime;
+            transform.position = position;
+            rotation *= Time.deltaTime;
+            transform.rotation = Quaternion.Euler(0, 178, 0);
             anim.SetBool("isWalking", false);
             anim.SetBool("isIdle", true);
             anim.SetBool("isSitting",false);
-            UserInput = false;
+            //  anim.SetBool("isWalking", false);
+            //  anim.SetBool("isIdle", false);
+            //  anim.SetBool("isSitting",true);
+             Debug.Log(anim.GetBool("isSiting"));
+             //sitDown = true;
+                         // transform.position.x = temp;
+            // transform.position.z = temp1;
+            // translation *= Time.deltaTime;
+            // //rotation *= Time.deltaTime;
+            // transform.Translate(0,0,translation);
+            //transform.Rotate(0,rotation,0);
+            //transform.Translate(0,0,translation);
+            //float rotation = 178 * rotationSpeed;
+            //transform.Rotate(0,rotation,0);
+            //char_RB.MovePosition(char_RB.gameObject.transform.forward * speed);
+            // float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
+            // transform.Translate(0,0,translation);
+            // transform.Rotate(0,rotation,0);
+            // panelSitDown.SetActive(true);
+            // anim.SetBool("isWalking", false);
+            // anim.SetBool("isIdle", true);
+            // anim.SetBool("isSitting",false);
+            //
          }
+
+         if(other.gameObject.tag == "ChairBack")
+         {
+             panelSitDown.SetActive(true);
+             UserInput = false;
+             float rotation = (float)3.124;
+             float moveHorizontal = Input.GetAxis("Horizontal");
+            float moveVertical = Input.GetAxis("Vertical");
+             float translation = 0;
+            double temp = other.gameObject.transform.position.x - 1.18;//- 0.01;//-0.6-0.33;
+            double temp1 = other.gameObject.transform.position.z - 0.6;//+ 0.514;
+            Debug.Log(other.gameObject.transform.position.x);
+            Debug.Log(other.gameObject.transform.position.z);
+            Vector3 position = new Vector3((float)temp,(float)-15,(float)temp1);//new Vector3((float)-0.93,(float)0.3,(float)-0.62);
+            position.x += moveHorizontal * speed * Time.deltaTime;
+            position.z += moveVertical * speed * Time.deltaTime;
+            transform.position = position;
+            rotation *= Time.deltaTime;
+            transform.rotation = Quaternion.Euler(0, (float)3.124, 0);
+             anim.SetBool("isWalking", false);
+            anim.SetBool("isIdle", true);
+            anim.SetBool("isSitting",false);
+            //  anim.SetBool("isWalking", false);
+            //  anim.SetBool("isIdle", false);
+            //  anim.SetBool("isSitting",true);
+             Debug.Log(anim.GetBool("isSiting"));
+             //sitDown = true;
+            // transform.position.x = temp;
+            // transform.position.z = temp1;
+            // translation *= Time.deltaTime;
+            // //rotation *= Time.deltaTime;
+            // transform.Translate(0,0,translation);
+            //transform.Rotate(0,rotation,0);
+            //transform.Translate(0,0,translation);
+            //float rotation = 178 * rotationSpeed;
+            //transform.Rotate(0,rotation,0);
+            //char_RB.MovePosition(char_RB.gameObject.transform.forward * speed);
+            // float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
+            // transform.Translate(0,0,translation);
+            // transform.Rotate(0,rotation,0);
+            // panelSitDown.SetActive(true);
+            // anim.SetBool("isWalking", false);
+            // anim.SetBool("isIdle", true);
+            // anim.SetBool("isSitting",false);
+            // UserInput = false;
+         }
+
+        if(other.gameObject.tag == "ChairRight")
+         {
+             panelSitDown.SetActive(true);
+             UserInput = false;
+             float rotation = (float)91.119;
+             float moveHorizontal = Input.GetAxis("Horizontal");
+            float moveVertical = Input.GetAxis("Vertical");
+             float translation = 0;
+            double temp = other.gameObject.transform.position.x - 0.817;//- 0.01;//-0.6-0.33;
+            double temp1 = other.gameObject.transform.position.z + 1.1421;//+ 0.514;
+            Debug.Log(other.gameObject.transform.position.x);
+            Debug.Log(other.gameObject.transform.position.z);
+            Vector3 position = new Vector3((float)temp,(float)-15,(float)temp1);//new Vector3((float)-0.93,(float)0.3,(float)-0.62);
+            position.x += moveHorizontal * speed * Time.deltaTime;
+            position.z += moveVertical * speed * Time.deltaTime;
+            transform.position = position;
+            rotation *= Time.deltaTime;
+            transform.rotation = Quaternion.Euler(0, (float)91.119, 0);
+              anim.SetBool("isWalking", false);
+            anim.SetBool("isIdle", true);
+            anim.SetBool("isSitting",false);
+             Debug.Log(anim.GetBool("isSiting"));
+             //sitDown = true;
+            // transform.position.x = temp;
+            // transform.position.z = temp1;
+            // translation *= Time.deltaTime;
+            // //rotation *= Time.deltaTime;
+            // transform.Translate(0,0,translation);
+            //transform.Rotate(0,rotation,0);
+            //transform.Translate(0,0,translation);
+            //float rotation = 178 * rotationSpeed;
+            //transform.Rotate(0,rotation,0);
+            //char_RB.MovePosition(char_RB.gameObject.transform.forward * speed);
+            // float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
+            // transform.Translate(0,0,translation);
+            // transform.Rotate(0,rotation,0);
+            // panelSitDown.SetActive(true);
+            // anim.SetBool("isWalking", false);
+            // anim.SetBool("isIdle", true);
+            // anim.SetBool("isSitting",false);
+            // UserInput = false;
+         }
+
+
+         if(other.gameObject.tag == "ChairLeft")
+         {
+             panelSitDown.SetActive(true);
+             UserInput = false;
+             float rotation = (float)-88.05;
+             float moveHorizontal = Input.GetAxis("Horizontal");
+            float moveVertical = Input.GetAxis("Vertical");
+             float translation = 0;
+            double temp = other.gameObject.transform.position.x + 0.81;//- 0.01;//-0.6-0.33;
+            double temp1 = other.gameObject.transform.position.z - 1.15;//+ 0.514;
+            Debug.Log(other.gameObject.transform.position.x);
+            Debug.Log(other.gameObject.transform.position.z);
+            Vector3 position = new Vector3((float)temp,(float)-15,(float)temp1);//new Vector3((float)-0.93,(float)0.3,(float)-0.62);
+            position.x += moveHorizontal * speed * Time.deltaTime;
+            position.z += moveVertical * speed * Time.deltaTime;
+            transform.position = position;
+            rotation *= Time.deltaTime;
+            transform.rotation = Quaternion.Euler(0, (float)-88.05, 0);
+              anim.SetBool("isWalking", false);
+            anim.SetBool("isIdle", true);
+            anim.SetBool("isSitting",false);
+             Debug.Log(anim.GetBool("isSiting"));
+             //sitDown = true;
+            // transform.position.x = temp;
+            // transform.position.z = temp1;
+            // translation *= Time.deltaTime;
+            // //rotation *= Time.deltaTime;
+            // transform.Translate(0,0,translation);
+            //transform.Rotate(0,rotation,0);
+            //transform.Translate(0,0,translation);
+            //float rotation = 178 * rotationSpeed;
+            //transform.Rotate(0,rotation,0);
+            //char_RB.MovePosition(char_RB.gameObject.transform.forward * speed);
+            // float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
+            // transform.Translate(0,0,translation);
+            // transform.Rotate(0,rotation,0);
+            // panelSitDown.SetActive(true);
+            // anim.SetBool("isWalking", false);
+            // anim.SetBool("isIdle", true);
+            // anim.SetBool("isSitting",false);
+            // UserInput = false;
+         }
+
+
+         if(other.gameObject.tag == "orangeLounge")
+         {
+             panelSitDown.SetActive(true);
+             UserInput = false;
+             float rotation = (float)93.24;
+             float moveHorizontal = Input.GetAxis("Horizontal");
+            float moveVertical = Input.GetAxis("Vertical");
+             float translation = 0;
+            double temp = other.gameObject.transform.position.x + 2.66;//- 0.01;//-0.6-0.33;
+            double temp1 = other.gameObject.transform.position.z - 0.597;//+ 0.514;
+            Debug.Log(other.gameObject.transform.position.x);
+            Debug.Log(other.gameObject.transform.position.z);
+            Vector3 position = new Vector3((float)temp,(float)-15,(float)temp1);//new Vector3((float)-0.93,(float)0.3,(float)-0.62);
+            position.x += moveHorizontal * speed * Time.deltaTime;
+            position.z += moveVertical * speed * Time.deltaTime;
+            transform.position = position;
+            rotation *= Time.deltaTime;
+            transform.rotation = Quaternion.Euler(0, (float)93.24, 0);
+              anim.SetBool("isWalking", false);
+            anim.SetBool("isIdle", true);
+            anim.SetBool("isSitting",false);
+             Debug.Log(anim.GetBool("isSiting"));
+             //sitDown = true;
+            // transform.position.x = temp;
+            // transform.position.z = temp1;
+            // translation *= Time.deltaTime;
+            // //rotation *= Time.deltaTime;
+            // transform.Translate(0,0,translation);
+            //transform.Rotate(0,rotation,0);
+            //transform.Translate(0,0,translation);
+            //float rotation = 178 * rotationSpeed;
+            //transform.Rotate(0,rotation,0);
+            //char_RB.MovePosition(char_RB.gameObject.transform.forward * speed);
+            // float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
+            // transform.Translate(0,0,translation);
+            // transform.Rotate(0,rotation,0);
+            // panelSitDown.SetActive(true);
+            // anim.SetBool("isWalking", false);
+            // anim.SetBool("isIdle", true);
+            // anim.SetBool("isSitting",false);
+            // UserInput = false;
+         }
+
+         if(other.gameObject.tag == "orangeLounge1")
+         {
+             panelSitDown.SetActive(true);
+             UserInput = false;
+             float rotation = (float)127.84;
+             float moveHorizontal = Input.GetAxis("Horizontal");
+            float moveVertical = Input.GetAxis("Vertical");
+             float translation = 0;
+            double temp = other.gameObject.transform.position.x + 1.17;//- 0.01;//-0.6-0.33;
+            double temp1 = other.gameObject.transform.position.z - 1.743;//+ 0.514;
+            Debug.Log(other.gameObject.transform.position.x);
+            Debug.Log(other.gameObject.transform.position.z);
+            Vector3 position = new Vector3((float)temp,(float)-15,(float)temp1);//new Vector3((float)-0.93,(float)0.3,(float)-0.62);
+            position.x += moveHorizontal * speed * Time.deltaTime;
+            position.z += moveVertical * speed * Time.deltaTime;
+            transform.position = position;
+            rotation *= Time.deltaTime;
+            transform.rotation = Quaternion.Euler(0, (float)127.84, 0);
+              anim.SetBool("isWalking", false);
+            anim.SetBool("isIdle", true);
+            anim.SetBool("isSitting",false);
+             Debug.Log(anim.GetBool("isSiting"));
+             //sitDown = true;
+            // transform.position.x = temp;
+            // transform.position.z = temp1;
+            // translation *= Time.deltaTime;
+            // //rotation *= Time.deltaTime;
+            // transform.Translate(0,0,translation);
+            //transform.Rotate(0,rotation,0);
+            //transform.Translate(0,0,translation);
+            //float rotation = 178 * rotationSpeed;
+            //transform.Rotate(0,rotation,0);
+            //char_RB.MovePosition(char_RB.gameObject.transform.forward * speed);
+            // float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
+            // transform.Translate(0,0,translation);
+            // transform.Rotate(0,rotation,0);
+            // panelSitDown.SetActive(true);
+            // anim.SetBool("isWalking", false);
+            // anim.SetBool("isIdle", true);
+            // anim.SetBool("isSitting",false);
+            // UserInput = false;
+         }
+
+         if(other.gameObject.tag == "blueLounge")
+         {
+             panelSitDown.SetActive(true);
+             UserInput = false;
+             float rotation = (float)-98.94;
+             float moveHorizontal = Input.GetAxis("Horizontal");
+            float moveVertical = Input.GetAxis("Vertical");
+             float translation = 0;
+            double temp = other.gameObject.transform.position.x - 2.2;//- 0.01;//-0.6-0.33;
+            double temp1 = other.gameObject.transform.position.z - 0.191;//+ 0.514;
+            Debug.Log(other.gameObject.transform.position.x);
+            Debug.Log(other.gameObject.transform.position.z);
+            Vector3 position = new Vector3((float)temp,(float)-15,(float)temp1);//new Vector3((float)-0.93,(float)0.3,(float)-0.62);
+            position.x += moveHorizontal * speed * Time.deltaTime;
+            position.z += moveVertical * speed * Time.deltaTime;
+            transform.position = position;
+            rotation *= Time.deltaTime;
+            transform.rotation = Quaternion.Euler(0, (float)-98.94, 0);
+              anim.SetBool("isWalking", false);
+            anim.SetBool("isIdle", true);
+            anim.SetBool("isSitting",false);
+             Debug.Log(anim.GetBool("isSiting"));
+             //sitDown = true;
+            // transform.position.x = temp;
+            // transform.position.z = temp1;
+            // translation *= Time.deltaTime;
+            // //rotation *= Time.deltaTime;
+            // transform.Translate(0,0,translation);
+            //transform.Rotate(0,rotation,0);
+            //transform.Translate(0,0,translation);
+            //float rotation = 178 * rotationSpeed;
+            //transform.Rotate(0,rotation,0);
+            //char_RB.MovePosition(char_RB.gameObject.transform.forward * speed);
+            // float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
+            // transform.Translate(0,0,translation);
+            // transform.Rotate(0,rotation,0);
+            // panelSitDown.SetActive(true);
+            // anim.SetBool("isWalking", false);
+            // anim.SetBool("isIdle", true);
+            // anim.SetBool("isSitting",false);
+            // UserInput = false;
+         }
+
+
+
+
+
+
+
      }
 
      void TaskOnClick()
@@ -243,7 +544,14 @@ public class PlayerController : NetworkBehaviour
          UserInput = true;
          panelSitDown.SetActive(false);
      }
-*/
 
+
+     void TaskOnClickNo()
+     {
+        //  anim.SetBool("isSitting",true);
+        //  Debug.Log("Clicked");
+          UserInput = true;
+         panelSitDown.SetActive(false);
+     }
 
 }

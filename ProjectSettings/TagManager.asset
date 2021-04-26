@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Chair
+  - ChairBack
+  - ChairRight
+  - ChairLeft
+  - orangeLounge
+  - orangeLounge1
+  - blueLounge
   layers:
   - Default
   - TransparentFX

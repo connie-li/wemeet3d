@@ -155,9 +155,18 @@ namespace MirrorBasics {
             BEGIN MATCH
         */
 
-        public bool checkIfStarted(string _matchID)
+        [Command]
+        public void joinIfStarted(string _matchID)
         {
-          return (MatchMaker.instance.checkIfMeetingStarted(_matchID));
+          if(MatchMaker.instance.checkIfMeetingStarted(_matchID))
+          {
+            string selectedScene = MatchMaker.instance.getMeetingScene(_matchID);
+            StartGame(selectedScene);
+          }else
+          {
+            Debug.Log("Meeting has not been detected as started :(");
+          }
+
         }
 
         //public void markAsStarted(string _matchID)
@@ -173,6 +182,7 @@ namespace MirrorBasics {
         void CmdBeginGame (string selectedScene) {
             //Player.localPlayer.markAsStarted(matchID);
             MatchMaker.instance.BeginGame (matchID, selectedScene);
+            ClientTellAllAMeetingStarted(matchID, selectedScene);
             Debug.Log ($"<color = red>Game Beginning</color>");
         }
 
@@ -186,9 +196,16 @@ namespace MirrorBasics {
             //Additively load game scene
             //SceneManager.UnloadScene("main-menu");
           //  mainCanvas.SetActive(false);
-          meetingStarted = true;
           UILobby.instance.removeCanvas();
           SceneManager.LoadScene (selectedScene, LoadSceneMode.Additive);
+          Rigidbody rb = GetComponent<Rigidbody>();
+          rb.useGravity = true; 
+        }
+
+        [ClientRpc]
+        void ClientTellAllAMeetingStarted(string matchID, string selectedScene)
+        {
+            MatchMaker.instance.markMeetingAsStarted (matchID, selectedScene);
         }
 
         /*[TargetRpc]

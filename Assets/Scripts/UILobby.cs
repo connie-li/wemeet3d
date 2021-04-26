@@ -115,12 +115,13 @@ namespace MirrorBasics {
                 RoomPass.text = "";
                 //to check if meeting already meeting already started
                 Debug.Log("Checking if started in next line");
-                Debug.Log (Player.localPlayer.checkIfStarted(matchID));
-                if(Player.localPlayer.checkIfStarted(matchID))
-                {
-                  removeCanvas();
-                  SceneManager.LoadScene ("conference-room-new", LoadSceneMode.Additive);
-                }
+              //  Debug.Log (Player.localPlayer.checkIfStarted(matchID));
+            //  if(ChooseRoomGroup.SceneWasSelected() == true)
+              //{
+                  //string selectedScene = ChooseRoomGroup.getSelectedScene();
+                  Player.localPlayer.joinIfStarted(matchID);
+              //}
+
             } else {
                 joinMatchInput.interactable = true;
                 joinButton.interactable = true;
