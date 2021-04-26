@@ -2671,6 +2671,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 948878e9658c1f948bafdca7c15f86e6, type: 2}
   - {fileID: 11400000, guid: d396b0459ca271f46ac794194aad6e18, type: 2}
   nm: {fileID: 2327895040099534559, guid: f3185f0325feec64b860c38a2a47263f, type: 3}
+  selectionCanvas: {fileID: 597739168}
 --- !u!114 &597739171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2807,6 +2808,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2118713553}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &608273536
 MonoBehaviour:
@@ -3596,6 +3609,7 @@ MonoBehaviour:
   mainCanvas: {fileID: 642734232}
   errorMessageSceneSelection: {fileID: 745885555}
   ChooseRoomGroup: {fileID: 624276528}
+  characterPreview: {fileID: 1120012219}
 --- !u!1 &646546763
 GameObject:
   m_ObjectHideFlags: 0
@@ -5408,7 +5422,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &853887766
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6299,6 +6313,18 @@ MonoBehaviour:
       - m_Target: {fileID: 642734237}
         m_TargetAssemblyTypeName: MirrorBasics.UILobby, Assembly-CSharp
         m_MethodName: Host
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 642734237}
+        m_TargetAssemblyTypeName: MirrorBasics.UILobby, Assembly-CSharp
+        m_MethodName: DeleteUnusedCharacters
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9505,6 +9531,31 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2118713553}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 597739170}
+        m_TargetAssemblyTypeName: DapperDino.Mirror.Tutorials.CharacterSelection.CharacterSelect,
+          Assembly-CSharp
+        m_MethodName: Restart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1622208620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11889,6 +11940,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 642734237}
+        m_TargetAssemblyTypeName: MirrorBasics.UILobby, Assembly-CSharp
+        m_MethodName: DeleteUnusedCharacters
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2009111970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12584,7 +12647,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2118713554
 RectTransform:
   m_ObjectHideFlags: 0

@@ -35,6 +35,9 @@ namespace MirrorBasics {
         [SerializeField] TextMeshProUGUI errorMessageSceneSelection;
         [SerializeField] SceneSelect ChooseRoomGroup;
 
+        [Header ("Selection")]
+        [SerializeField] Transform characterPreview;
+
         void Awake()
         {
           if (instance == null) {
@@ -47,6 +50,7 @@ namespace MirrorBasics {
         void Start () {
           Debug.Log ($"<color = green>UI LObby is start</color>");
             instance = this;
+
         }
 
         public void waitALittle()
@@ -156,6 +160,14 @@ namespace MirrorBasics {
         public void removeCanvas()
         {
           mainCanvas.SetActive(false);
+        }
+
+        public void DeleteUnusedCharacters()
+        {
+          foreach (Transform child in characterPreview)
+          {
+              GameObject.Destroy(child.gameObject);
+            }
         }
 
     }

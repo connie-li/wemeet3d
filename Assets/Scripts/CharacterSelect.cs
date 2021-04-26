@@ -15,6 +15,7 @@ namespace DapperDino.Mirror.Tutorials.CharacterSelection
         [SerializeField] private float turnSpeed = 90f;
         [SerializeField] private Character[] characters = default;
         [SerializeField] private NetworkManager nm = null;
+        [SerializeField] public GameObject selectionCanvas;
 
         private int currentCharacterIndex = 0;
         private List<GameObject> characterInstances = new List<GameObject>();
@@ -38,6 +39,30 @@ namespace DapperDino.Mirror.Tutorials.CharacterSelection
             characterNameText.text = characters[currentCharacterIndex].CharacterName;
 
             characterSelectDisplay.SetActive(true);
+            selectionCanvas.SetActive(false);
+        }
+
+
+        public void Restart()
+        {
+          Debug.Log("Starting character select");
+            if (characterPreviewParent.childCount == 0)
+            {
+                foreach (var character in characters)
+                {
+                    GameObject characterInstance =
+                        Instantiate(character.CharacterPreviewPrefab, characterPreviewParent);
+                    characterInstance.SetActive(false);
+
+                    characterInstances.Add(characterInstance);
+                }
+            }
+
+            characterInstances[currentCharacterIndex].SetActive(true);
+            characterNameText.text = characters[currentCharacterIndex].CharacterName;
+
+            characterSelectDisplay.SetActive(true);
+          //  selectionCanvas.SetActive(false);
         }
 
         private void Update()
