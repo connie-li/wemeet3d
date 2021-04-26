@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using DapperDino.Mirror.Tutorials.CharacterSelection;
 
 
 namespace MirrorBasics {
 
 public class NetworkManagerEdit : NetworkManager
 {
+  [SerializeField] GameObject prefab;
 
     public void BeingHost()
     {
@@ -61,9 +63,35 @@ public class NetworkManagerEdit : NetworkManager
       NetworkServer.AddPlayerForConnection(conn, newPlayerPrefab);
     }
 
-    public void OnServerAddPlayer(NetworkConnection conn,int playerControllerId)
+    public virtual void OnServerAddPlayer(NetworkConnection conn, int playerControllerId)
     {
-    //  NetworkServer.Spawn(playerControllerId, conn);
+      var player = (GameObject)GameObject.Instantiate(playerPrefab);
+      NetworkServer.AddPlayerForConnection(conn, player);
+
+    }
+
+  //  public override void OnClientConnect(NetworkConnection conn)
+  //    {
+  //        base.OnClientConnect(conn);
+  //    }
+
+
+    public void ReplacePlayer(int characterIndex, Character[] characters, NetworkConnection conn)
+    {
+        //base.OnClientConnect(conn);
+      //NetworkConnection conn = NetworkBehaviour.connectionToClient();
+      GameObject characterInstance = prefab;
+
+      // Cache a reference to the current player object
+      GameObject oldPlayer = conn.identity.gameObject;
+
+      // Instantiate the new player object and broadcast to clients
+      bool replaced = NetworkServer.ReplacePlayerForConnection(conn, Instantiate(characterInstance), true);
+      Debug.Log("It has been replaced?");
+      Debug.Log(replaced);
+
+      // Remove the previous player object that's now been replaced
+      NetworkServer.Destroy(oldPlayer);
 
     }
 

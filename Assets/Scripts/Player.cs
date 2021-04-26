@@ -26,9 +26,9 @@ namespace MirrorBasics {
         void Start () {
             Debug.Log ($"<color = green>Player is start</color>");
             networkMatchChecker = GetComponent<NetworkMatchChecker> ();
-            if (localPlayer == null) {
+            if (localPlayer == null || hasAuthority) {
                 localPlayer = this;
-                Debug.Log ($"<color = Instanciating </color>");
+                Debug.Log ($"<color = Instanciating Player </color>");
             } else {
                 UILobby.instance.SpawnPlayerUIPrefab (this);
             }
@@ -187,6 +187,10 @@ namespace MirrorBasics {
             MatchMaker.instance.markMeetingAsStarted (matchID, selectedScene);
         }
 
+        public NetworkConnection GetConnection()
+        {
+          return connectionToClient;
+        }
 
         /*[TargetRpc]
         void TargetShowMessage(string msg,string peer,string username,MessageDisplay messageDisplay,string displayMsg,RtmChannel channel,RtmClient rtmClient){

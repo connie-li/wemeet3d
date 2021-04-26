@@ -45,9 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 1
+  PersistNetworkManagerToOfflineScene: 0
   runInBackground: 1
   autoStartServerBuild: 1
-  showDebugMessages: 0
   serverTickRate: 30
   serverBatching: 0
   serverBatchInterval: 0
@@ -59,11 +59,14 @@ MonoBehaviour:
   disconnectInactiveConnections: 0
   disconnectInactiveTimeout: 60
   authenticator: {fileID: 0}
-  playerPrefab: {fileID: 39254547051457587, guid: c85eb9ab7bcca09499b522ee392f6254,
+  playerPrefab: {fileID: 5593114697170388214, guid: c706c1c4373431c479410d0bd605908b,
     type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
-  spawnPrefabs: []
+  spawnPrefabs:
+  - {fileID: 5593114697170388214, guid: c706c1c4373431c479410d0bd605908b, type: 3}
+  - {fileID: 5593114697170388214, guid: c706c1c4373431c479410d0bd605908b, type: 3}
+  prefab: {fileID: 5593114697170388214, guid: c706c1c4373431c479410d0bd605908b, type: 3}
 --- !u!114 &2327895040099534544
 MonoBehaviour:
   m_ObjectHideFlags: 0

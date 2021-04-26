@@ -51,6 +51,13 @@ namespace DapperDino.Mirror.Tutorials.CharacterSelection
                 turnSpeed * Time.deltaTime);
         }
 
+        public void DeleteCharacterOptions()
+        {
+          foreach (Transform child in characterPreviewParent) 
+          {
+              GameObject.Destroy(child.gameObject);
+            }
+        }
 
         public void Select()
         {
@@ -59,19 +66,23 @@ namespace DapperDino.Mirror.Tutorials.CharacterSelection
             //NetworkIdentity.AssignClientAuthority(this.);
             CmdSelect(currentCharacterIndex, characters);
             characterSelectDisplay.SetActive(false);
+            //characterPreviewParent.SetActive(false);
         }
 
       //  [Command]
-        public void CmdSelect(int characterIndex, Character[] characters,  NetworkConnectionToClient sender = null)
+        public void CmdSelect(int characterIndex, Character[] characters)
         {
-          GameObject characterInstance = Instantiate(characters[0].GameplayCharacterPrefab);
+          //GameObject characterInstance = characters[0].GameplayCharacterPrefab;
           //nm.GetComponent<NetworkManagerEdit>().getPlayerPrefab();
           //short cindex = short(CharacterIndex);
           //nm.GetComponent<NetworkManagerEdit>().OnServerAddPlayer(sender, characterIndex);
           //  characterInstance.GetComponent<NetworkIdentity>().AssignClientAuthority(characterInstance.GetComponent<NetworkIdentity>().connectionToClient);
           //  NetworkServer.Spawn(characterInstance, sender);
         //  nm.GetComponent<NetworkManagerEdit>().setPlayerPrefab(sender, characterInstance);
-          NetworkServer.AddPlayerForConnection(sender, characterInstance);
+        //  NetworkServer.AddPlayerForConnection(sender, characterInstance);
+        NetworkConnection conn = Player.localPlayer.GetConnection();
+        nm.GetComponent<NetworkManagerEdit>().ReplacePlayer(characterIndex, characters, conn);
+
 
 
         }
