@@ -36,7 +36,6 @@ namespace agora_rtm {
 				Debug.LogError("_rtmChannelPtr is null");
 				return (int)COMMON_ERR_CODE.ERROR_NULL_PTR;
 			}
-			Debug.Log("test1");
 			return channel_join(_rtmChannelPtr);
 		}
 

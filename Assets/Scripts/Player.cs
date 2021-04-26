@@ -5,12 +5,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using io.agora.rtm.demo;
 using agora_rtm;
+using agora_gaming_rtc;
 
 namespace MirrorBasics {
 
     public class Player : NetworkBehaviour {
 
         public static Player localPlayer = null;
+        //public static AgoraInterface ai = null;
         [SyncVar] public string matchID;
         [SyncVar] public string meetingPassword;
         [SyncVar] public int playerIndex;
@@ -75,18 +77,39 @@ namespace MirrorBasics {
             Debug.Log ($"MatchID: {matchID} == {_matchID}");
             UILobby.instance.HostSuccess (success, _matchID, _meetingPassword);
 
-            var channelName = "test";
-            Debug.Log("Check1");
-            RtmClientEventHandler clientEventHandler = new RtmClientEventHandler();
-            RtmChannel channel;
-            RtmCallEventHandler callEventHandler = new RtmCallEventHandler();
-            RtmClient rtmClient = new RtmClient("5b605d324a8d4fe082de1236e69872af", clientEventHandler);
-            RtmChannelEventHandler channelEventHandler = new RtmChannelEventHandler();
-            channel = rtmClient.CreateChannel(channelName, channelEventHandler);
-            Debug.Log("Chec2");
-            channel.Join();
-            //rtmChat.JoinChannel()
+        }
 
+      /*  public void AddGameObject(string uidString){
+            CmdAddGameObject(uidString);
+        }
+
+        [Command]
+        void CmdAddGameObject(string uidString){
+          ClientAddGameObject(uidString);
+        }
+        [ClientRpc]
+        void ClientAddGameObject(string uidString){
+          AgoraInterface ai = new AgoraInterface();
+          ai.addObject(uidString);
+        }*/
+
+        public void DeleteGameObject(GameObject go,string uidString){
+          if(localPlayer == this)
+          {
+            AgoraInterface ai = new AgoraInterface();
+            ai.deleteObject(go,uidString);
+            CmdDeleteGameObject(go,uidString);
+          }
+        }
+
+        [Command]
+        void CmdDeleteGameObject(GameObject go,string uidString){
+          ClientDeleteGameObject(go,uidString);
+        }
+        [ClientRpc]
+        void ClientDeleteGameObject(GameObject go,string uidString){
+          AgoraInterface ai = new AgoraInterface();
+          ai.deleteObject(go,uidString);
         }
 
         /*
