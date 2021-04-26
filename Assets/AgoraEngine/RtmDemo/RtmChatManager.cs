@@ -219,7 +219,7 @@ namespace io.agora.rtm.demo
             string peer = "[channel:" + ChannelName + "]";
 
             UserName = PlayerPrefs.GetString("name");
-            string displayMsg = string.Format("{0}->{1}: {2}", UserName, peer, msg);
+            string displayMsg = string.Format("{0}:{2}", UserName, peer, msg);
 
             messageDisplay.AddTextToDisplay(displayMsg, Message.MessageType.PlayerMessage);
             channel.SendMessage(rtmClient.CreateMessage(msg));
@@ -280,7 +280,7 @@ namespace io.agora.rtm.demo
         {
             string msg = "channel OnMemberJoinedHandler member ID=" + member.GetUserId() + " channelId = " + member.GetChannelId();
             Debug.Log(msg);
-            messageDisplay.AddTextToDisplay(msg, Message.MessageType.Info);
+            //messageDisplay.AddTextToDisplay(msg, Message.MessageType.Info);
         }
 
         void OnMemberLeftHandler(int id, RtmChannelMember member)

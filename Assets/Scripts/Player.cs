@@ -79,7 +79,7 @@ namespace MirrorBasics {
 
         }
 
-        public void AddGameObject(string uidString){
+      /*  public void AddGameObject(string uidString){
             CmdAddGameObject(uidString);
         }
 
@@ -91,7 +91,7 @@ namespace MirrorBasics {
         void ClientAddGameObject(string uidString){
           AgoraInterface ai = new AgoraInterface();
           ai.addObject(uidString);
-        }
+        }*/
 
         public void DeleteGameObject(GameObject go,string uidString){
           if(localPlayer == this)
