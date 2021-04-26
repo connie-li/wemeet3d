@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using io.agora.rtm.demo;
 using agora_rtm;
+using DapperDino.Mirror.Tutorials.CharacterSelection;
+using UnityEngine.Networking;
 
 namespace MirrorBasics {
 
@@ -176,7 +178,7 @@ namespace MirrorBasics {
           UILobby.instance.removeCanvas();
           SceneManager.LoadScene (selectedScene, LoadSceneMode.Additive);
           Rigidbody rb = GetComponent<Rigidbody>();
-          rb.useGravity = true; 
+          rb.useGravity = true;
         }
 
         [ClientRpc]
@@ -184,6 +186,7 @@ namespace MirrorBasics {
         {
             MatchMaker.instance.markMeetingAsStarted (matchID, selectedScene);
         }
+
 
         /*[TargetRpc]
         void TargetShowMessage(string msg,string peer,string username,MessageDisplay messageDisplay,string displayMsg,RtmChannel channel,RtmClient rtmClient){

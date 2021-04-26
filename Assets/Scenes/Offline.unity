@@ -979,6 +979,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 102218615}
+        m_TargetAssemblyTypeName: Mirror.NetworkManager, Mirror
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1426384944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1159,12 +1171,12 @@ PrefabInstance:
         type: 3}
       propertyPath: playerPrefab
       value: 
-      objectReference: {fileID: 5593114697170388214, guid: c706c1c4373431c479410d0bd605908b,
+      objectReference: {fileID: 39254547051457587, guid: c85eb9ab7bcca09499b522ee392f6254,
         type: 3}
     - target: {fileID: 2327895040099534559, guid: f3185f0325feec64b860c38a2a47263f,
         type: 3}
       propertyPath: networkAddress
-      value: 140.186.107.42
+      value: localhost
       objectReference: {fileID: 0}
     - target: {fileID: 2327895040099534559, guid: f3185f0325feec64b860c38a2a47263f,
         type: 3}
@@ -1174,11 +1186,17 @@ PrefabInstance:
     - target: {fileID: 2327895040099534559, guid: f3185f0325feec64b860c38a2a47263f,
         type: 3}
       propertyPath: spawnPrefabs.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2327895040099534559, guid: f3185f0325feec64b860c38a2a47263f,
         type: 3}
       propertyPath: spawnPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 5593114697170388214, guid: c706c1c4373431c479410d0bd605908b,
+        type: 3}
+    - target: {fileID: 2327895040099534559, guid: f3185f0325feec64b860c38a2a47263f,
+        type: 3}
+      propertyPath: spawnPrefabs.Array.data[1]
       value: 
       objectReference: {fileID: 0}
     m_RemovedComponents:

@@ -50,6 +50,23 @@ public class NetworkManagerEdit : NetworkManager
       UILobby.instance.Join();
     }
 
+    public GameObject getPlayerPrefab()
+    {
+      return playerPrefab;
+    }
+
+    public void setPlayerPrefab(NetworkConnection conn, GameObject newPlayerPrefab)
+    {
+      //playerPrefab = newPlayerPrefab;
+      NetworkServer.AddPlayerForConnection(conn, newPlayerPrefab);
+    }
+
+    public void OnServerAddPlayer(NetworkConnection conn,int playerControllerId)
+    {
+    //  NetworkServer.Spawn(playerControllerId, conn);
+
+    }
+
 
 }
 
