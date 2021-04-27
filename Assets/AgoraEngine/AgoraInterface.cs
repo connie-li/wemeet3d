@@ -15,8 +15,8 @@ public class AgoraInterface
     public IRtcEngine mRtcEngine;
     private Text MessageText;
     public string uidString;
-    uint num;
     public string appID;
+    uint num;
 
 
    void Start()
@@ -55,6 +55,8 @@ public class AgoraInterface
       mRtcEngine.OnUserJoined = onUserJoined;
       mRtcEngine.OnUserOffline = onUserOffline;
 
+      mRtcEngine.OnRemoteVideoStateChanged = OnRemoteVideoStateChangedHandler;
+
       //ignore warnings
       /*mRtcEngine.OnWarning = (int warn, string msg) =>
       {
@@ -79,7 +81,7 @@ public class AgoraInterface
         //GameObject go = GameObject.Find(uidString);
         mRtcEngine.EnableLocalVideo(true);
         RawImage img = go.AddComponent<RawImage>();
-        NetworkIdentity iden = go.AddComponent<NetworkIdentity>();
+        //NetworkIdentity iden = go.AddComponent<NetworkIdentity>();
         img.rectTransform.position = new Vector3(600,600,0);
         img.rectTransform.sizeDelta = new Vector2(200,200);
         img.rectTransform.Rotate(new Vector3(0,0,-180));
@@ -89,6 +91,7 @@ public class AgoraInterface
             go.transform.SetParent(canvas.transform);
         }
         VideoSurface videoSurface = go.AddComponent<VideoSurface>();
+
         //make element draggable
         go.AddComponent<UIElementDragger>();
         Debug.Log("Video on");
@@ -97,8 +100,11 @@ public class AgoraInterface
       {
         mRtcEngine.EnableLocalVideo(false);
         GameObject go = GameObject.Find(uidString);
+        mRtcEngine.OnRemoteVideoStateChanged = OnRemoteVideoStateChangedHandler;
+
+        GameObject.Destroy(go);
         //delete game object
-        Player.localPlayer.DeleteGameObject(go,uidString);
+        //Player.localPlayer.DeleteGameObject(go,uidString);
         Debug.Log("Video off");
       }
     }
@@ -195,13 +201,13 @@ public class AgoraInterface
     // implement engine callbacks
     private void onJoinChannelSuccess(string channelName, uint uid, int elapsed)
     {
-        uidString = uid.ToString();
         num = uid;
+        uidString = uid.ToString();
         Debug.Log("JoinChannelSuccessHandler: uid = " + uid);
 
     }
 
-    void OnRemoteVideoStateChanged(uint uid, REMOTE_VIDEO_STATE state, REMOTE_VIDEO_STATE_REASON reason, int elapsed)
+    void OnRemoteVideoStateChangedHandler(uint uid, REMOTE_VIDEO_STATE state, REMOTE_VIDEO_STATE_REASON reason, int elapsed)
     {
         Debug.Log("uid " + uid + " state = " + state + " reason = " + reason);
         GameObject go = GameObject.Find(uid.ToString());
@@ -209,14 +215,18 @@ public class AgoraInterface
             //remoteView.SetEnable(false);
             go.GetComponent<VideoSurface>().SetEnable(false);
 	    }
+      if (reason == REMOTE_VIDEO_STATE_REASON.REMOTE_VIDEO_STATE_REASON_REMOTE_UNMUTED) {
+          go.GetComponent<VideoSurface>().SetEnable(true);
     }
+    }
+
     // When a remote user joined, this delegate will be called. Typically
     // create a GameObject to render video on it
     private void onUserJoined(uint uid, int elapsed)
     {
         Debug.Log("onUserJoined: uid = " + uid + " elapsed = " + elapsed);
         //find a game object to render video stream from 'uid'
-        /* GameObject go = GameObject.Find(uid.ToString());
+        /*GameObject go = GameObject.Find(uid.ToString());
         if (!ReferenceEquals(go, null))
         {
             return; // reuse
@@ -250,8 +260,8 @@ public class AgoraInterface
 
         // to be renderered onto
         RawImage img = go.AddComponent<RawImage>();
-        NetworkIdentity iden = go.AddComponent<NetworkIdentity>();
-        img.rectTransform.position = new Vector3(900,900,0);
+        //NetworkIdentity iden = go.AddComponent<NetworkIdentity>();
+        img.rectTransform.position = new Vector3(800,800,0);
         img.rectTransform.sizeDelta = new Vector2(200,200);
         img.rectTransform.Rotate(new Vector3(0,0,-180));
         //img.color = new Color(0 ,0 ,0 ,255);
