@@ -47,13 +47,13 @@ namespace MirrorBasics {
       {
         if(sceneSelected == forestScene)
         {
-          return "conference-room-new"; //change this to forestscene
+          return "forest"; //change this to forestscene
         } else if(sceneSelected == conferenceScene)
         {
           return "conference-room-new";
         }else if(sceneSelected == moonScene)
         {
-          return "conference-room-new"; //change this to moonScene
+          return "moon"; //change this to moonScene
         }else
         {
           return "main-menu"; //this should never return because the scenewasselected function is called before
