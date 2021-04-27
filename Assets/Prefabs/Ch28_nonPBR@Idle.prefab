@@ -1487,6 +1487,7 @@ GameObject:
   - component: {fileID: 1294621818951936752}
   - component: {fileID: 9208843478222098704}
   - component: {fileID: 7920981839698754408}
+  - component: {fileID: 3243676413727869258}
   m_Layer: 0
   m_Name: Ch28_nonPBR@Idle
   m_TagString: Untagged
@@ -1689,6 +1690,22 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   currentMatchDebug: 
+--- !u!114 &3243676413727869258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104872619259412147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0
+  clientAuthority: 1
+  animator: {fileID: 1294621818951936717}
 --- !u!1 &2157671138759892285
 GameObject:
   m_ObjectHideFlags: 0
