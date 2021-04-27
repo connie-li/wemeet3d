@@ -211,11 +211,14 @@ public class AgoraInterface
     {
         Debug.Log("uid " + uid + " state = " + state + " reason = " + reason);
         GameObject go = GameObject.Find(uid.ToString());
+        RawImage img = go.GetComponent<RawImage>();
         if (reason == REMOTE_VIDEO_STATE_REASON.REMOTE_VIDEO_STATE_REASON_REMOTE_MUTED) {
             //remoteView.SetEnable(false);
+            img.color = new Color(255 ,255 ,255 ,0);
             go.GetComponent<VideoSurface>().SetEnable(false);
 	    }
       if (reason == REMOTE_VIDEO_STATE_REASON.REMOTE_VIDEO_STATE_REASON_REMOTE_UNMUTED) {
+          img.color = new Color(255 ,255 ,255 ,255);
           go.GetComponent<VideoSurface>().SetEnable(true);
     }
     }
