@@ -1161,7 +1161,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5226248706753525582
 Transform:
   m_ObjectHideFlags: 0
@@ -3225,10 +3225,10 @@ MonoBehaviour:
   rotationSpeed: 100
   speed: 10
   char_RB: {fileID: 0}
-  panelSitDown: {fileID: 0}
-  yesButton: {fileID: 0}
-  noButton: {fileID: 0}
-  myCam: {fileID: 0}
+  panelSitDown: {fileID: 5431621020904737192}
+  yesButton: {fileID: 8808460725982955753}
+  noButton: {fileID: 8102224872724998425}
+  myCam: {fileID: 4090481129393659748}
 --- !u!114 &2621371418542181231
 MonoBehaviour:
   m_ObjectHideFlags: 0
