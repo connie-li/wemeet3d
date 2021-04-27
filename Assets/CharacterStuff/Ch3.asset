@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: be24fdc9511150a449ab4a2c5150fc08, type: 3}
-  m_Name: Ch2
+  m_Name: Ch3
   m_EditorClassIdentifier: 
-  characterName: character2
-  characterPreviewPrefab: {fileID: 2104872619259412147, guid: e9b9097ec43224d42997bf25bfd83110,
+  characterName: character3
+  characterPreviewPrefab: {fileID: 8635069672238666191, guid: d0e8fd6180aebc544b2414e5c6a1574d,
     type: 3}
-  gameplayCharacterPrefab: {fileID: 2104872619259412147, guid: e9b9097ec43224d42997bf25bfd83110,
+  gameplayCharacterPrefab: {fileID: 8635069672238666191, guid: d0e8fd6180aebc544b2414e5c6a1574d,
     type: 3}

@@ -138,7 +138,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: JackieAnimator
+  m_Name: Animator2
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: isWalking
@@ -270,7 +270,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 6489b0f50f36b96449c9a6eaed9bfb60,
+  m_Motion: {fileID: -203655887218126122, guid: 22d64ad59be83054bb9652072c1f51e8,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -324,7 +324,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 334bbf13e7a54114f88139444586dfe4,
+  m_Motion: {fileID: -203655887218126122, guid: 4ed314c0da38cbc4f89d7bbe20ce7a8b,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 

@@ -297,6 +297,8 @@ GameObject:
   - component: {fileID: 2300480799688327324}
   - component: {fileID: 2300480799688327313}
   - component: {fileID: 2300480799688327318}
+  - component: {fileID: 38085653689078765}
+  - component: {fileID: -8650805325631194468}
   m_Layer: 0
   m_Name: remy@Idle
   m_TagString: Untagged
@@ -366,7 +368,7 @@ CharacterController:
   m_GameObject: {fileID: 1381930847619902645}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Height: 2
   m_Radius: 0.5
@@ -384,7 +386,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1381930847619902645}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 1
   m_Direction: 1
@@ -420,12 +422,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27f1a03ffbbe7934aa18c447e799a8a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   rotationSpeed: 100
   speed: 10
   char_RB: {fileID: 0}
   panelSitDown: {fileID: 2300480798757978738}
   yesButton: {fileID: 2300480799833006818}
   noButton: {fileID: 2300480800379036001}
+  myCam: {fileID: 2300480798464036633}
 --- !u!114 &2300480799688327313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -439,8 +444,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
-  syncInterval: 0.1
-  clientAuthority: 0
+  syncInterval: 0
+  clientAuthority: 1
   localPositionSensitivity: 0.01
   localRotationSensitivity: 0.01
   localScaleSensitivity: 0.01
@@ -464,6 +469,39 @@ MonoBehaviour:
   visible: 0
   m_AssetId: 
   hasSpawned: 0
+--- !u!114 &38085653689078765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381930847619902645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1020a74962faada4b807ac5dc053a4cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0
+  currentMatchDebug: 
+--- !u!114 &-8650805325631194468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381930847619902645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39c0055fbf554554a9d929a66af30ed7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0
+  matchID: 
+  meetingPassword: 
+  playerIndex: 0
+  meetingStarted: 0
 --- !u!1 &1674521179308668300
 GameObject:
   m_ObjectHideFlags: 0
@@ -805,7 +843,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2300480798464036638
 Transform:
   m_ObjectHideFlags: 0

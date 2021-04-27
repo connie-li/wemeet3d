@@ -2488,6 +2488,8 @@ GameObject:
   - component: {fileID: 8868862877580588813}
   - component: {fileID: 8868862877580588810}
   - component: {fileID: 8868862877580588855}
+  - component: {fileID: 7988278869730782971}
+  - component: {fileID: 4088346631856239785}
   m_Layer: 0
   m_Name: Ch22_nonPBR@Idle
   m_TagString: Untagged
@@ -2610,12 +2612,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27f1a03ffbbe7934aa18c447e799a8a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   rotationSpeed: 100
   speed: 10
   char_RB: {fileID: 0}
   panelSitDown: {fileID: 8868862878172045747}
   yesButton: {fileID: 8868862878468296753}
   noButton: {fileID: 8868862877290616556}
+  myCam: {fileID: 8868862878151395782}
 --- !u!114 &8868862877580588810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2629,8 +2634,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
-  syncInterval: 0.1
-  clientAuthority: 0
+  syncInterval: 0
+  clientAuthority: 1
   localPositionSensitivity: 0.01
   localRotationSensitivity: 0.01
   localScaleSensitivity: 0.01
@@ -2654,6 +2659,39 @@ MonoBehaviour:
   visible: 0
   m_AssetId: 
   hasSpawned: 0
+--- !u!114 &7988278869730782971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8635069672238666191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1020a74962faada4b807ac5dc053a4cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0
+  currentMatchDebug: 
+--- !u!114 &4088346631856239785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8635069672238666191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39c0055fbf554554a9d929a66af30ed7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0
+  matchID: 
+  meetingPassword: 
+  playerIndex: 0
+  meetingStarted: 0
 --- !u!1 &8663079464847323683
 GameObject:
   m_ObjectHideFlags: 0
@@ -3173,7 +3211,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8868862878151395781
 Transform:
   m_ObjectHideFlags: 0
