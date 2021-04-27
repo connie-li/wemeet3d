@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using io.agora.rtm.demo;
 using agora_rtm;
+using DapperDino.Mirror.Tutorials.CharacterSelection;
+using UnityEngine.Networking;
 using agora_gaming_rtc;
 
 namespace MirrorBasics {
@@ -26,9 +28,9 @@ namespace MirrorBasics {
         void Start () {
             Debug.Log ($"<color = green>Player is start</color>");
             networkMatchChecker = GetComponent<NetworkMatchChecker> ();
-            if (localPlayer == null) {
+            if (localPlayer == null || hasAuthority) {
                 localPlayer = this;
-                Debug.Log ($"<color = Instanciating </color>");
+                Debug.Log ($"<color = Instanciating Player </color>");
             } else {
                 UILobby.instance.SpawnPlayerUIPrefab (this);
             }
@@ -199,13 +201,18 @@ namespace MirrorBasics {
           UILobby.instance.removeCanvas();
           SceneManager.LoadScene (selectedScene, LoadSceneMode.Additive);
           Rigidbody rb = GetComponent<Rigidbody>();
-          rb.useGravity = true; 
+          rb.useGravity = true;
         }
 
         [ClientRpc]
         void ClientTellAllAMeetingStarted(string matchID, string selectedScene)
         {
             MatchMaker.instance.markMeetingAsStarted (matchID, selectedScene);
+        }
+
+        public NetworkConnection GetConnection()
+        {
+          return connectionToClient;
         }
 
         /*[TargetRpc]
