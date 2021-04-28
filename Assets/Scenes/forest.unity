@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.5058982, g: 0.52407897, b: 0.5369262, a: 1}
+  m_IndirectSpecularColor: {r: 0.505915, g: 0.524086, b: 0.5369582, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -531,7 +531,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 936232250}
         m_TargetAssemblyTypeName: io.agora.rtm.demo.RtmChatManager, Assembly-CSharp
         m_MethodName: SendMessageToChannel
         m_Mode: 1
@@ -1537,6 +1537,7 @@ GameObject:
   - component: {fileID: 433500002}
   - component: {fileID: 433500001}
   - component: {fileID: 433500000}
+  - component: {fileID: 433500004}
   m_Layer: 5
   m_Name: chat-toggle-button
   m_TagString: Untagged
@@ -1612,9 +1613,9 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: io.agora.rtm.demo.RtmChatManager, Assembly-CSharp
-        m_MethodName: JoinChannel
+      - m_Target: {fileID: 433500001}
+        m_TargetAssemblyTypeName: ButtonHandler, Assembly-CSharp
+        m_MethodName: OnButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1678,6 +1679,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 433499998}
   m_CullTransparentMesh: 0
+--- !u!114 &433500004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 433499998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76a691873742447b0969ab56756a5262, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vid: 0
+  mute: 0
+  chat: 0
 --- !u!1 &449201221
 GameObject:
   m_ObjectHideFlags: 0
@@ -2883,7 +2899,7 @@ MonoBehaviour:
   userNameITwo: {fileID: 1723262819}
   channelNameInputTwo: {fileID: 742123320}
   roomCode: {fileID: 453927649}
-  channelMsgInputBox: {fileID: 0}
+  channelMsgInputBox: {fileID: 1339336468}
   messageDisplay: {fileID: 936232249}
 --- !u!4 &936232251
 Transform:
@@ -3321,7 +3337,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   username: {fileID: 2033328634}
   channelName: {fileID: 742123320}
-  Panel: {fileID: 0}
+  Panel: {fileID: 957747719}
   AppID: 5b605d324a8d4fe082de1236e69872af
 --- !u!4 &1064770847
 Transform:

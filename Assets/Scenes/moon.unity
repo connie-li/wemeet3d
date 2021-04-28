@@ -2487,7 +2487,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2103008862}
         m_TargetAssemblyTypeName: io.agora.rtm.demo.RtmChatManager, Assembly-CSharp
         m_MethodName: SendMessageToChannel
         m_Mode: 1
@@ -4600,6 +4600,7 @@ GameObject:
   - component: {fileID: 1516344156}
   - component: {fileID: 1516344155}
   - component: {fileID: 1516344154}
+  - component: {fileID: 1516344158}
   m_Layer: 5
   m_Name: chat-toggle-button
   m_TagString: Untagged
@@ -4675,9 +4676,9 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: io.agora.rtm.demo.RtmChatManager, Assembly-CSharp
-        m_MethodName: JoinChannel
+      - m_Target: {fileID: 1516344155}
+        m_TargetAssemblyTypeName: ButtonHandler, Assembly-CSharp
+        m_MethodName: OnButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4741,6 +4742,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1516344152}
   m_CullTransparentMesh: 0
+--- !u!114 &1516344158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1516344152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76a691873742447b0969ab56756a5262, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vid: 0
+  mute: 0
+  chat: 0
 --- !u!1 &1527820142
 GameObject:
   m_ObjectHideFlags: 0
