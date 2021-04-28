@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4992,6 +4992,9 @@ MonoBehaviour:
   errorMessageSceneSelection: {fileID: 745885555}
   ChooseRoomGroup: {fileID: 624276528}
   characterPreview: {fileID: 1120012219}
+  skybox_moon: {fileID: 2100000, guid: 27c0cce60d93adc4aa3fba77995f9921, type: 2}
+  skybox_forest: {fileID: 2100000, guid: 053e06695b93abc49868dc4096d72d82, type: 2}
+  skybox_conf: {fileID: 2100000, guid: 982e0d86f860c1246b831a8bccaf59f2, type: 2}
 --- !u!1 &646546763
 GameObject:
   m_ObjectHideFlags: 0

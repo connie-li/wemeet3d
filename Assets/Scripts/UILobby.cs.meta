@@ -5,14 +5,27 @@ MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - joinMatchInput: {instanceID: 0}
-  - currentCanvas: {instanceID: 0}
-  - lobbyCanvas: {instanceID: 0}
-  - UIPlayerParent: {fileID: 4563732799383576469, guid: c85eb9ab7bcca09499b522ee392f6254,
-      type: 3}
+  - passwordInput: {instanceID: 0}
+  - joinButton: {instanceID: 0}
+  - hostButton: {instanceID: 0}
+  - lobbyClient: {instanceID: 0}
+  - lobbyHost: {instanceID: 0}
+  - hostCanvas: {instanceID: 0}
+  - joinCanvas: {instanceID: 0}
+  - RoomPass: {instanceID: 0}
   - UIPlayerPrefab: {fileID: 39254547051457587, guid: c85eb9ab7bcca09499b522ee392f6254,
       type: 3}
   - matchIDText: {instanceID: 0}
+  - passwordText: {instanceID: 0}
   - beginGameButton: {instanceID: 0}
+  - PlayerPrefab: {instanceID: 0}
+  - mainCanvas: {instanceID: 0}
+  - errorMessageSceneSelection: {instanceID: 0}
+  - ChooseRoomGroup: {instanceID: 0}
+  - characterPreview: {instanceID: 0}
+  - skybox_moon: {fileID: 2100000, guid: 27c0cce60d93adc4aa3fba77995f9921, type: 2}
+  - skybox_forest: {instanceID: 0}
+  - skybox_conf: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

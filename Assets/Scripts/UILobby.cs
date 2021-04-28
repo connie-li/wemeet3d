@@ -37,6 +37,9 @@ namespace MirrorBasics {
 
         [Header ("Selection")]
         [SerializeField] Transform characterPreview;
+        [SerializeField] Material skybox_moon;
+        [SerializeField] Material skybox_forest;
+        [SerializeField] Material skybox_conf;
 
         void Awake()
         {
@@ -147,12 +150,28 @@ namespace MirrorBasics {
           if(ChooseRoomGroup.SceneWasSelected() == true)
           {
               string selectedScene = ChooseRoomGroup.getSelectedScene();
+              if (selectedScene == "moon")
+              {
+                RenderSettings.skybox = skybox_moon;
+              }
+
+              if (selectedScene == "forest")
+              {
+                RenderSettings.skybox = skybox_forest;
+              }
+
+              if (selectedScene == "conference-room-new")
+              {
+                RenderSettings.skybox = skybox_conf;
+              }
+              
               Player.localPlayer.BeginGame (selectedScene);
           }
           else
           {
             errorMessageSceneSelection.text = "Please select a room";
           }
+        
 
 
         }
