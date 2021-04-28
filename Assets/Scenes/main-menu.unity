@@ -564,7 +564,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 597739170}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: DapperDino.Mirror.Tutorials.CharacterSelection.CharacterSelect,
           Assembly-CSharp
         m_MethodName: Select
@@ -2755,7 +2755,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 597739170}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: DapperDino.Mirror.Tutorials.CharacterSelection.CharacterSelect,
           Assembly-CSharp
         m_MethodName: Select
@@ -2962,7 +2962,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 597739170}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: DapperDino.Mirror.Tutorials.CharacterSelection.CharacterSelect,
           Assembly-CSharp
         m_MethodName: Right
@@ -3720,8 +3720,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 597739169}
-  - component: {fileID: 597739171}
-  - component: {fileID: 597739170}
   m_Layer: 5
   m_Name: menu4-customize-avatar
   m_TagString: Untagged
@@ -3758,52 +3756,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1021.6858, y: 146.69861}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &597739170
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 597739168}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cecc62ff0b6bac4bb670d0a86835271, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  characterSelectDisplay: {fileID: 1931665455}
-  characterPreviewParent: {fileID: 1120012219}
-  characterNameText: {fileID: 837430252}
-  char1: {fileID: 1893072671}
-  char2: {fileID: 1908021920}
-  char3: {fileID: 7695078}
-  char4: {fileID: 354245954}
-  turnSpeed: 90
-  characters:
-  - {fileID: 11400000, guid: 948878e9658c1f948bafdca7c15f86e6, type: 2}
-  - {fileID: 11400000, guid: d396b0459ca271f46ac794194aad6e18, type: 2}
-  - {fileID: 11400000, guid: f8c1e69177b7bdb4382867709ae1b368, type: 2}
-  - {fileID: 11400000, guid: 51851578c5f744d4394f590a10f576f5, type: 2}
-  nm: {fileID: 2327895040099534559, guid: f3185f0325feec64b860c38a2a47263f, type: 3}
-  selectionCanvas: {fileID: 597739168}
---- !u!114 &597739171
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 597739168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 3264804657
-  serverOnly: 0
-  visible: 0
-  m_AssetId: 
-  hasSpawned: 0
 --- !u!1 &608273533
 GameObject:
   m_ObjectHideFlags: 0
@@ -3911,7 +3863,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 597739170}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: DapperDino.Mirror.Tutorials.CharacterSelection.CharacterSelect,
           Assembly-CSharp
         m_MethodName: DeleteCharacterOptions
@@ -7997,7 +7949,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 597739170}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: DapperDino.Mirror.Tutorials.CharacterSelection.CharacterSelect,
           Assembly-CSharp
         m_MethodName: Left
@@ -10634,7 +10586,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 597739170}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: DapperDino.Mirror.Tutorials.CharacterSelection.CharacterSelect,
           Assembly-CSharp
         m_MethodName: Right
@@ -12339,7 +12291,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 597739170}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: DapperDino.Mirror.Tutorials.CharacterSelection.CharacterSelect,
           Assembly-CSharp
         m_MethodName: Left
@@ -12636,7 +12588,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 597739170}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: DapperDino.Mirror.Tutorials.CharacterSelection.CharacterSelect,
           Assembly-CSharp
         m_MethodName: Restart
