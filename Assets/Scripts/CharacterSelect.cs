@@ -4,6 +4,7 @@ using Mirror;
 using TMPro;
 using UnityEngine;
 using MirrorBasics;
+using UnityEngine.UI;
 
 namespace DapperDino.Mirror.Tutorials.CharacterSelection
 {
@@ -12,6 +13,10 @@ namespace DapperDino.Mirror.Tutorials.CharacterSelection
         [SerializeField] private GameObject characterSelectDisplay = default;
         [SerializeField] private Transform characterPreviewParent = default;
         [SerializeField] private TMP_Text characterNameText = default;
+        [SerializeField] private GameObject char1;
+        [SerializeField] private GameObject char2;
+        [SerializeField] private GameObject char3;
+        [SerializeField] private GameObject char4;
         [SerializeField] private float turnSpeed = 90f;
         [SerializeField] private Character[] characters = default;
         [SerializeField] private NetworkManager nm = null;
@@ -19,6 +24,7 @@ namespace DapperDino.Mirror.Tutorials.CharacterSelection
 
         private int currentCharacterIndex = 0;
         private List<GameObject> characterInstances = new List<GameObject>();
+        private List<GameObject> characterImgs = new List<GameObject>();
 
         public void Start()
         {
@@ -35,7 +41,13 @@ namespace DapperDino.Mirror.Tutorials.CharacterSelection
                 }
             }
 
+            characterImgs.Add(char1);
+            characterImgs.Add(char2);
+            characterImgs.Add(char3);
+            characterImgs.Add(char4);
+
             characterInstances[currentCharacterIndex].SetActive(true);
+            characterImgs[currentCharacterIndex].SetActive(true);
             characterNameText.text = characters[currentCharacterIndex].CharacterName;
 
             characterSelectDisplay.SetActive(true);
@@ -99,16 +111,19 @@ namespace DapperDino.Mirror.Tutorials.CharacterSelection
         public void Right()
         {
             characterInstances[currentCharacterIndex].SetActive(false);
+            characterImgs[currentCharacterIndex].SetActive(false);
 
             currentCharacterIndex = (currentCharacterIndex + 1) % characterInstances.Count;
 
             characterInstances[currentCharacterIndex].SetActive(true);
+            characterImgs[currentCharacterIndex].SetActive(true);
             characterNameText.text = characters[currentCharacterIndex].CharacterName;
         }
 
         public void Left()
         {
             characterInstances[currentCharacterIndex].SetActive(false);
+            characterImgs[currentCharacterIndex].SetActive(false);
 
             currentCharacterIndex--;
             if (currentCharacterIndex < 0)
@@ -117,6 +132,7 @@ namespace DapperDino.Mirror.Tutorials.CharacterSelection
             }
 
             characterInstances[currentCharacterIndex].SetActive(true);
+            characterImgs[currentCharacterIndex].SetActive(true);
             characterNameText.text = characters[currentCharacterIndex].CharacterName;
         }
     }
